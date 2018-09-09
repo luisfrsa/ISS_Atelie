@@ -6,22 +6,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tbl_produto")
-public class Produto {
+public class Produto implements Serializable {
 
     //Atributos
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-    
+
     @Column(name = "descricao")
     private String descricao;
     
     @Column(name = "valor")
-    private Float valor;
+    private Double valor;
     
     @Column(name = "cor")
     private String cor;
@@ -40,12 +42,9 @@ public class Produto {
     }
     
     //Métodos
+
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getDescricao() {
@@ -56,11 +55,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public Float getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(Float valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -100,5 +99,35 @@ public class Produto {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", valor=" + valor +
+                ", cor='" + cor + '\'' +
+                ", tamanho='" + tamanho + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Produto)) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(getId(), produto.getId()) &&
+                Objects.equals(getDescricao(), produto.getDescricao()) &&
+                Objects.equals(getValor(), produto.getValor()) &&
+                Objects.equals(getCor(), produto.getCor()) &&
+                Objects.equals(getTamanho(), produto.getTamanho()) &&
+                Objects.equals(getMarca(), produto.getMarca()) &&
+                Objects.equals(getModelo(), produto.getModelo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getDescricao(), getValor(), getCor(), getTamanho(), getMarca(), getModelo());
+    }
 }

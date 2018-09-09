@@ -4,17 +4,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import static java.util.Objects.isNull;
+
 //Classe de Conexão com o Banco de Dados
 
 public class ConexaoBanco {
 
-    public static EntityManagerFactory emf;
-    public static EntityManager em;
+    private static EntityManagerFactory emf = null;
+    private static EntityManager em= null;
 
 
     public static void conectar() {
-        emf = Persistence.createEntityManagerFactory("AtelieJPA");
-        em = emf.createEntityManager();
+        if(isNull(emf) || isNull(em)) {
+            emf = Persistence.createEntityManagerFactory("AtelieJPA");
+            em = emf.createEntityManager();
+        }
     }
 
     public static void desconectar() {
@@ -22,4 +26,17 @@ public class ConexaoBanco {
         emf.close();
     }
 
+    public static EntityManagerFactory getEmf() {
+        if(isNull(emf)){
+            conectar();
+        }
+        return emf;
+    }
+
+    public static EntityManager getEm() {
+        if(isNull(em)){
+            conectar();
+        }
+        return em;
+    }
 }

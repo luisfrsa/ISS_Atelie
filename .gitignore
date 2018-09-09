@@ -4,3 +4,10 @@ dist/
 nbproject/
 ISS_Atelie.iml
 out/
+
+.idea/
+/build/
+/dist/
+/nbproject/
+/ISS_Atelie.iml
+/out/
