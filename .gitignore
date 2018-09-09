@@ -4,10 +4,9 @@ dist/
 nbproject/
 ISS_Atelie.iml
 out/
+Banco/BancoAtelie
 
-.idea/
-/build/
-/dist/
-/nbproject/
-/ISS_Atelie.iml
-/out/
+*.jar
+*.class
+*.rapt
+private.properties
