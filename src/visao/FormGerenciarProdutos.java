@@ -88,7 +88,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         btnBuscar.setBackground(new java.awt.Color(153, 204, 255));
         btnBuscar.setText("Buscar");
 
-        lblBusca.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBusca.setText("Busca");
 
         lblDescricao.setText("Descrição:");
@@ -115,13 +115,13 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitulo)
                             .addComponent(lblBusca)
+                            .addComponent(lblListagem)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDescricao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar))
-                            .addComponent(lblListagem))
+                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -145,7 +145,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                 .addComponent(lblListagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetalhes)
                     .addComponent(btnEditar)
