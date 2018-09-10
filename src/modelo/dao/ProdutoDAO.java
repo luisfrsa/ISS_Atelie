@@ -1,8 +1,6 @@
 package modelo.dao;
 
-import conexao.ConexaoBanco;
 import modelo.Produto;
-
 import java.util.List;
 
 public class ProdutoDAO extends AbstractDAOImpl<Produto> {
@@ -12,7 +10,7 @@ public class ProdutoDAO extends AbstractDAOImpl<Produto> {
     }
 
     public Produto buscarPorId(Integer id) {
-        return super.buscarPorId(Produto.class, id);
+        return buscarPorId(Produto.class, id);
     }
 
     public boolean remover(Integer id) {

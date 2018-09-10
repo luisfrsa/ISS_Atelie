@@ -5,6 +5,9 @@
  */
 package visao;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
 /**
  *
  * @author willr
@@ -208,4 +211,38 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField txtTamanho;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+
+    //Getters de componentes para uso do controle
+    public JButton getBtnCadastrar() {
+        return btnCadastrar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JTextField getTxtCor() {
+        return txtCor;
+    }
+
+    public JTextField getTxtDescricao() {
+        return txtDescricao;
+    }
+
+    public JTextField getTxtMarca() {
+        return txtMarca;
+    }
+
+    public JTextField getTxtModelo() {
+        return txtModelo;
+    }
+
+    public JTextField getTxtTamanho() {
+        return txtTamanho;
+    }
+
+    public JTextField getTxtValor() {
+        return txtValor;
+    }
+
 }

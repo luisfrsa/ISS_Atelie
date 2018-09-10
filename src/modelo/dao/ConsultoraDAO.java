@@ -1,8 +1,6 @@
 package modelo.dao;
 
 import modelo.Consultora;
-import modelo.Produto;
-
 import java.util.List;
 
 public class ConsultoraDAO extends AbstractDAOImpl<Consultora> {

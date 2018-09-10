@@ -1,10 +1,7 @@
 package modelo.builder;
 
 import modelo.Consultora;
-
-import javax.persistence.Column;
 import java.util.Date;
-
 import static java.util.Objects.isNull;
 
 public class ConsultoraBuilder {
