@@ -23,6 +23,8 @@ public class Consultora implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
+    @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "dataNascimento")
     private Date dataNascimento;
 

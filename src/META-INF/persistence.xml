@@ -3,6 +3,7 @@
   <persistence-unit name="AtelieJPA" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>modelo.Produto</class>
+    <class>modelo.Consultora</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BancoAtelie"/>
       <property name="javax.persistence.jdbc.user" value="administrador"/>
