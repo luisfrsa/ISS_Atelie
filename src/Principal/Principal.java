@@ -1,6 +1,7 @@
 package Principal;
 
 import conexao.ConexaoBanco;
+import controle.GerenciarProdutosControle;
 import modelo.Consultora;
 import modelo.Produto;
 import modelo.builder.ConsultoraBuilder;
@@ -8,6 +9,7 @@ import modelo.dao.ConsultoraDAO;
 import modelo.dao.ProdutoDAO;
 
 import java.util.Date;
+import visao.FormGerenciarProdutos;
 
 public class Principal {
 
@@ -32,7 +34,7 @@ public class Principal {
         produtoDao.inserir(p1); //Insere o novo produto
 
         Produto p2 = new Produto(); //Cria um objeto novo Produto e insere seus atributos
-        p2.setDescricao("aaaa");
+        p2.setDescricao("ProdutoTeste");
         p2.setValor(11.50);
 
         produtoDao.inserir(p2); //Insere o novo produto
@@ -42,7 +44,7 @@ public class Principal {
 
         Produto p3 = produtoDao.buscarPorId(1);
         System.out.println(p3.getId());
-        p3.setValor(112233.0);
+        p3.setValor(17.0);
         produtoDao.alterar(p3);
         Produto p4 = produtoDao.buscarPorId(1);
         System.out.println("p4");
@@ -68,13 +70,13 @@ public class Principal {
 
 
         Consultora consultora = new ConsultoraBuilder("Nome")
-                .setCpf("123123123")
+                .setCpf("074123")
                 .setDataNascimento(new Date())
                 .setStatusAtividade(true)
                 .build();
 
         Consultora consultora2 = new ConsultoraBuilder("Nome 2")
-                .setCpf("123123123")
+                .setCpf("085321")
                 .setDataNascimento(new Date())
                 .setStatusAtividade(true)
                 .build();
@@ -87,6 +89,10 @@ public class Principal {
 
         System.out.println(consultoraDAO.buscarTodos());
 
+        // ----- Testando view -----
+        FormGerenciarProdutos visaoGerenciarProdutos = new FormGerenciarProdutos(); //Instancia a visao
+        GerenciarProdutosControle controleGerenciarProdutos = new GerenciarProdutosControle(produtoDao, visaoGerenciarProdutos); //Intancia o controle
+        visaoGerenciarProdutos.setVisible(true); //Torna a visao ativa
 
     }
 

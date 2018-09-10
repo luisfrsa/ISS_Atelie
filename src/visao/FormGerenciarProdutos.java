@@ -5,6 +5,11 @@
  */
 package visao;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author willr
@@ -60,13 +65,14 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblProdutos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblProdutos);
         if (tblProdutos.getColumnModel().getColumnCount() > 0) {
             tblProdutos.getColumnModel().getColumn(0).setResizable(false);
@@ -208,4 +214,37 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
+
+    
+    //Getters de componentes para uso do controle
+    
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JButton getBtnCadastrar() {
+        return btnCadastrar;
+    }
+
+    public JToggleButton getBtnDetalhes() {
+        return btnDetalhes;
+    }
+
+    public JToggleButton getBtnEditar() {
+        return btnEditar;
+    }
+
+    public JToggleButton getBtnExcluir() {
+        return btnExcluir;
+    }
+
+    public JTable getTblProdutos() {
+        return tblProdutos;
+    }
+
+    public JTextField getTxtDescricao() {
+        return txtDescricao;
+    }
+
+    
 }
