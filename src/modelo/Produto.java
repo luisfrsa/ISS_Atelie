@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
+import modelo.builder.ProdutoBuilder;
 
 @Entity
 @Table(name = "tbl_produto")
@@ -39,6 +40,16 @@ public class Produto implements Serializable {
 
     //Construtor
     public Produto() {
+    }
+
+    public Produto(ProdutoBuilder produtoBuilder) {
+        this.id = produtoBuilder.id;
+        this.descricao = produtoBuilder.descricao;
+        this.valor = produtoBuilder.valor;
+        this.cor = produtoBuilder.cor;
+        this.tamanho = produtoBuilder.tamanho;
+        this.marca = produtoBuilder.marca;
+        this.modelo = produtoBuilder.modelo;
     }
     
     //Métodos

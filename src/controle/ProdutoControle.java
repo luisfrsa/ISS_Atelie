@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Produto;
 import dao.ProdutoDAO;
 import javax.swing.JOptionPane;
+import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
 import visao.produto.FormGerenciarProdutos;
 
@@ -98,21 +99,21 @@ public class ProdutoControle {
 
                 //Obtendo os dados inseridos na visão
                 String descricao = visaoCadastrarProduto.getTxtDescricao().getText();
-                String valor = visaoCadastrarProduto.getTxtValor().getText();
+                Double valor = Double.parseDouble(visaoCadastrarProduto.getTxtValor().getText());
                 String cor = visaoCadastrarProduto.getTxtCor().getText();
                 String tamanho = visaoCadastrarProduto.getTxtTamanho().getText();
                 String marca = visaoCadastrarProduto.getTxtMarca().getText();
                 String modleo = visaoCadastrarProduto.getTxtModelo().getText();
 
                 //Criando objeto com as informações
-                Produto produto = new Produto();
-                produto.setDescricao(descricao);
-                produto.setValor(Double.parseDouble(valor));
-                produto.setCor(cor);
-                produto.setTamanho(tamanho);
-                produto.setMarca(marca);
-                produto.setModelo(modleo);
-
+                Produto  produto = new ProdutoBuilder(descricao).setValor(valor)
+                        .setCor(cor)
+                        .setTamanho(tamanho)
+                        .setMarca(marca)
+                        .setModelo(modleo)
+                        .build();
+                
+                
                 //Persistindo objeto
                 //Implementar validação do cadastro
                 daoProduto.inserir(produto);

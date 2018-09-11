@@ -23,6 +23,7 @@ public class ConsultoraBuilder {
     public Consultora build(){
         return new Consultora(this);
     }
+    
     public ConsultoraBuilder setId(Integer id) {
         this.id = id;
         return this;
