@@ -36,9 +36,13 @@ public class ProdutoControle {
     }
 
     public void renderizarVisaoEditarProduto() {
-        evtBotaoSalvar();
-        evtBotaoCancelarEdicao();
+//        System.out.println("A");
+//        evtBotaoSalvar();
+//        System.out.println("A");
+//        evtBotaoCancelarEdicao();
+//        System.out.println("A");
         visaoEditarProduto.setVisible(true);
+        System.out.println("A");
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
