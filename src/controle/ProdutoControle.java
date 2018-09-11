@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Produto;
 import dao.ProdutoDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
@@ -23,10 +25,11 @@ public class ProdutoControle {
 
     //Métodos
     public void renderizarVisaoGerenciarProdutos() {
-        preencheTabela();
+        preencheTabela(daoProduto.buscarTodos());
         evtBotaoCadastrar();
         evtBotaoDetalhes();
         evtBotaoExcluir();
+        evtBotaoBuscar();
         visaoGerenciarProdutos.setVisible(true);
     }
 
@@ -44,10 +47,10 @@ public class ProdutoControle {
 
     //----- TELA GERENCIAR PRODUTOS -----
     
-    private void preencheTabela() {
+    private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
-        for (Produto produto : daoProduto.buscarTodos()) {
+        for (Produto produto : lista) {
             modelo.addRow(new Object[]{
                 produto.getId(),
                 produto.getDescricao(),
@@ -109,12 +112,43 @@ public class ProdutoControle {
                         Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
                         daoProduto.remover(id);
                         JOptionPane.showMessageDialog(null, "Produto Excluido com Sucesso!", "Sucesso", 1);
-                        preencheTabela(); //Atualiza tabela após remoção
+                        preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após remoção
                     }
                 }
             }
         };
         visaoGerenciarProdutos.getBtnExcluir().addActionListener(actionListener);
+    }
+
+    private void evtBotaoBuscar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+                String busca = visaoGerenciarProdutos.getTxtDescricao().getText();
+                if (busca.equals("")) {
+                    preencheTabela(daoProduto.buscarTodos());
+                } else {
+                    List<Produto> listaDeBusca = buscaPorDescricao(busca);
+                    preencheTabela(listaDeBusca);
+                }
+            }
+        };
+        visaoGerenciarProdutos.getBtnBuscar().addActionListener(actionListener);
+
+    }
+
+    private List<Produto> buscaPorDescricao(String busca) {
+
+        List<Produto> listaDeBusca = new ArrayList<>();
+        int numLetras = busca.length();
+
+        for (Produto produto : daoProduto.buscarTodos()) {
+            if (produto.getDescricao().toLowerCase().substring(0, numLetras).equals(busca.toLowerCase())) {
+                listaDeBusca.add(produto);
+            }
+        }
+        return listaDeBusca;
     }
 
     //----- TELA CADASTRAR PRODUTO -----
@@ -173,7 +207,7 @@ public class ProdutoControle {
                 daoProduto.inserir(produto);
                 JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                 visaoCadastrarProduto.dispose();
-                preencheTabela(); //Atualiza tabela após cadastro
+                preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após cadastro
                 limparCamposCadastro();
             }
         };
@@ -219,7 +253,7 @@ public class ProdutoControle {
                 daoProduto.alterar(novoProduto);
                 JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
                 visaoEditarProduto.dispose();
-                preencheTabela();
+                preencheTabela(daoProduto.buscarTodos());
 
             }
         };
