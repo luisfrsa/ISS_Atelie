@@ -47,6 +47,7 @@ public class ProdutoControle {
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
+    
     private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
@@ -152,6 +153,7 @@ public class ProdutoControle {
     }
 
     //----- TELA CADASTRAR PRODUTO -----
+    
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
             @Override
@@ -224,7 +226,7 @@ public class ProdutoControle {
     private boolean validaCadastroProduto(Produto produto) {
 
         restauraCorCamposCadastro();
-        
+
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtDescricao().requestFocus();
@@ -233,8 +235,15 @@ public class ProdutoControle {
         }
 
         if (produto.getValor() == null) {
-            JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!" 
+            JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtValor().requestFocus();
+            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (produto.getValor() <= 0) {
+            JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtValor().requestFocus();
             visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
             return false;
@@ -242,8 +251,8 @@ public class ProdutoControle {
 
         return true;
     }
-    
-    private void restauraCorCamposCadastro(){
+
+    private void restauraCorCamposCadastro() {
         visaoCadastrarProduto.getTxtDescricao().setBackground(Color.white);
         visaoCadastrarProduto.getTxtValor().setBackground(Color.white);
         visaoCadastrarProduto.getTxtCor().setBackground(Color.white);
@@ -262,6 +271,7 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR PRODUTOS -----
+    
     private void evtBotaoSalvar() {
         actionListener = new ActionListener() {
             @Override
@@ -270,7 +280,14 @@ public class ProdutoControle {
                 //Obtendo os dados inseridos na visão
                 Integer id = Integer.parseInt(visaoEditarProduto.getTxtId().getText());
                 String descricao = visaoEditarProduto.getTxtDescricao().getText();
-                Double valor = Double.parseDouble(visaoEditarProduto.getTxtValor().getText());
+                
+                Double valor;
+                try {
+                    valor = Double.parseDouble(visaoEditarProduto.getTxtValor().getText());
+                } catch (Exception e) {
+                    valor = null;
+                }                
+                
                 String cor = visaoEditarProduto.getTxtCor().getText();
                 String tamanho = visaoEditarProduto.getTxtTamanho().getText();
                 String marca = visaoEditarProduto.getTxtMarca().getText();
@@ -286,15 +303,53 @@ public class ProdutoControle {
                 novoProduto.setModelo(modleo);
 
                 //Persistindo objeto alterado
-                //Implementar validação da edição
-                daoProduto.alterar(novoProduto);
-                JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
-                visaoEditarProduto.dispose();
-                preencheTabela(daoProduto.buscarTodos());
-
+                if (validaEdicaoProduto(novoProduto)) {
+                    daoProduto.alterar(novoProduto);
+                    JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
+                    visaoEditarProduto.dispose();
+                    preencheTabela(daoProduto.buscarTodos());
+                }
             }
         };
         visaoEditarProduto.getBtnSalvar().addActionListener(actionListener);
+    }
+
+    private boolean validaEdicaoProduto(Produto produto) {
+
+        restauraCorCamposEdicao();
+
+        if (produto.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtDescricao().requestFocus();
+            visaoEditarProduto.getTxtDescricao().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (produto.getValor() == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
+                    + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtValor().requestFocus();
+            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (produto.getValor() <= 0) {
+            JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtValor().requestFocus();
+            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void restauraCorCamposEdicao() {
+        visaoEditarProduto.getTxtDescricao().setBackground(Color.white);
+        visaoEditarProduto.getTxtValor().setBackground(Color.white);
+        visaoEditarProduto.getTxtCor().setBackground(Color.white);
+        visaoEditarProduto.getTxtTamanho().setBackground(Color.white);
+        visaoEditarProduto.getTxtMarca().setBackground(Color.white);
+        visaoEditarProduto.getTxtModelo().setBackground(Color.white);
     }
 
     private void evtBotaoCancelarEdicao() {
