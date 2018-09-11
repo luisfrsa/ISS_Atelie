@@ -1,7 +1,24 @@
-Mon Sep 10 22:04:14 BRT 2018 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Tue Sep 11 13:16:14 BRT 2018 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Mon Sep 10 22:04:14 BRT 2018:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0165-c628-4afa-ffffbe3ab13a
+Tue Sep 11 13:16:14 BRT 2018:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0165-c96b-40cd-ffffbe3ab13a
+no diretório de banco de dados C:\Users\willr\Desktop\FACULDADE\2018\2 Semestre\ISS - Implementação de Sistemas de Software\Implementação\ISS_Atelie\Banco\BancoAtelie 
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_171-b11
+user.dir=C:\Program Files\glassfish-4.1.1\javadb
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\willr\Desktop\FACULDADE\2018\2 Semestre\ISS - Implementação de Sistemas de Software\Implementação\ISS_Atelie\Banco
+Carregador de classe do banco de dados iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Sep 11 13:16:21 BRT 2018:
+Encerrando a instância a816c00e-0165-c96b-40cd-ffffbe3ab13a
+Tue Sep 11 13:16:21 BRT 2018 Thread[DRDAConnThread_2,5,main] (DATABASE = BancoAtelie), (DRDAID = {2}), Banco de dados 'BancoAtelie' fechado.
+----------------------------------------------------------------
+Tue Sep 11 13:16:29 BRT 2018:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância 560740aa-0165-c96b-40cd-ffffbe3ab13a
 no diretório de banco de dados C:\Users\willr\Desktop\FACULDADE\2018\2 Semestre\ISS - Implementação de Sistemas de Software\Implementação\ISS_Atelie\Banco\BancoAtelie 
 
 java.vendor=Oracle Corporation

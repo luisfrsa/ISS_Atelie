@@ -26,6 +26,7 @@ public class ProdutoControle {
         preencheTabela();
         evtBotaoCadastrar();
         evtBotaoDetalhes();
+        evtBotaoExcluir();
         visaoGerenciarProdutos.setVisible(true);
     }
 
@@ -36,13 +37,9 @@ public class ProdutoControle {
     }
 
     public void renderizarVisaoEditarProduto() {
-//        System.out.println("A");
-//        evtBotaoSalvar();
-//        System.out.println("A");
-//        evtBotaoCancelarEdicao();
-//        System.out.println("A");
+        evtBotaoSalvar();
+        evtBotaoCancelarEdicao();
         visaoEditarProduto.setVisible(true);
-        System.out.println("A");
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
@@ -94,6 +91,30 @@ public class ProdutoControle {
             }
         };
         visaoGerenciarProdutos.getBtnDetalhes().addActionListener(actionListener);
+    }
+
+    private void evtBotaoExcluir() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                int linha = visaoGerenciarProdutos.getTblProdutos().getSelectedRow(); //Linha selecionada da tabela
+                if (linha < 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhum Prodruto selecionado!", "Erro", 0);
+                } else {
+                    int opcao = JOptionPane.showConfirmDialog(null, "Confirma a exclusão do produto "
+                            + visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 1)
+                            + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (opcao == 0) {
+                        Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
+                        daoProduto.remover(id);
+                        JOptionPane.showMessageDialog(null, "Produto Excluido com Sucesso!", "Sucesso", 1);
+                        preencheTabela(); //Atualiza tabela após remoção
+                    }
+                }
+            }
+        };
+        visaoGerenciarProdutos.getBtnExcluir().addActionListener(actionListener);
     }
 
     //----- TELA CADASTRAR PRODUTO -----
@@ -152,10 +173,20 @@ public class ProdutoControle {
                 daoProduto.inserir(produto);
                 JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                 visaoCadastrarProduto.dispose();
-                preencheTabela();
+                preencheTabela(); //Atualiza tabela após cadastro
+                limparCamposCadastro();
             }
         };
         visaoCadastrarProduto.getBtnCadastrar().addActionListener(actionListener);
+    }
+
+    private void limparCamposCadastro() {
+        visaoCadastrarProduto.getTxtDescricao().setText("");
+        visaoCadastrarProduto.getTxtValor().setText("");
+        visaoCadastrarProduto.getTxtCor().setText("");
+        visaoCadastrarProduto.getTxtTamanho().setText("");
+        visaoCadastrarProduto.getTxtMarca().setText("");
+        visaoCadastrarProduto.getTxtModelo().setText("");
     }
 
     //----- TELA EDITAR PRODUTOS -----
@@ -209,6 +240,5 @@ public class ProdutoControle {
         };
         visaoEditarProduto.getBtnCancelar().addActionListener(actionListener);
     }
-    
-    
+
 }
