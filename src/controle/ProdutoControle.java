@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Produto;
 import dao.ProdutoDAO;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -46,7 +47,6 @@ public class ProdutoControle {
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
-    
     private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
@@ -124,7 +124,7 @@ public class ProdutoControle {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 String busca = visaoGerenciarProdutos.getTxtDescricao().getText();
                 if (busca.equals("")) {
                     preencheTabela(daoProduto.buscarTodos());
@@ -152,7 +152,6 @@ public class ProdutoControle {
     }
 
     //----- TELA CADASTRAR PRODUTO -----
-    
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
             @Override
@@ -187,7 +186,14 @@ public class ProdutoControle {
 
                 //Obtendo os dados inseridos na visão
                 String descricao = visaoCadastrarProduto.getTxtDescricao().getText();
-                Double valor = Double.parseDouble(visaoCadastrarProduto.getTxtValor().getText());
+
+                Double valor;
+                try {
+                    valor = Double.parseDouble(visaoCadastrarProduto.getTxtValor().getText());
+                } catch (Exception e) {
+                    valor = null;
+                }
+
                 String cor = visaoCadastrarProduto.getTxtCor().getText();
                 String tamanho = visaoCadastrarProduto.getTxtTamanho().getText();
                 String marca = visaoCadastrarProduto.getTxtMarca().getText();
@@ -203,15 +209,47 @@ public class ProdutoControle {
                         .build();
 
                 //Persistindo objeto
-                //Implementar validação do cadastro
-                daoProduto.inserir(produto);
-                JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
-                visaoCadastrarProduto.dispose();
-                preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após cadastro
-                limparCamposCadastro();
+                if (validaCadastroProduto(produto)) {
+                    daoProduto.inserir(produto);
+                    JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
+                    visaoCadastrarProduto.dispose();
+                    preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após cadastro
+                    limparCamposCadastro();
+                }
             }
         };
         visaoCadastrarProduto.getBtnCadastrar().addActionListener(actionListener);
+    }
+
+    private boolean validaCadastroProduto(Produto produto) {
+
+        restauraCorCamposCadastro();
+        
+        if (produto.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtDescricao().requestFocus();
+            visaoCadastrarProduto.getTxtDescricao().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (produto.getValor() == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!" 
+                    + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtValor().requestFocus();
+            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        return true;
+    }
+    
+    private void restauraCorCamposCadastro(){
+        visaoCadastrarProduto.getTxtDescricao().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtValor().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtCor().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtTamanho().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtMarca().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtModelo().setBackground(Color.white);
     }
 
     private void limparCamposCadastro() {
@@ -224,7 +262,6 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR PRODUTOS -----
-    
     private void evtBotaoSalvar() {
         actionListener = new ActionListener() {
             @Override
