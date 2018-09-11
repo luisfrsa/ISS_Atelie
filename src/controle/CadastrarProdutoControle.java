@@ -1,12 +1,11 @@
 package controle;
 
-import conexao.ConexaoBanco;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import modelo.Produto;
-import modelo.dao.ProdutoDAO;
-import visao.FormCadastrarProduto;
+import dao.ProdutoDAO;
+import visao.produto.FormCadastrarProduto;
 
 public class CadastrarProdutoControle {
 
@@ -76,9 +75,9 @@ public class CadastrarProdutoControle {
 
                 //Persistindo objeto
                 //Implementar validação do cadastro
-                ConexaoBanco.conectar();
+//                ConexaoBanco.conectar();
                 daoProduto.inserir(produto);
-                ConexaoBanco.desconectar();
+//                ConexaoBanco.desconectar();
 
                 JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                 visaoCadastrarProdutos.dispose();

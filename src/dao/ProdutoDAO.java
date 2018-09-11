@@ -1,4 +1,4 @@
-package modelo.dao;
+package dao;
 
 import modelo.Produto;
 import java.util.List;

@@ -1,48 +1,48 @@
 package controle;
 
-import conexao.ConexaoBanco;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+
 import modelo.Produto;
-import modelo.dao.ProdutoDAO;
-import visao.FormCadastrarProduto;
-import visao.FormGerenciarProdutos;
+import dao.ProdutoDAO;
+import visao.produto.FormCadastrarProduto;
+import visao.produto.FormGerenciarProdutos;
 
 public class GerenciarProdutosControle {
 
     //Atributos
-    private final ProdutoDAO daoProduto;
-    private final FormGerenciarProdutos visaoGerenciarProdutos;
+    private static final ProdutoDAO daoProduto = new ProdutoDAO();
+    private static final FormGerenciarProdutos visaoGerenciarProdutos = new FormGerenciarProdutos();
     private ActionListener actionListener;
 
     //Construtor
-    public GerenciarProdutosControle(ProdutoDAO daoProduto, FormGerenciarProdutos visaoGerenciarProdutos) {
-        this.daoProduto = daoProduto;
-        this.visaoGerenciarProdutos = visaoGerenciarProdutos;
-        //Métodos ouvindo eventos
+    public GerenciarProdutosControle() {
+    }
+
+    public void renderizarVisao() {
         preencheTabela();
         evtBotaoCadastrar();
         evtBotaoAtualizar();
+        visaoGerenciarProdutos.setVisible(true);
+
     }
 
     //Métodos
-    private void preencheTabela() {        
+    private void preencheTabela() {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
-        
-        ConexaoBanco.conectar();
+
         for (Produto produto : daoProduto.buscarTodos()) {
             modelo.addRow(new Object[]{
-                produto.getId(),
-                produto.getDescricao(),
-                produto.getValor()
+                    produto.getId(),
+                    produto.getDescricao(),
+                    produto.getValor()
             });
         }
-        ConexaoBanco.desconectar();
     }
-    
-    private void evtBotaoCadastrar(){
+
+    private void evtBotaoCadastrar() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -53,8 +53,8 @@ public class GerenciarProdutosControle {
         };
         visaoGerenciarProdutos.getBtnCadastrar().addActionListener(actionListener);
     }
-    
-    private void evtBotaoAtualizar(){
+
+    private void evtBotaoAtualizar() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

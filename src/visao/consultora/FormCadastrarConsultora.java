@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao;
+package visao.consultora;
 
+import visao.produto.*;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -12,12 +13,12 @@ import javax.swing.JTextField;
  *
  * @author willr
  */
-public class FormCadastrarProduto extends javax.swing.JFrame {
+public class FormCadastrarConsultora extends javax.swing.JFrame {
 
     /**
      * Creates new form FormCadastrarProduto
      */
-    public FormCadastrarProduto() {
+    public FormCadastrarConsultora() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -36,14 +37,10 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
         lblValor = new javax.swing.JLabel();
         lblCor = new javax.swing.JLabel();
         lblTamanho = new javax.swing.JLabel();
-        lblMarca = new javax.swing.JLabel();
-        lblModelo = new javax.swing.JLabel();
         txtTamanho = new javax.swing.JTextField();
         txtCor = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
-        txtMarca = new javax.swing.JTextField();
-        txtModelo = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -53,17 +50,13 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTitulo.setText("Cadastrar Produto");
 
-        lblDescricao.setText("Descrição:");
+        lblDescricao.setText("Cód: ");
 
-        lblValor.setText("Valor:");
+        lblValor.setText("Nome: ");
 
-        lblCor.setText("Cor:");
+        lblCor.setText("Data de Nscimento: ");
 
-        lblTamanho.setText("Tamanho:");
-
-        lblMarca.setText("Marca:");
-
-        lblModelo.setText("Modelo:");
+        lblTamanho.setText("CPF:");
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
         btnCadastrar.setText("Cadastrar");
@@ -82,7 +75,7 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTitulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnCancelar))))
@@ -90,35 +83,24 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
                                 .addComponent(lblValor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addGap(34, 34, 34)
+                                .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addComponent(lblDescricao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDescricao))
+                                .addGap(4, 4, 4)
+                                .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(lblCor))
-                                    .addComponent(lblTamanho))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lblTamanho)
+                                    .addComponent(lblCor))
+                                .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTamanho)
                                     .addComponent(txtCor)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblModelo)
-                                    .addComponent(lblMarca))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtMarca)))
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,15 +123,7 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTamanho)
                     .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMarca)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblModelo)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnCancelar))
@@ -176,20 +150,21 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCadastrarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastrarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCadastrarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastrarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCadastrarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastrarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormCadastrarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastrarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCadastrarProduto().setVisible(true);
+                new FormCadastrarConsultora().setVisible(true);
             }
         });
     }
@@ -199,15 +174,11 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel lblCor;
     private javax.swing.JLabel lblDescricao;
-    private javax.swing.JLabel lblMarca;
-    private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblTamanho;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
     private javax.swing.JTextField txtCor;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtMarca;
-    private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtTamanho;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
@@ -227,14 +198,6 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
 
     public JTextField getTxtDescricao() {
         return txtDescricao;
-    }
-
-    public JTextField getTxtMarca() {
-        return txtMarca;
-    }
-
-    public JTextField getTxtModelo() {
-        return txtModelo;
     }
 
     public JTextField getTxtTamanho() {
