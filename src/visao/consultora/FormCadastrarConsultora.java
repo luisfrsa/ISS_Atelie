@@ -45,10 +45,10 @@ public class FormCadastrarConsultora extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Produto");
+        setTitle("Cadastrar Consultora");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Cadastrar Produto");
+        lblTitulo.setText("Cadastrar Consultora");
 
         lblDescricao.setText("Cód: ");
 
@@ -75,7 +75,7 @@ public class FormCadastrarConsultora extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTitulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnCancelar))))
@@ -100,7 +100,7 @@ public class FormCadastrarConsultora extends javax.swing.JFrame {
                                     .addComponent(txtTamanho)
                                     .addComponent(txtCor)))
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

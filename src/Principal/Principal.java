@@ -1,7 +1,7 @@
 package Principal;
 
 import conexao.ConexaoBanco;
-import controle.GerenciarProdutosControle;
+import controle.ProdutoControle;
 import dao.ProdutoDAO;
 import visao.Inicio;
 import visao.produto.FormGerenciarProdutos;

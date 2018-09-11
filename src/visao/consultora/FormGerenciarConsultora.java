@@ -48,12 +48,12 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Produtos");
+        setTitle("Gerenciar Consultoras");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTitulo.setText("Gerenciar Consultoras");
 
-        lblListagem.setText("Listagem de Produtos:");
+        lblListagem.setText("Listagem de Consultoras:");
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,7 +79,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         }
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Cadastrar Novo");
+        btnCadastrar.setText("Cadastrar Nova");
 
         btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
         btnExcluir.setText("Excluir");
