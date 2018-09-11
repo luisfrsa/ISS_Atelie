@@ -5,6 +5,9 @@
  */
 package visao.produto;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
 /**
  *
  * @author willr
@@ -224,4 +227,43 @@ public class FormEditarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField txtTamanho;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+
+    //Getters de componentes para uso do controle
+    
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnSalvar() {
+        return btnSalvar;
+    }
+
+    public JTextField getTxtCor() {
+        return txtCor;
+    }
+
+    public JTextField getTxtDescricao() {
+        return txtDescricao;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    public JTextField getTxtMarca() {
+        return txtMarca;
+    }
+
+    public JTextField getTxtModelo() {
+        return txtModelo;
+    }
+
+    public JTextField getTxtTamanho() {
+        return txtTamanho;
+    }
+
+    public JTextField getTxtValor() {
+        return txtValor;
+    }
+
 }

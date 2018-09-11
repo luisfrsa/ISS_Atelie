@@ -9,6 +9,7 @@ import dao.ProdutoDAO;
 import javax.swing.JOptionPane;
 import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
+import visao.produto.FormEditarProduto;
 import visao.produto.FormGerenciarProdutos;
 
 public class ProdutoControle {
@@ -17,30 +18,39 @@ public class ProdutoControle {
     private static final ProdutoDAO daoProduto = new ProdutoDAO();
     private static final FormGerenciarProdutos visaoGerenciarProdutos = new FormGerenciarProdutos();
     private static final FormCadastrarProduto visaoCadastrarProduto = new FormCadastrarProduto();
+    private static final FormEditarProduto visaoEditarProduto = new FormEditarProduto();
     private ActionListener actionListener;
 
     //Métodos
     public void renderizarVisaoGerenciarProdutos() {
         preencheTabela();
         evtBotaoCadastrar();
-        evtBotaoAtualizar();
+        evtBotaoDetalhes();
         visaoGerenciarProdutos.setVisible(true);
     }
-    
+
     public void renderizarVisaoCadastrarProduto() {
         evtBotaoCadastrarNovo();
         evtBotaoCancelar();
         visaoCadastrarProduto.setVisible(true);
     }
+
+    public void renderizarVisaoEditarProduto() {
+        evtBotaoSalvar();
+        evtBotaoCancelarEdicao();
+        visaoEditarProduto.setVisible(true);
+    }
+
+    //----- TELA GERENCIAR PRODUTOS -----
     
     private void preencheTabela() {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
         for (Produto produto : daoProduto.buscarTodos()) {
             modelo.addRow(new Object[]{
-                    produto.getId(),
-                    produto.getDescricao(),
-                    produto.getValor()
+                produto.getId(),
+                produto.getDescricao(),
+                produto.getValor()
             });
         }
     }
@@ -55,15 +65,34 @@ public class ProdutoControle {
         visaoGerenciarProdutos.getBtnCadastrar().addActionListener(actionListener);
     }
 
-    private void evtBotaoAtualizar() {
+    private void evtBotaoDetalhes() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                preencheTabela();
+
+                int linha = visaoGerenciarProdutos.getTblProdutos().getSelectedRow(); //Linha selecionada da tabela
+                if (linha < 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhum Prodruto selecionado!", "Erro", 0);
+                } else {
+                    Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
+                    Produto produtoSelecionado = daoProduto.buscarPorId(id);
+                    //Preenche os campos do form editar
+                    visaoEditarProduto.getTxtId().setText(produtoSelecionado.getId().toString());
+                    visaoEditarProduto.getTxtDescricao().setText(produtoSelecionado.getDescricao());
+                    visaoEditarProduto.getTxtValor().setText(produtoSelecionado.getValor().toString());
+                    visaoEditarProduto.getTxtCor().setText(produtoSelecionado.getCor());
+                    visaoEditarProduto.getTxtTamanho().setText(produtoSelecionado.getTamanho());
+                    visaoEditarProduto.getTxtMarca().setText(produtoSelecionado.getMarca());
+                    visaoEditarProduto.getTxtModelo().setText(produtoSelecionado.getModelo());
+                    renderizarVisaoEditarProduto();
+                }
+
             }
         };
-        visaoGerenciarProdutos.getBtnAtualizar().addActionListener(actionListener);
+        visaoGerenciarProdutos.getBtnDetalhes().addActionListener(actionListener);
     }
+
+    //----- TELA CADASTRAR PRODUTO -----
     
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
@@ -106,23 +135,76 @@ public class ProdutoControle {
                 String modleo = visaoCadastrarProduto.getTxtModelo().getText();
 
                 //Criando objeto com as informações
-                Produto  produto = new ProdutoBuilder(descricao).setValor(valor)
+                Produto produto = new ProdutoBuilder(descricao)
+                        .setValor(valor)
                         .setCor(cor)
                         .setTamanho(tamanho)
                         .setMarca(marca)
                         .setModelo(modleo)
                         .build();
-                
-                
+
                 //Persistindo objeto
                 //Implementar validação do cadastro
                 daoProduto.inserir(produto);
-
                 JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                 visaoCadastrarProduto.dispose();
+                preencheTabela();
             }
         };
         visaoCadastrarProduto.getBtnCadastrar().addActionListener(actionListener);
     }
 
+    //----- TELA EDITAR PRODUTOS -----
+    
+    private void evtBotaoSalvar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                //Obtendo os dados inseridos na visão
+                Integer id = Integer.parseInt(visaoEditarProduto.getTxtId().getText());
+                String descricao = visaoEditarProduto.getTxtDescricao().getText();
+                Double valor = Double.parseDouble(visaoEditarProduto.getTxtValor().getText());
+                String cor = visaoEditarProduto.getTxtCor().getText();
+                String tamanho = visaoEditarProduto.getTxtTamanho().getText();
+                String marca = visaoEditarProduto.getTxtMarca().getText();
+                String modleo = visaoEditarProduto.getTxtModelo().getText();
+
+                //Criando objeto com as informações
+                Produto novoProduto = daoProduto.buscarPorId(id);
+                novoProduto.setDescricao(descricao);
+                novoProduto.setValor(valor);
+                novoProduto.setCor(cor);
+                novoProduto.setTamanho(tamanho);
+                novoProduto.setMarca(marca);
+                novoProduto.setModelo(modleo);
+
+                //Persistindo objeto alterado
+                //Implementar validação da edição
+                daoProduto.alterar(novoProduto);
+                JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
+                visaoEditarProduto.dispose();
+                preencheTabela();
+
+            }
+        };
+        visaoEditarProduto.getBtnSalvar().addActionListener(actionListener);
+    }
+
+    private void evtBotaoCancelarEdicao() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a edição? ", "Confirmação", JOptionPane.YES_NO_OPTION);
+                if (opcao == 0) {
+                    visaoEditarProduto.dispose();
+                }
+            }
+
+        };
+        visaoEditarProduto.getBtnCancelar().addActionListener(actionListener);
+    }
+    
+    
 }
