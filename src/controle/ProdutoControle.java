@@ -24,30 +24,45 @@ public class ProdutoControle {
     private static final FormEditarProduto visaoEditarProduto = new FormEditarProduto();
     private ActionListener actionListener;
 
+    private boolean ouvirEventosGerenciar = true;
+    private boolean ouvirEventosCadastrar = true;
+    private boolean ouvirEventosEditar = true;
+
     //Métodos
     public void renderizarVisaoGerenciarProdutos() {
+
+        if (ouvirEventosGerenciar) {
+            evtBotaoCadastrar();
+            evtBotaoDetalhes();
+            evtBotaoExcluir();
+            evtBotaoBuscar();
+            ouvirEventosGerenciar = false;
+        }
         preencheTabela(daoProduto.buscarTodos());
-        evtBotaoCadastrar();
-        evtBotaoDetalhes();
-        evtBotaoExcluir();
-        evtBotaoBuscar();
         visaoGerenciarProdutos.setVisible(true);
     }
 
     public void renderizarVisaoCadastrarProduto() {
-        evtBotaoCadastrarNovo();
-        evtBotaoCancelar();
+
+        if (ouvirEventosCadastrar) {
+            evtBotaoCadastrarNovo();
+            evtBotaoCancelar();
+            ouvirEventosCadastrar = false;
+        }
         visaoCadastrarProduto.setVisible(true);
     }
 
     public void renderizarVisaoEditarProduto() {
-        evtBotaoSalvar();
-        evtBotaoCancelarEdicao();
+
+        if (ouvirEventosEditar) {
+            evtBotaoSalvar();
+            evtBotaoCancelarEdicao();
+            ouvirEventosEditar = false;
+        }
         visaoEditarProduto.setVisible(true);
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
-    
     private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
@@ -153,7 +168,6 @@ public class ProdutoControle {
     }
 
     //----- TELA CADASTRAR PRODUTO -----
-    
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
             @Override
@@ -271,7 +285,6 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR PRODUTOS -----
-    
     private void evtBotaoSalvar() {
         actionListener = new ActionListener() {
             @Override
@@ -280,14 +293,14 @@ public class ProdutoControle {
                 //Obtendo os dados inseridos na visão
                 Integer id = Integer.parseInt(visaoEditarProduto.getTxtId().getText());
                 String descricao = visaoEditarProduto.getTxtDescricao().getText();
-                
+
                 Double valor;
                 try {
                     valor = Double.parseDouble(visaoEditarProduto.getTxtValor().getText());
                 } catch (Exception e) {
                     valor = null;
-                }                
-                
+                }
+
                 String cor = visaoEditarProduto.getTxtCor().getText();
                 String tamanho = visaoEditarProduto.getTxtTamanho().getText();
                 String marca = visaoEditarProduto.getTxtMarca().getText();
