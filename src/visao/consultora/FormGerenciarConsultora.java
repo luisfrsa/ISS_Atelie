@@ -8,6 +8,8 @@ package visao.consultora;
 import controle.ConsultoraControle;
 import controle.ProdutoControle;
 import java.util.Date;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import visao.produto.*;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -20,6 +22,7 @@ import util.Datas;
  * @author willr
  */
 public class FormGerenciarConsultora extends javax.swing.JFrame {
+
     private static final ConsultoraControle consultoraControle = new ConsultoraControle();
 
     /**
@@ -42,20 +45,41 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         txtNome.setText("");
         txtData.setText("");
         txtCPF.setText("");
+        status.setSelected(false);
+    }
+
+    private void setarCampos(Consultora consultora) {
+        txtID.setText(consultora.getId().toString());
+        txtNome.setText(consultora.getNome());
+        txtData.setText(Datas.dateToString(consultora.getDataNascimento()));
+        txtCPF.setText(consultora.getCpf());
+        status.setSelected(consultora.getStatusAtividade());
     }
 
     public void acaoCadastrar() {
         limparCampos();
     }
-    
-    private Consultora extraiCampos(){
-         Integer id = Integer.parseInt(txtID.getText());
+
+    public void acaoAlterar(Consultora consultora) {
+        limparCampos();
+        setarCampos(consultora);
+    }
+
+    private Consultora extraiCampos() {
+        String strId = txtID.getText();
+        Integer id = null;
+        if (!strId.equals("") && nonNull(strId)) {
+            id = Integer.parseInt(txtID.getText());
+        }
         String nome = txtNome.getText();
         String cpf = txtCPF.getText();
-        Date data = Datas.stringToData(txtCPF.getText());
-        return  new ConsultoraBuilder(nome)
+        Boolean statusAtividade = status.isSelected();
+        Date data = Datas.stringToData(txtData.getText());
+        return new ConsultoraBuilder(nome)
+                .setId(id)
                 .setCpf(cpf)
                 .setDataNascimento(data)
+                .setStatusAtividade(statusAtividade)
                 .build();
     }
 
@@ -68,6 +92,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         lblTitulo = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
         lblValor = new javax.swing.JLabel();
@@ -79,6 +104,10 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblTamanho1 = new javax.swing.JLabel();
+        status = new javax.swing.JCheckBox();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Consultora");
@@ -111,6 +140,15 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelar.setText("Cancelar");
 
+        lblTamanho1.setText("Status de Atividade:");
+
+        status.setText("Ativo");
+        status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,14 +171,16 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblCor)
                                         .addComponent(lblTamanho, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblTamanho1, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtData, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                                     .addComponent(txtNome)
                                     .addComponent(txtID)
-                                    .addComponent(txtCPF))))
+                                    .addComponent(txtCPF)
+                                    .addComponent(status))))
                         .addGap(0, 42, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -166,7 +206,11 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTamanho)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTamanho1)
+                    .addComponent(status))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
@@ -182,9 +226,13 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-         Consultora consultora = extraiCampos();
+        Consultora consultora = extraiCampos();
         consultoraControle.salvar(consultora);
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,11 +275,14 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel lblCor;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblTamanho;
+    private javax.swing.JLabel lblTamanho1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
+    private javax.swing.JCheckBox status;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtID;

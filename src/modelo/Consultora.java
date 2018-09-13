@@ -14,7 +14,7 @@ public class Consultora implements Serializable {
     //Atributos
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "nome")
@@ -31,7 +31,7 @@ public class Consultora implements Serializable {
     @Column(name = "statusAtividade")
     private Boolean statusAtividade;
 
-    public Consultora(){
+    public Consultora() {
 
     }
 
@@ -41,6 +41,10 @@ public class Consultora implements Serializable {
         this.cpf = consultoraBuilder.cpf;
         this.dataNascimento = consultoraBuilder.dataNascimento;
         this.statusAtividade = consultoraBuilder.statusAtividade;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {

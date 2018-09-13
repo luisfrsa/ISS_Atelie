@@ -6,6 +6,7 @@
 package visao.consultora;
 
 import controle.ConsultoraControle;
+import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -18,6 +19,7 @@ import javax.swing.JToggleButton;
 public class FormListarConsultora extends javax.swing.JFrame {
 
     private static final ConsultoraControle consultoraControle = new ConsultoraControle();
+
     /**
      * Creates new form FormGerenciarProdutos
      */
@@ -38,7 +40,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblListagem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProdutos = new javax.swing.JTable();
+        tblConsultora = new javax.swing.JTable();
         btnCadastrar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JToggleButton();
         btnBuscar = new javax.swing.JButton();
@@ -56,7 +58,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
 
         lblListagem.setText("Listagem de Consultoras:");
 
-        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tblConsultora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -72,11 +74,16 @@ public class FormListarConsultora extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblProdutos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tblProdutos);
-        if (tblProdutos.getColumnModel().getColumnCount() > 0) {
-            tblProdutos.getColumnModel().getColumn(0).setResizable(false);
-            tblProdutos.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tblConsultora.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblConsultora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblConsultoraMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblConsultora);
+        if (tblConsultora.getColumnModel().getColumnCount() > 0) {
+            tblConsultora.getColumnModel().getColumn(0).setResizable(false);
+            tblConsultora.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
@@ -164,6 +171,14 @@ public class FormListarConsultora extends javax.swing.JFrame {
         consultoraControle.renderizarVisaoCadastro();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void tblConsultoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConsultoraMouseClicked
+        // TODO add your handling code here:
+        JTable table = (JTable) evt.getSource();
+        int row = table.rowAtPoint(evt.getPoint());
+        Integer id = (Integer) table.getValueAt(row, 0);
+        consultoraControle.renderizarVisaoAlterar(id);
+    }//GEN-LAST:event_tblConsultoraMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -211,13 +226,11 @@ public class FormListarConsultora extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblProdutos;
+    private javax.swing.JTable tblConsultora;
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 
-    
     //Getters de componentes para uso do controle
-    
     public JButton getBtnBuscar() {
         return btnBuscar;
     }
@@ -226,17 +239,16 @@ public class FormListarConsultora extends javax.swing.JFrame {
         return btnCadastrar;
     }
 
-    
     public JToggleButton getBtnExcluir() {
         return btnExcluir;
     }
 
-    public JTable getTblProdutos() {
-        return tblProdutos;
+    public JTable getTblConsultora() {
+        return tblConsultora;
     }
 
     public JTextField getTxtDescricao() {
         return txtDescricao;
     }
-    
+
 }
