@@ -58,7 +58,11 @@ public class AbstractDAOImpl<T> implements DAOInterface<T> {
                 if (Modifier.isPrivate(field.getModifiers())) {
                     boolean accessible = field.isAccessible();
                     field.setAccessible(true);
+<<<<<<< Updated upstream
                     log.info("Valor antigo: "+field.get(objetoAntigo).toString()+"; Valor novo: "+field.get(object).toString());
+=======
+                    log.info("Valor antigo: "+field.get(objetoAntigo).toString()+";  Valor novo:  "+field.get(object).toString());
+>>>>>>> Stashed changes
                     field.set(objetoAntigo,field.get(object));
                     field.setAccessible(accessible);
                 }
