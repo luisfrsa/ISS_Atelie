@@ -3,6 +3,8 @@ package controle;
 import dao.ConsultoraDAO;
 import java.util.List;
 import static java.util.Objects.isNull;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consultora;
 import modelo.Produto;
@@ -17,8 +19,7 @@ public class ConsultoraControle {
     private static final FormGerenciarConsultora formGerenciarConsultora = new FormGerenciarConsultora();
 
     public void renderizarVisao() {
-        List<Consultora> consultoras = consultoraDAO.buscarTodos();
-        preencheTabela(consultoras);
+        atualizaTabela();
         formListarConsultora.setVisible(true);
     }
 
@@ -33,6 +34,20 @@ public class ConsultoraControle {
         formGerenciarConsultora.setVisible(true);
     }
 
+    public void fechar() {
+        fecharTela();
+    }
+
+    public void excluir(Integer id) {
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Você realmente deseja excluir este registro", "Atenção", dialogButton);
+        if (dialogResult == 0) {
+            consultoraDAO.remover(id);
+            fecharTela();
+        }
+
+    }
+
     public void salvar(Consultora consultora) {
         if (isNull(consultora.getDataNascimento())) {
             JError.alert("Não foi possível converter data de nascimento, favor informar dd/mm/yyyy", "Erro validação");
@@ -42,7 +57,21 @@ public class ConsultoraControle {
             } else {
                 consultoraDAO.alterar(consultora);
             }
+            fecharTela();
         }
+    }
+
+    public void buscarPorNome(String stringBusca) {
+        List<Consultora> consultoras = consultoraDAO.buscarTodos()
+                .stream()
+                .filter(consultora -> consultora.getNome().contains(stringBusca))
+                .collect(Collectors.toList());
+        preencheTabela(consultoras);
+    }
+
+    private void atualizaTabela() {
+        List<Consultora> consultoras = consultoraDAO.buscarTodos();
+        preencheTabela(consultoras);
     }
 
     private void preencheTabela(List<Consultora> lista) {
@@ -55,6 +84,11 @@ public class ConsultoraControle {
                 consultora.getCpf()
             });
         });
+    }
+
+    private void fecharTela() {
+        atualizaTabela();
+        formGerenciarConsultora.setVisible(false);
     }
 
 }
