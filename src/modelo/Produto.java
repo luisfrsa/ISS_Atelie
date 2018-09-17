@@ -141,4 +141,6 @@ public class Produto implements Serializable {
     public int hashCode() {
         return Objects.hash(getId(), getDescricao(), getValor(), getCor(), getTamanho(), getMarca(), getModelo());
     }
+
+
 }
