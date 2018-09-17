@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consultora;
 import modelo.Produto;
+import static util.Documentos.adicionaPontuacaoCPF;
+import static util.Documentos.validaCPF;
 import util.JError;
 import visao.consultora.FormGerenciarConsultora;
 import visao.consultora.FormListarConsultora;
@@ -49,9 +51,7 @@ public class ConsultoraControle {
     }
 
     public void salvar(Consultora consultora) {
-        if (isNull(consultora.getDataNascimento())) {
-            JError.alert("Não foi possível converter data de nascimento, favor informar dd/mm/yyyy", "Erro validação");
-        } else {
+        if (validarConsultora(consultora)) {
             if (isNull(consultora.getId())) {
                 consultoraDAO.inserir(consultora);
             } else {
@@ -69,6 +69,23 @@ public class ConsultoraControle {
         preencheTabela(consultoras);
     }
 
+    private Boolean validarConsultora(Consultora consultora) {
+        Boolean erro = false;
+        if (consultora.getNome().length() < 3) {
+            erro = true;
+            JError.alert("O Nome deve possuir no mínimo 3 caracteres", "Erro validação");
+        }
+        if (!validaCPF(consultora.getCpf())) {
+            erro = true;
+            JError.alert("CPF Inválido", "Erro validação");
+        }
+        if (isNull(consultora.getDataNascimento())) {
+            erro = true;
+            JError.alert("Não foi possível converter data de nascimento, favor informar dd/mm/yyyy", "Erro validação");
+        }
+        return !erro;
+    }
+
     private void atualizaTabela() {
         List<Consultora> consultoras = consultoraDAO.buscarTodos();
         preencheTabela(consultoras);
@@ -81,7 +98,7 @@ public class ConsultoraControle {
             modelo.addRow(new Object[]{
                 consultora.getId(),
                 consultora.getNome(),
-                consultora.getCpf()
+                adicionaPontuacaoCPF(consultora.getCpf())
             });
         });
     }

@@ -5,7 +5,9 @@ nbproject/
 ISS_Atelie.iml
 out/
 Banco/BancoAtelie
-
+nbproject
+/nbproject
+project.properties
 *.jar
 *.class
 *.rapt

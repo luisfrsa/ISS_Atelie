@@ -16,6 +16,10 @@ import javax.swing.JTextField;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import util.Datas;
+import static util.Datas.dateToString;
+import util.Documentos;
+import static util.Documentos.adicionaPontuacaoCPF;
+import static util.Documentos.removePontuacao;
 
 /**
  *
@@ -51,8 +55,8 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     private void setarCampos(Consultora consultora) {
         txtID.setText(consultora.getId().toString());
         txtNome.setText(consultora.getNome());
-        txtData.setText(Datas.dateToString(consultora.getDataNascimento()));
-        txtCPF.setText(consultora.getCpf());
+        txtData.setText(dateToString(consultora.getDataNascimento()));
+        txtCPF.setText(adicionaPontuacaoCPF(consultora.getCpf()));
         status.setSelected(consultora.getStatusAtividade());
     }
 
@@ -74,7 +78,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
             id = Integer.parseInt(txtID.getText());
         }
         String nome = txtNome.getText();
-        String cpf = txtCPF.getText();
+        String cpf = removePontuacao(txtCPF.getText());
         Boolean statusAtividade = status.isSelected();
         Date data = Datas.stringToData(txtData.getText());
         return new ConsultoraBuilder(nome)
@@ -166,37 +170,34 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitulo)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addGap(82, 82, 82)
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExcluir)
-                                .addGap(53, 53, 53)
-                                .addComponent(btnCancelar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCor)
-                                        .addComponent(lblTamanho, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblTamanho1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNome)
-                                    .addComponent(txtID)
-                                    .addComponent(txtCPF)
-                                    .addComponent(status)
-                                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 42, Short.MAX_VALUE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCor)
+                                .addComponent(lblTamanho, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblTamanho1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNome)
+                            .addComponent(txtID)
+                            .addComponent(txtCPF)
+                            .addComponent(status)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 42, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblTitulo)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
