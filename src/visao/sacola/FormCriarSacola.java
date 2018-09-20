@@ -28,45 +28,45 @@ public class FormCriarSacola extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        btnAssociarConsultora = new javax.swing.JButton();
+        lblInfoNome = new javax.swing.JLabel();
+        lblNomeConsultora = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblSubTitulo1 = new javax.swing.JLabel();
+        lblSubTitulo2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        tblItensDeSacola = new javax.swing.JTable();
+        btnAdicionarProduto = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCriarSacola = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criar Sacola");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Criar Sacola");
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTitulo.setText("Criar Sacola");
 
-        jLabel2.setText("CPF da Consultora:");
+        lblCpf.setText("CPF da Consultora:");
 
-        jButton1.setBackground(new java.awt.Color(153, 204, 255));
-        jButton1.setText("Associar Consultora");
+        btnAssociarConsultora.setBackground(new java.awt.Color(153, 204, 255));
+        btnAssociarConsultora.setText("Associar Consultora");
 
-        jLabel4.setText("Nome da Consultora:");
+        lblInfoNome.setText("Nome da Consultora:");
 
-        jLabel3.setText("Nenhuma Consultora associada.");
+        lblNomeConsultora.setText("Nenhuma Consultora associada.");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Consultora Associada");
+        lblSubTitulo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSubTitulo1.setText("Consultora Associada");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Produtos Associados");
+        lblSubTitulo2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSubTitulo2.setText("Produtos Associados");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblItensDeSacola.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -82,16 +82,16 @@ public class FormCriarSacola extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblItensDeSacola);
 
-        jButton2.setBackground(new java.awt.Color(153, 204, 255));
-        jButton2.setText("Adicionar Produto");
+        btnAdicionarProduto.setBackground(new java.awt.Color(153, 204, 255));
+        btnAdicionarProduto.setText("Adicionar Produto");
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 102));
-        jButton4.setText("Criar Sacola");
+        btnCriarSacola.setBackground(new java.awt.Color(0, 153, 102));
+        btnCriarSacola.setText("Criar Sacola");
 
-        jButton5.setBackground(new java.awt.Color(255, 102, 102));
-        jButton5.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,29 +103,29 @@ public class FormCriarSacola extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnCriarSacola)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5))
+                        .addComponent(btnCancelar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jSeparator2)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel5)
+                                .addComponent(lblSubTitulo2)
+                                .addComponent(lblTitulo)
+                                .addComponent(lblSubTitulo1)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel2))
+                                        .addComponent(lblInfoNome)
+                                        .addComponent(lblCpf))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jTextField1)
+                                            .addComponent(txtCpf)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jButton1))
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))))
-                            .addComponent(jButton2))
+                                            .addComponent(btnAssociarConsultora))
+                                        .addComponent(lblNomeConsultora, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))))
+                            .addComponent(btnAdicionarProduto))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -133,34 +133,34 @@ public class FormCriarSacola extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lblSubTitulo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(lblCpf)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAssociarConsultora))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
+                    .addComponent(lblInfoNome)
+                    .addComponent(lblNomeConsultora))
                 .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(lblSubTitulo2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnAdicionarProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(btnCriarSacola)
+                    .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
@@ -203,21 +203,21 @@ public class FormCriarSacola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnAdicionarProduto;
+    private javax.swing.JButton btnAssociarConsultora;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCriarSacola;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblInfoNome;
+    private javax.swing.JLabel lblNomeConsultora;
+    private javax.swing.JLabel lblSubTitulo1;
+    private javax.swing.JLabel lblSubTitulo2;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tblItensDeSacola;
+    private javax.swing.JTextField txtCpf;
     // End of variables declaration//GEN-END:variables
 }
