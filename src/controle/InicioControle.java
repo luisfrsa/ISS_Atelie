@@ -9,6 +9,7 @@ public class InicioControle {
 
     private static final ConsultoraControle consultoraControle = new ConsultoraControle();
     private static final ProdutoControle ProdutoControle = new ProdutoControle();
+    private static final SacolaControle SacolaControle = new SacolaControle();
 
     public void abreView(Tela tela) {
         switch (tela) {
@@ -17,6 +18,9 @@ public class InicioControle {
                 break;
             case CONSULTORA:
                 consultoraControle.renderizarVisao();
+                break;
+            case SACOLA:
+                SacolaControle.renderizarVisaoGerenciarSacolas();
                 break;
             default:
                 throw new RuntimeException(format("Tela %s ainda não implementada", tela.getNome()));
