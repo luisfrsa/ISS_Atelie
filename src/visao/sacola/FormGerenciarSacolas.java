@@ -42,7 +42,8 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         btnNova = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Sacolas");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTitulo.setText("Gerenciar Sacolas");
