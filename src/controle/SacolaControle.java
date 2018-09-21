@@ -15,6 +15,7 @@ public class SacolaControle {
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
+        //eventos
         visaoGerenciarSacolas.setVisible(true);
     }
 }
