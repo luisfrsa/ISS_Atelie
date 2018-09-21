@@ -37,6 +37,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuProdutos = new javax.swing.JMenuItem();
         menuConsultoras = new javax.swing.JMenuItem();
+        menuSacolas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ateliê Doce Beleza");
@@ -58,6 +59,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menuConsultoras);
+
+        menuSacolas.setText("Sacolas");
+        menuSacolas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSacolasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuSacolas);
 
         jMenuBar1.add(jMenu1);
 
@@ -86,6 +95,11 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         inicioControle.abreView(Tela.CONSULTORA);
     }//GEN-LAST:event_menuConsultorasActionPerformed
+
+    private void menuSacolasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSacolasActionPerformed
+        // TODO add your handling code here:
+        inicioControle.abreView(Tela.SACOLA);
+    }//GEN-LAST:event_menuSacolasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,5 +141,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem menuConsultoras;
     private javax.swing.JMenuItem menuProdutos;
+    private javax.swing.JMenuItem menuSacolas;
     // End of variables declaration//GEN-END:variables
 }

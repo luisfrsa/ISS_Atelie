@@ -3,7 +3,8 @@ package modelo.enums;
 public enum Tela {
 
     PRODUTO(0, "Produto"),
-    CONSULTORA(1, "Consultora");
+    CONSULTORA(1, "Consultora"),
+    SACOLA(2, "Sacola");
 
     private Integer codigo;
     private String nome;

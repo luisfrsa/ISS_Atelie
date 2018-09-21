@@ -383,4 +383,10 @@ public class ProdutoControle {
         visaoEditarProduto.getBtnCancelar().addActionListener(actionListener);
     }
 
+    public ProdutoDAO getDaoProduto() {
+        return daoProduto;
+    }
+    
+    
+
 }
