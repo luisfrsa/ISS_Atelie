@@ -63,6 +63,7 @@ public class ProdutoControle {
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
+    
     private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
         modelo.setNumRows(0);
@@ -168,6 +169,7 @@ public class ProdutoControle {
     }
 
     //----- TELA CADASTRAR PRODUTO -----
+    
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
             @Override
@@ -285,6 +287,7 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR PRODUTOS -----
+    
     private void evtBotaoSalvar() {
         actionListener = new ActionListener() {
             @Override

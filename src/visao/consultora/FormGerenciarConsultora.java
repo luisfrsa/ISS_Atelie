@@ -16,6 +16,10 @@ import javax.swing.JTextField;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import util.Datas;
+import static util.Datas.dateToString;
+import util.Documentos;
+import static util.Documentos.adicionaPontuacaoCPF;
+import static util.Documentos.removePontuacao;
 
 /**
  *
@@ -51,16 +55,18 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     private void setarCampos(Consultora consultora) {
         txtID.setText(consultora.getId().toString());
         txtNome.setText(consultora.getNome());
-        txtData.setText(Datas.dateToString(consultora.getDataNascimento()));
-        txtCPF.setText(consultora.getCpf());
+        txtData.setText(dateToString(consultora.getDataNascimento()));
+        txtCPF.setText(adicionaPontuacaoCPF(consultora.getCpf()));
         status.setSelected(consultora.getStatusAtividade());
     }
 
     public void acaoCadastrar() {
+        btnExcluir.setEnabled(false);
         limparCampos();
     }
 
     public void acaoAlterar(Consultora consultora) {
+        btnExcluir.setEnabled(true);
         limparCampos();
         setarCampos(consultora);
     }
@@ -72,7 +78,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
             id = Integer.parseInt(txtID.getText());
         }
         String nome = txtNome.getText();
-        String cpf = txtCPF.getText();
+        String cpf = removePontuacao(txtCPF.getText());
         Boolean statusAtividade = status.isSelected();
         Date data = Datas.stringToData(txtData.getText());
         return new ConsultoraBuilder(nome)
@@ -99,13 +105,14 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
         lblCor = new javax.swing.JLabel();
         lblTamanho = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         lblTamanho1 = new javax.swing.JLabel();
         status = new javax.swing.JCheckBox();
+        btnCancelar = new javax.swing.JButton();
+        txtData = new javax.swing.JFormattedTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -123,12 +130,6 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
 
         lblTamanho.setText("CPF:");
 
-        txtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataActionPerformed(evt);
-            }
-        });
-
         btnSalvar.setBackground(new java.awt.Color(0, 153, 102));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,8 +138,13 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
-        btnCancelar.setText("Cancelar");
+        btnExcluir.setBackground(new java.awt.Color(255, 153, 51));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         lblTamanho1.setText("Status de Atividade:");
 
@@ -149,40 +155,49 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addGap(82, 82, 82)
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCancelar))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSalvar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCor)
-                                        .addComponent(lblTamanho, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblTamanho1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtData, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(txtNome)
-                                    .addComponent(txtID)
-                                    .addComponent(txtCPF)
-                                    .addComponent(status))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCor)
+                                .addComponent(lblTamanho, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblValor, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblTamanho1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNome)
+                            .addComponent(txtID)
+                            .addComponent(txtCPF)
+                            .addComponent(status)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 42, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblTitulo)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,10 +214,10 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCor)
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTamanho)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,19 +225,16 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTamanho1)
                     .addComponent(status))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
+                    .addComponent(btnExcluir)
                     .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
@@ -233,6 +245,17 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_statusActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        Integer id = Integer.parseInt(txtID.getText());
+        consultoraControle.excluir(id);
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        consultoraControle.fechar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +297,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel lblCor;
@@ -284,7 +308,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     private javax.swing.JLabel lblValor;
     private javax.swing.JCheckBox status;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtData;
+    private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
@@ -295,7 +319,7 @@ public class FormGerenciarConsultora extends javax.swing.JFrame {
     }
 
     public JButton getBtnCancelar() {
-        return btnCancelar;
+        return btnExcluir;
     }
 
     public JTextField getTxtCor() {

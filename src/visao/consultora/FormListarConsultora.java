@@ -42,11 +42,10 @@ public class FormListarConsultora extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblConsultora = new javax.swing.JTable();
         btnCadastrar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JToggleButton();
         btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
+        buscarNome = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -94,11 +93,13 @@ public class FormListarConsultora extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
-        btnExcluir.setText("Excluir");
-
         btnBuscar.setBackground(new java.awt.Color(153, 204, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBusca.setText("Busca");
@@ -112,29 +113,25 @@ public class FormListarConsultora extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(lblTitulo)
+                            .addComponent(lblBusca)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTitulo)
-                                    .addComponent(lblBusca)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblDescricao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnBuscar))
-                                    .addComponent(lblListagem))
-                                .addGap(0, 51, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir)
-                        .addGap(20, 20, 20))))
+                                .addComponent(lblDescricao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar))
+                            .addComponent(lblListagem))
+                        .addGap(0, 51, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +145,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescricao)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,9 +154,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnExcluir))
+                .addComponent(btnCadastrar)
                 .addContainerGap())
         );
 
@@ -178,6 +173,12 @@ public class FormListarConsultora extends javax.swing.JFrame {
         Integer id = (Integer) table.getValueAt(row, 0);
         consultoraControle.renderizarVisaoAlterar(id);
     }//GEN-LAST:event_tblConsultoraMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        String stringBusca = buscarNome.getText();
+        consultoraControle.buscarPorNome(stringBusca);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +219,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JToggleButton btnExcluir;
+    private javax.swing.JTextField buscarNome;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -227,7 +228,6 @@ public class FormListarConsultora extends javax.swing.JFrame {
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblConsultora;
-    private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 
     //Getters de componentes para uso do controle
@@ -239,16 +239,13 @@ public class FormListarConsultora extends javax.swing.JFrame {
         return btnCadastrar;
     }
 
-    public JToggleButton getBtnExcluir() {
-        return btnExcluir;
-    }
 
     public JTable getTblConsultora() {
         return tblConsultora;
     }
 
     public JTextField getTxtDescricao() {
-        return txtDescricao;
+        return buscarNome;
     }
 
 }
