@@ -5,6 +5,11 @@
  */
 package visao.sacola;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author willr
@@ -220,4 +225,35 @@ public class FormCriarSacola extends javax.swing.JFrame {
     private javax.swing.JTable tblItensDeSacola;
     private javax.swing.JTextField txtCpf;
     // End of variables declaration//GEN-END:variables
+
+    
+    public JButton getBtnAdicionarProduto() {
+        return btnAdicionarProduto;
+    }
+
+    public JButton getBtnAssociarConsultora() {
+        return btnAssociarConsultora;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnCriarSacola() {
+        return btnCriarSacola;
+    }
+
+    public JLabel getLblNomeConsultora() {
+        return lblNomeConsultora;
+    }
+
+    public JTable getTblItensDeSacola() {
+        return tblItensDeSacola;
+    }
+
+    public JTextField getTxtCpf() {
+        return txtCpf;
+    }
+
+
 }

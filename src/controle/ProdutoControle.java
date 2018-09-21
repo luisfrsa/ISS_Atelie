@@ -246,7 +246,7 @@ public class ProdutoControle {
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtDescricao().requestFocus();
-            visaoCadastrarProduto.getTxtDescricao().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtDescricao().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -254,14 +254,14 @@ public class ProdutoControle {
             JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtValor().requestFocus();
-            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
         if (produto.getValor() <= 0) {
             JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtValor().requestFocus();
-            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -337,7 +337,7 @@ public class ProdutoControle {
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
             visaoEditarProduto.getTxtDescricao().requestFocus();
-            visaoEditarProduto.getTxtDescricao().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtDescricao().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -345,14 +345,14 @@ public class ProdutoControle {
             JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
             visaoEditarProduto.getTxtValor().requestFocus();
-            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
         if (produto.getValor() <= 0) {
             JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoEditarProduto.getTxtValor().requestFocus();
-            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 

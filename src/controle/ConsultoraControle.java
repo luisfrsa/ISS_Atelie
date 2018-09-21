@@ -68,6 +68,16 @@ public class ConsultoraControle {
                 .collect(Collectors.toList());
         preencheTabela(consultoras);
     }
+    
+    public Consultora buscaPorCpf(String cpf){
+        List<Consultora> consultoras = consultoraDAO.buscarTodos();
+        for(Consultora consultora: consultoras){
+            if(consultora.getCpf().equals(cpf)){
+                return consultora;
+            }            
+        }
+        return null;
+    }
 
     private Boolean validarConsultora(Consultora consultora) {
         Boolean erro = false;

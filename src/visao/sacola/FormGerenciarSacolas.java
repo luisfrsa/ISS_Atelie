@@ -5,6 +5,11 @@
  */
 package visao.sacola;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author willr
@@ -196,4 +201,30 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
     private javax.swing.JTable tblSacolas;
     private javax.swing.JTextField txtConsultora;
     // End of variables declaration//GEN-END:variables
+
+    
+    public JToggleButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JButton getBtnDetalhes() {
+        return btnDetalhes;
+    }
+
+    public JButton getBtnFinalizar() {
+        return btnFinalizar;
+    }
+
+    public JButton getBtnNova() {
+        return btnNova;
+    }
+
+    public JTable getTblSacolas() {
+        return tblSacolas;
+    }
+
+    public JTextField getTxtConsultora() {
+        return txtConsultora;
+    }
+
 }
