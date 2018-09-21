@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -40,7 +41,7 @@ public class Sacola {
     private Consultora consultora;
     
     @OneToMany    
-    private List <Produto> listaProdutos;
+    private List <ItemSacola> listaItens = new ArrayList<>();
 
     //Contrutores
     public Sacola() {
@@ -51,7 +52,7 @@ public class Sacola {
         this.dataCriacao = sacolabuilder.dataCriacao;
         this.dataAcerto = sacolabuilder.dataAcerto;
         this.consultora = sacolabuilder.consultora;
-        this.listaProdutos = sacolabuilder.listaProdutos;
+        this.listaItens = sacolabuilder.itensSacola;
     }
     
     //Métodos
@@ -87,12 +88,12 @@ public class Sacola {
         this.consultora = consultora;
     }
 
-    public List<Produto> getListaProdutos() {
-        return listaProdutos;
+    public List<ItemSacola> getListaItens() {
+        return listaItens;
     }
 
-    public void setListaProdutos(List<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    public void setListaProdutos(List<ItemSacola> listaItens) {
+        this.listaItens = listaItens;
     }
     
     

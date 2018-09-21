@@ -90,7 +90,7 @@ public class FormCriarSacola extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblItensDeSacola);
 
         btnAdicionarProduto.setBackground(new java.awt.Color(153, 204, 255));
-        btnAdicionarProduto.setText("Adicionar Produto");
+        btnAdicionarProduto.setText("Adicionar Produto a Sacola");
 
         btnCriarSacola.setBackground(new java.awt.Color(0, 153, 102));
         btnCriarSacola.setText("Criar Sacola");

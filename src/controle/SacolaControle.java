@@ -1,10 +1,18 @@
 package controle;
 
+import dao.ItemSacolaDAO;
 import dao.SacolaDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Consultora;
+import modelo.ItemSacola;
+import modelo.Produto;
+import modelo.Sacola;
+import visao.sacola.FormAssociarProdutoSacola;
 import visao.sacola.FormCriarSacola;
 import visao.sacola.FormGerenciarSacolas;
 
@@ -14,27 +22,46 @@ public class SacolaControle {
     private static final ProdutoControle controleProduto = new ProdutoControle();
     private static final ConsultoraControle controleConsultora = new ConsultoraControle();
     private static final SacolaDAO daoSacola = new SacolaDAO();
+    private static final ItemSacolaDAO daoItemSacola = new ItemSacolaDAO();
     private static final FormGerenciarSacolas visaoGerenciarSacolas = new FormGerenciarSacolas();
     private static final FormCriarSacola visaoCriarSacola = new FormCriarSacola();
+    private static final FormAssociarProdutoSacola visaoAssociarProduto = new FormAssociarProdutoSacola();
+    private Sacola sacola = new Sacola();
     private ActionListener actionListener;
+
+    private boolean ouvirEventosGerenciar = true;
+    private boolean ouvirEventosCriar = true;
+    private boolean ouvirEventosAssociarProduto = true;
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
-        evtBotaoCriar();
+        if (ouvirEventosGerenciar) {
+            evtBotaoCriar();
+            ouvirEventosGerenciar = false;
+        }
         visaoGerenciarSacolas.setVisible(true);
     }
 
     public void renderizarVisaoCriarSacola() {
-        evtBotaoAssociarConsultora();
-        restauraFormCriarSacola();
+        if (ouvirEventosCriar) {
+            evtBotaoAssociarConsultora();
+            evtBotaoAdicionarProduto();
+            restauraFormCriarSacola();
+            ouvirEventosCriar = false;
+        }
+        sacola = new Sacola();
         visaoCriarSacola.setVisible(true);
     }
 
-    private void restauraFormCriarSacola() {
-        visaoCriarSacola.getLblNomeConsultora().setText("Nenhuma Consultora associada.");
-        visaoCriarSacola.getTxtCpf().setText("");
-        visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 255, 255));
-        visaoCriarSacola.getTxtCpf().setEditable(true);
+    public void renderizarVisaoAssociarProduto() {
+        if (ouvirEventosAssociarProduto) {
+            evtBotaoBuscar();
+            evtBotaoConfirmar();
+            ouvirEventosAssociarProduto = false;
+        }
+        restauraFormAssociarProduto();
+        controleProduto.preencheTabelaProdutos(controleProduto.getDaoProduto().buscarTodos(), visaoAssociarProduto.getTblProdutos());
+        visaoAssociarProduto.setVisible(true);
     }
 
     //----- TELA GERENCIAR SACOLAS -----
@@ -49,6 +76,24 @@ public class SacolaControle {
     }
 
     //----- TELA CRIAR SACOLA -----
+    private void restauraFormCriarSacola() {
+        visaoCriarSacola.getLblNomeConsultora().setText("Nenhuma Consultora associada.");
+        visaoCriarSacola.getTxtCpf().setText("");
+        visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 255, 255));
+        visaoCriarSacola.getTxtCpf().setEditable(true);
+    }
+
+    public void preencheTabelaItensSacola(List<ItemSacola> lista, JTable tabela) {
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        modelo.setNumRows(0);
+        for (ItemSacola item : lista) {
+            modelo.addRow(new Object[]{
+                item.getProduto().getDescricao(),
+                item.getQuantidade()
+            });
+        }
+    }
+
     private void evtBotaoAssociarConsultora() {
         actionListener = new ActionListener() {
             @Override
@@ -56,9 +101,11 @@ public class SacolaControle {
                 String cpfConsultora = visaoCriarSacola.getTxtCpf().getText();
                 Consultora consultora = controleConsultora.buscaPorCpf(cpfConsultora);
                 if (validaAssocairConsultora(consultora)) {
+                    sacola.setConsultora(consultora);
                     visaoCriarSacola.getLblNomeConsultora().setText(consultora.getNome());
                     visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(204, 255, 204));
                     visaoCriarSacola.getTxtCpf().setEditable(false);
+                    visaoCriarSacola.getBtnAssociarConsultora().setEnabled(false);
                 }
             }
         };
@@ -66,12 +113,79 @@ public class SacolaControle {
     }
 
     private boolean validaAssocairConsultora(Consultora consultora) {
-        if(consultora == null){
+        if (consultora == null) {
             JOptionPane.showMessageDialog(null, "Nenhuma consultora cadastrada com o CPF informado.", "Erro na Validação", 0);
             visaoCriarSacola.getTxtCpf().requestFocus();
             visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
+        return true;
+    }
+
+    private void evtBotaoAdicionarProduto() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                renderizarVisaoAssociarProduto();
+            }
+        };
+        visaoCriarSacola.getBtnAdicionarProduto().addActionListener(actionListener);
+    }
+
+    //----- TELA ASSOCIAR PRODUTO -----
+    private void restauraFormAssociarProduto() {
+        visaoAssociarProduto.getTxtQuantidade().setText("");
+        visaoAssociarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 255, 255));
+        visaoAssociarProduto.getTxtDescricao().setText("");
+    }
+
+    private void evtBotaoBuscar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                String busca = visaoAssociarProduto.getTxtDescricao().getText();
+                if (busca.equals("")) {
+                    controleProduto.preencheTabelaProdutos(controleProduto.getDaoProduto().buscarTodos(), visaoAssociarProduto.getTblProdutos());
+                } else {
+                    List<Produto> listaDeBusca = controleProduto.buscaPorDescricao(busca);
+                    controleProduto.preencheTabelaProdutos(listaDeBusca, visaoAssociarProduto.getTblProdutos());
+                }
+            }
+        };
+        visaoAssociarProduto.getBtnBuscar().addActionListener(actionListener);
+    }
+
+    private void evtBotaoConfirmar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                int linha = visaoAssociarProduto.getTblProdutos().getSelectedRow();
+                if (validaFormAssociarProduto(linha)) {
+                    Integer id = (Integer) visaoAssociarProduto.getTblProdutos().getValueAt(linha, 0);
+                    Produto produto = controleProduto.getDaoProduto().buscarPorId(id);
+                    Integer quantidade = Integer.parseInt(visaoAssociarProduto.getTxtQuantidade().getText());
+                    ItemSacola itemSacola = new ItemSacola();
+                    itemSacola.setProduto(produto);
+                    itemSacola.setQuantidade(quantidade);
+                    itemSacola = daoItemSacola.inserir(itemSacola);
+                    sacola.getListaItens().add(itemSacola);
+                    preencheTabelaItensSacola(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
+                    visaoAssociarProduto.dispose();
+                }
+
+            }
+        };
+        visaoAssociarProduto.getBtnConfirmar().addActionListener(actionListener);
+    }
+
+    private boolean validaFormAssociarProduto(int linha) {
+        if (linha < 0){
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado na tabela.", "Erro", 0);
+            return false;
+        }
+        //Implementar demais validações
         return true;
     }
 
