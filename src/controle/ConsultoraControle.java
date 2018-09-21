@@ -108,4 +108,10 @@ public class ConsultoraControle {
         formGerenciarConsultora.setVisible(false);
     }
 
+    public static ConsultoraDAO getConsultoraDAO() {
+        return consultoraDAO;
+    }
+    
+    
+
 }
