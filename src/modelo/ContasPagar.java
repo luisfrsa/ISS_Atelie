@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.Transient;
 import modelo.builder.ContasPagarBuilder;
 
 /**
@@ -26,7 +25,7 @@ import modelo.builder.ContasPagarBuilder;
 @Table(name = "tbl_contas_pagar")
 
 public class ContasPagar implements Serializable {
-
+//Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -49,11 +48,17 @@ public class ContasPagar implements Serializable {
     @Column(name = "vencimento")
     private Date vencimento;
 
-    @Transient
-    private Integer atraso;
+    @Column(name = "status")
+    private String status;
 
+    @Column(name = "fornecedor")
+    private String fornecedor;
+
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
     
-
+    
+    //Construtores
     public ContasPagar(){
     }
 
@@ -64,6 +69,34 @@ public class ContasPagar implements Serializable {
         this.valor = contasPagarBuilder.valor;
         this.vencimento = contasPagarBuilder.vencimento;
         this.entrada = contasPagarBuilder.entrada;
+        this.status = contasPagarBuilder.status;
+        this.fornecedor = contasPagarBuilder.fornecedor;
+        this.formaPagamento = contasPagarBuilder.formaPagamento;
+        
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public Integer getId() {
@@ -114,17 +147,13 @@ public class ContasPagar implements Serializable {
         this.vencimento = vencimento;
     }
 
-    public Integer getAtraso() {
-        return atraso;
-    }
-
-    public void setAtraso(Integer atraso) {
-        this.atraso = atraso;
-    }
     
     public void setValor(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
     
     @Override
     public boolean equals(Object o) {
@@ -141,12 +170,14 @@ public class ContasPagar implements Serializable {
                 && Objects.equals(getEntrada(), that.getEntrada())
                 && Objects.equals(getBaixa(), that.getBaixa())
                 && Objects.equals(getVencimento(), that.getVencimento())
-                && Objects.equals(getAtraso(), that.getAtraso());
+                && Objects.equals(getFornecedor(), that.getFornecedor())
+                && Objects.equals(getStatus(), that.getStatus())
+                && Objects.equals(getFormaPagamento(), that.getFormaPagamento());
     }
 
      @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getAtraso());
+        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getFornecedor(), getFormaPagamento(), getStatus());
     }
 
 
@@ -154,13 +185,15 @@ public class ContasPagar implements Serializable {
     public String toString() {
         return "Produto{" +
                 "id=" + id +
+                ", fornecedor='" + fornecedor + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", valor=" + valor +
-                ", cor='" + entrada + '\'' +
-                ", tamanho='" + baixa + '\'' +
-                ", marca='" + vencimento + '\'' +
-                ", modelo='" + atraso + '\'' +
-                '}';
+                ", entrada='" + entrada + '\'' +
+                ", baixa='" + baixa + '\'' +
+                ", vencimento='" + vencimento + '\'' +
+                ", status='" + status + '\'' +
+                ", formadePagemento='" + formaPagamento + '\'' +
+               '}';
     }
 
 

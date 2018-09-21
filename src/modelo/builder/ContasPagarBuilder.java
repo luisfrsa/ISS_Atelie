@@ -21,8 +21,10 @@ public class ContasPagarBuilder {
     public Date entrada;
     public Date baixa;
     public Date vencimento;
-    public Integer atraso;
-
+    public String status;
+    public String fornecedor;
+    public String formaPagamento;
+    
     public ContasPagarBuilder(String descricao) {
         if (isNull(descricao)) {
             throw new IllegalArgumentException("Não é possível criar uma conta sem descrição");
@@ -60,8 +62,19 @@ public class ContasPagarBuilder {
         return this;
     }
 
-    public ContasPagarBuilder setAtraso(Integer atraso) {
-        this.atraso = atraso;
+    public ContasPagarBuilder setStatus(String status) {
+        this.status = status;
         return this;
     }
+
+    public ContasPagarBuilder setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+        return this;
+    }
+
+    public ContasPagarBuilder setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+        return this;
+    }
+
 }

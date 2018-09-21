@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.produto;
+package visao.contaspagar;
+
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -14,12 +15,12 @@ import javax.swing.JToggleButton;
  *
  * @author willr
  */
-public class FormGerenciarProdutos extends javax.swing.JFrame {
+public class FormGerenciarContasPagar extends javax.swing.JFrame {
 
     /**
      * Creates new form FormGerenciarProdutos
      */
-    public FormGerenciarProdutos() {
+    public FormGerenciarContasPagar() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -48,19 +49,19 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Produtos");
+        setTitle("Gerenciar Contas a Pagar");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Gerenciar Produto");
+        lblTitulo.setText("Gerenciar Contas a Pagar");
 
-        lblListagem.setText("Listagem de Produtos:");
+        lblListagem.setText("Listagem de Contas:");
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Descrição", "Valor"
+                "ID", "Fornecedor", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -79,7 +80,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         }
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Cadastrar Novo");
+        btnCadastrar.setText("Cadastrar Conta");
 
         btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
         btnExcluir.setText("Excluir");
@@ -93,7 +94,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBusca.setText("Busca");
 
-        lblDescricao.setText("Descrição:");
+        lblDescricao.setText("Fornecedor:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,6 +114,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo)
                             .addComponent(lblBusca)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDescricao)
@@ -120,9 +122,8 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
-                            .addComponent(lblListagem)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                            .addComponent(lblListagem))
+                        .addGap(0, 25, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,20 +174,21 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormGerenciarProdutos().setVisible(true);
+                new FormGerenciarContasPagar().setVisible(true);
             }
         });
     }
