@@ -5,6 +5,11 @@
  */
 package visao.sacola;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author willr
@@ -32,16 +37,12 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblBusca = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         lblListagem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
-        btnAssociarProduto = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
-        lblInfoProduto = new javax.swing.JLabel();
-        lblNomeProduto = new javax.swing.JLabel();
         lblQuantidade = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
@@ -82,13 +83,6 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProdutos);
 
-        btnAssociarProduto.setBackground(new java.awt.Color(153, 204, 255));
-        btnAssociarProduto.setText("Associar Produto");
-
-        lblInfoProduto.setText("Produto associado:");
-
-        lblNomeProduto.setText("Nenhum Produto associado.");
-
         lblQuantidade.setText("Quantidade:");
 
         btnConfirmar.setBackground(new java.awt.Color(0, 153, 102));
@@ -103,36 +97,31 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnConfirmar)
                             .addGap(221, 221, 221)
                             .addComponent(btnCancelar))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTitulo)
-                            .addComponent(lblBusca)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDescricao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblQuantidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar))
-                            .addComponent(lblListagem)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnAssociarProduto)
-                            .addComponent(jSeparator3)
-                            .addComponent(jSeparator2)
-                            .addComponent(jSeparator1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblInfoProduto)
-                                    .addComponent(lblQuantidade))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)))))
-                    .addComponent(jSeparator5))
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblTitulo)
+                                .addComponent(lblBusca)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblDescricao)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnBuscar))
+                                .addComponent(lblListagem)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                                .addComponent(jSeparator2)
+                                .addComponent(jSeparator1))))
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,7 +136,7 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescricao)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,21 +144,13 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
                 .addComponent(lblListagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAssociarProduto)
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblInfoProduto)
-                    .addComponent(lblNomeProduto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidade)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
@@ -215,24 +196,71 @@ public class FormAssociarProdutoSacola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssociarProduto;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBusca;
     private javax.swing.JLabel lblDescricao;
-    private javax.swing.JLabel lblInfoProduto;
     private javax.swing.JLabel lblListagem;
-    private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblProdutos;
+    private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public void setBtnConfirmar(JButton btnConfirmar) {
+        this.btnConfirmar = btnConfirmar;
+    }
+
+
+    public JTable getTblProdutos() {
+        return tblProdutos;
+    }
+
+    public void setTblProdutos(JTable tblProdutos) {
+        this.tblProdutos = tblProdutos;
+    }
+
+    public JTextField getTxtQuantidade() {
+        return txtQuantidade;
+    }
+
+    public void setTxtQuantidade(JTextField txtQuantidade) {
+        this.txtQuantidade = txtQuantidade;
+    }
+
+    public JTextField getTxtDescricao() {
+        return txtDescricao;
+    }
+
+
+
 }

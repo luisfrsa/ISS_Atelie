@@ -3,6 +3,7 @@ package modelo.builder;
 import java.util.Date;
 import java.util.List;
 import modelo.Consultora;
+import modelo.ItemSacola;
 import modelo.Produto;
 import modelo.Sacola;
 
@@ -12,7 +13,7 @@ public class SacolaBuilder {
     public Date dataCriacao;
     public Date dataAcerto;
     public Consultora consultora;    
-    public List <Produto> listaProdutos;
+    public List <ItemSacola> itensSacola;
     
     public Sacola build(){
         return new Sacola(this);
@@ -38,8 +39,8 @@ public class SacolaBuilder {
         return this;
     }
 
-    public SacolaBuilder setListaProdutos(List<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    public SacolaBuilder setListaProdutos(List<ItemSacola> listaItens) {
+        this.itensSacola = listaItens;
         return this;
     }
     

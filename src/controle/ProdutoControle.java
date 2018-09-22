@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
 import visao.produto.FormEditarProduto;
@@ -38,7 +39,7 @@ public class ProdutoControle {
             evtBotaoBuscar();
             ouvirEventosGerenciar = false;
         }
-        preencheTabela(daoProduto.buscarTodos());
+        preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
         visaoGerenciarProdutos.setVisible(true);
     }
 
@@ -64,8 +65,8 @@ public class ProdutoControle {
 
     //----- TELA GERENCIAR PRODUTOS -----
     
-    private void preencheTabela(List<Produto> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) visaoGerenciarProdutos.getTblProdutos().getModel();
+    public void preencheTabelaProdutos(List<Produto> lista, JTable tabela) {
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
         for (Produto produto : lista) {
             modelo.addRow(new Object[]{
@@ -129,7 +130,7 @@ public class ProdutoControle {
                         Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
                         daoProduto.remover(id);
                         JOptionPane.showMessageDialog(null, "Produto Excluido com Sucesso!", "Sucesso", 1);
-                        preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após remoção
+                        preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após remoção
                     }
                 }
             }
@@ -144,10 +145,10 @@ public class ProdutoControle {
 
                 String busca = visaoGerenciarProdutos.getTxtDescricao().getText();
                 if (busca.equals("")) {
-                    preencheTabela(daoProduto.buscarTodos());
+                    preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
                 } else {
                     List<Produto> listaDeBusca = buscaPorDescricao(busca);
-                    preencheTabela(listaDeBusca);
+                    preencheTabelaProdutos(listaDeBusca, visaoGerenciarProdutos.getTblProdutos());
                 }
             }
         };
@@ -155,7 +156,7 @@ public class ProdutoControle {
 
     }
 
-    private List<Produto> buscaPorDescricao(String busca) {
+    public List<Produto> buscaPorDescricao(String busca) {
 
         List<Produto> listaDeBusca = new ArrayList<>();
         int numLetras = busca.length();
@@ -231,7 +232,7 @@ public class ProdutoControle {
                     daoProduto.inserir(produto);
                     JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                     visaoCadastrarProduto.dispose();
-                    preencheTabela(daoProduto.buscarTodos()); //Atualiza tabela após cadastro
+                    preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após cadastro
                     limparCamposCadastro();
                 }
             }
@@ -246,7 +247,7 @@ public class ProdutoControle {
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtDescricao().requestFocus();
-            visaoCadastrarProduto.getTxtDescricao().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtDescricao().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -254,14 +255,14 @@ public class ProdutoControle {
             JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtValor().requestFocus();
-            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
         if (produto.getValor() <= 0) {
             JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoCadastrarProduto.getTxtValor().requestFocus();
-            visaoCadastrarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoCadastrarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -323,7 +324,7 @@ public class ProdutoControle {
                     daoProduto.alterar(novoProduto);
                     JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
                     visaoEditarProduto.dispose();
-                    preencheTabela(daoProduto.buscarTodos());
+                    preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
                 }
             }
         };
@@ -337,7 +338,7 @@ public class ProdutoControle {
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
             visaoEditarProduto.getTxtDescricao().requestFocus();
-            visaoEditarProduto.getTxtDescricao().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtDescricao().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
@@ -345,14 +346,14 @@ public class ProdutoControle {
             JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
             visaoEditarProduto.getTxtValor().requestFocus();
-            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
         if (produto.getValor() <= 0) {
             JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoEditarProduto.getTxtValor().requestFocus();
-            visaoEditarProduto.getTxtValor().setBackground(Color.yellow);
+            visaoEditarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 

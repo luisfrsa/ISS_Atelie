@@ -1,8 +1,10 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,8 +41,8 @@ public class Sacola {
     @JoinColumn(name = "consultora_id")
     private Consultora consultora;
     
-    @OneToMany    
-    private List <Produto> listaProdutos;
+    @OneToMany(cascade = CascadeType.ALL)   
+    private List <ItemSacola> listaItens = new ArrayList<>();
 
     //Contrutores
     public Sacola() {
@@ -51,7 +53,7 @@ public class Sacola {
         this.dataCriacao = sacolabuilder.dataCriacao;
         this.dataAcerto = sacolabuilder.dataAcerto;
         this.consultora = sacolabuilder.consultora;
-        this.listaProdutos = sacolabuilder.listaProdutos;
+        this.listaItens = sacolabuilder.itensSacola;
     }
     
     //Métodos
@@ -87,12 +89,12 @@ public class Sacola {
         this.consultora = consultora;
     }
 
-    public List<Produto> getListaProdutos() {
-        return listaProdutos;
+    public List<ItemSacola> getListaItens() {
+        return listaItens;
     }
 
-    public void setListaProdutos(List<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    public void setListaProdutos(List<ItemSacola> listaItens) {
+        this.listaItens = listaItens;
     }
     
     
