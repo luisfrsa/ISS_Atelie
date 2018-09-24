@@ -4,7 +4,8 @@ public enum Tela {
 
     PRODUTO(0, "Produto"),
     CONSULTORA(1, "Consultora"),
-    SACOLA(2, "Sacola");
+    SACOLA(2, "Sacola"),
+    CONTASPAGAR(3, "ContasPagar");
 
     private Integer codigo;
     private String nome;

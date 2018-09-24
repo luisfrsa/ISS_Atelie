@@ -51,7 +51,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         setTitle("Gerenciar Produtos");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Gerenciar Produto");
+        lblTitulo.setText("Gerenciar Produtos");
 
         lblListagem.setText("Listagem de Produtos:");
 
