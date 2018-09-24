@@ -7,8 +7,6 @@ out/
 Banco/BancoAtelie
 nbproject
 /nbproject
-project.properties
 *.jar
 *.class
 *.rapt
-private.properties
