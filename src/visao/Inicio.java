@@ -38,6 +38,8 @@ public class Inicio extends javax.swing.JFrame {
         menuProdutos = new javax.swing.JMenuItem();
         menuConsultoras = new javax.swing.JMenuItem();
         menuSacolas = new javax.swing.JMenuItem();
+        jMenu2Financeiro = new javax.swing.JMenu();
+        jMenuContasPagar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ateliê Doce Beleza");
@@ -70,6 +72,18 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2Financeiro.setText("Financeiro");
+
+        jMenuContasPagar.setText("Contas a Pagar");
+        jMenuContasPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuContasPagarActionPerformed(evt);
+            }
+        });
+        jMenu2Financeiro.add(jMenuContasPagar);
+
+        jMenuBar1.add(jMenu2Financeiro);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,6 +114,10 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         inicioControle.abreView(Tela.SACOLA);
     }//GEN-LAST:event_menuSacolasActionPerformed
+
+    private void jMenuContasPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContasPagarActionPerformed
+        inicioControle.abreView(Tela.CONTASPAGAR);
+    }//GEN-LAST:event_jMenuContasPagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +156,9 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2Financeiro;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuContasPagar;
     private javax.swing.JMenuItem menuConsultoras;
     private javax.swing.JMenuItem menuProdutos;
     private javax.swing.JMenuItem menuSacolas;

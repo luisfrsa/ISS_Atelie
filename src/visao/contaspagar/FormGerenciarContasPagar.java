@@ -47,6 +47,7 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        btnBaixar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Contas a Pagar");
@@ -96,6 +97,9 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
 
         lblDescricao.setText("Fornecedor:");
 
+        btnBaixar.setBackground(new java.awt.Color(255, 255, 51));
+        btnBaixar.setText("Baixar Conta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,9 +109,11 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDetalhes)
-                        .addGap(70, 70, 70)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBaixar)
+                        .addGap(18, 18, 18)
                         .addComponent(btnExcluir))
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
@@ -150,7 +156,8 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetalhes)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnBaixar))
                 .addContainerGap())
         );
 
@@ -194,6 +201,7 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBaixar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JToggleButton btnDetalhes;
