@@ -40,6 +40,7 @@ public class ProdutoControle {
             ouvirEventosGerenciar = false;
         }
         preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
+        visaoGerenciarProdutos.getTxtDescricao().setText("");
         visaoGerenciarProdutos.setVisible(true);
     }
 

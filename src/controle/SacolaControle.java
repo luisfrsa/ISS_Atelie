@@ -39,20 +39,22 @@ public class SacolaControle {
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
         if (ouvirEventosGerenciar) {
-            evtBotaoCriarNova();            
+            evtBotaoCriarNova();
             ouvirEventosGerenciar = false;
         }
         preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+        visaoGerenciarSacolas.getTxtConsultora().setText("");
         visaoGerenciarSacolas.setVisible(true);
     }
 
     public void renderizarVisaoCriarSacola() {
         if (ouvirEventosCriar) {
             evtBotaoAssociarConsultora();
-            evtBotaoAdicionarProduto();            
+            evtBotaoAdicionarProduto();
             evtBotaoCriarSacola();
+            evtBotaoCancelarCriar();
             ouvirEventosCriar = false;
-        }        
+        }
         restauraFormCriarSacola();
         sacola = new Sacola();
         preencheTabelaItensSacola(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
@@ -63,10 +65,13 @@ public class SacolaControle {
         if (ouvirEventosAssociarProduto) {
             evtBotaoBuscar();
             evtBotaoConfirmar();
+            evtBotaoCancelarAssociar();
             ouvirEventosAssociarProduto = false;
         }
         restauraFormAssociarProduto();
         controleProduto.preencheTabelaProdutos(controleProduto.getDaoProduto().buscarTodos(), visaoAssociarProduto.getTblProdutos());
+        visaoAssociarProduto.getTxtQuantidade().setText("");
+        visaoAssociarProduto.getTxtDescricao().setText("");
         visaoAssociarProduto.setVisible(true);
     }
 
@@ -83,7 +88,7 @@ public class SacolaControle {
             });
         }
     }
-    
+
     private void evtBotaoCriarNova() {
         actionListener = new ActionListener() {
             @Override
@@ -100,6 +105,8 @@ public class SacolaControle {
         visaoCriarSacola.getTxtCpf().setText("");
         visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 255, 255));
         visaoCriarSacola.getTxtCpf().setEditable(true);
+        visaoCriarSacola.getTxtDataAcerto().setText("");
+        visaoCriarSacola.getTxtDataAcerto().setBackground(new java.awt.Color(255, 255, 255));
         visaoCriarSacola.getBtnAssociarConsultora().setEnabled(true);
     }
 
@@ -151,8 +158,8 @@ public class SacolaControle {
         };
         visaoCriarSacola.getBtnAdicionarProduto().addActionListener(actionListener);
     }
-    
-    private void evtBotaoCriarSacola(){
+
+    private void evtBotaoCriarSacola() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -164,25 +171,65 @@ public class SacolaControle {
                 } catch (Exception e) {
                     System.out.println("Erro na conversão (String para Date) formato digitado é incorreto.");
                 }
-                
+
                 Calendar calendario = Calendar.getInstance();
                 Date dataCricao = calendario.getTime();
-                
+
                 sacola.setDataCriacao(dataCricao);
-                sacola.setDataAcerto(dataAcerto);                
-                daoSacola.inserir(sacola);
-                preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
-                visaoCriarSacola.dispose();
+                sacola.setDataAcerto(dataAcerto);
+                if (validaSacola(sacola)) {
+                    daoSacola.inserir(sacola);
+                    preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+                    visaoCriarSacola.dispose();
+                }
             }
         };
         visaoCriarSacola.getBtnCriarSacola().addActionListener(actionListener);
     }
 
+    private boolean validaSacola(Sacola sacola) {
+        visaoCriarSacola.getTxtDataAcerto().setBackground(new java.awt.Color(255, 255, 255));
+
+        if (sacola.getConsultora() == null) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo 'CPF da culsoltora' e associe uma Consultora à Sacola!", "Erro na Validação", 0);
+            visaoCriarSacola.getBtnAssociarConsultora().requestFocus();
+            return false;
+        }
+
+        if (sacola.getDataAcerto() == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Data de Acerto' é obrigatório!"
+                    + "\nFormato de data: dd/mm/aaaa", "Erro na Validação", 0);
+            visaoCriarSacola.getTxtDataAcerto().requestFocus();
+            visaoCriarSacola.getTxtDataAcerto().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+
+        if (sacola.getListaItens().size() == 0) {
+            JOptionPane.showMessageDialog(null, "Nenhum Produto foi adicionado à Sacola", "Erro na Validação", 0);
+            visaoCriarSacola.getBtnAdicionarProduto().requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void evtBotaoCancelarCriar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a criação da Sacola? ", "Confirmação", JOptionPane.YES_NO_OPTION);
+                if (opcao == 0) {
+                    visaoCriarSacola.dispose();
+                }
+            }
+        };
+        visaoCriarSacola.getBtnCancelar().addActionListener(actionListener);
+
+    }
+
     //----- TELA ASSOCIAR PRODUTO -----
     private void restauraFormAssociarProduto() {
-        visaoAssociarProduto.getTxtQuantidade().setText("");
+
         visaoAssociarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 255, 255));
-        visaoAssociarProduto.getTxtDescricao().setText("");
     }
 
     private void evtBotaoBuscar() {
@@ -226,12 +273,55 @@ public class SacolaControle {
     }
 
     private boolean validaFormAssociarProduto(int linha) {
-        if (linha < 0){
+        restauraFormAssociarProduto();
+
+        if (linha < 0) {
             JOptionPane.showMessageDialog(null, "Nenhum produto selecionado na tabela.", "Erro", 0);
             return false;
         }
-        //Implementar demais validações
+
+        if (visaoAssociarProduto.getTxtQuantidade().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Quantidade' é obrigatório!", "Erro na Validação", 0);
+            visaoAssociarProduto.getTxtQuantidade().requestFocus();
+            visaoAssociarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+
+        if (produtoRepetidoSacola((Integer) visaoAssociarProduto.getTblProdutos().getValueAt(linha, 0))) {
+            JOptionPane.showMessageDialog(null, "O Produto selecionado já foi adicionado à Sacola!", "Erro na Validação", 0);
+            return false;
+        }
+
+        try {
+            Integer.parseInt(visaoAssociarProduto.getTxtQuantidade().getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "O campo 'Quantidade' aceita apenas número inteiros!", "Erro na Validação", 0);
+            visaoAssociarProduto.getTxtQuantidade().requestFocus();
+            visaoAssociarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+
         return true;
+    }
+
+    private boolean produtoRepetidoSacola(Integer id) {
+        for (ItemSacola item : sacola.getListaItens()) {
+            if (item.getProduto().getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void evtBotaoCancelarAssociar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoAssociarProduto.dispose();
+            }
+        };
+        visaoAssociarProduto.getBtnCancelar().addActionListener(actionListener);
+
     }
 
 }

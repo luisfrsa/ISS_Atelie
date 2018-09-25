@@ -45,7 +45,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         tblSacolas = new javax.swing.JTable();
         btnDetalhes = new javax.swing.JButton();
         btnNova = new javax.swing.JButton();
-        btnFinalizar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Sacolas");
@@ -87,8 +87,8 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         btnNova.setBackground(new java.awt.Color(0, 153, 102));
         btnNova.setText("Criar Nova Sacola");
 
-        btnFinalizar.setBackground(new java.awt.Color(255, 102, 102));
-        btnFinalizar.setText("Finalizar Sacola");
+        btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
+        btnExcluir.setText("Excluir Sacola");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +117,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNova)
                         .addGap(51, 51, 51)
-                        .addComponent(btnFinalizar)))
+                        .addComponent(btnExcluir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,7 +144,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetalhes)
                     .addComponent(btnNova)
-                    .addComponent(btnFinalizar))
+                    .addComponent(btnExcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,7 +189,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBuscar;
     private javax.swing.JButton btnDetalhes;
-    private javax.swing.JButton btnFinalizar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNova;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -211,8 +211,8 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         return btnDetalhes;
     }
 
-    public JButton getBtnFinalizar() {
-        return btnFinalizar;
+    public JButton getBtnExcluir() {
+        return btnExcluir;
     }
 
     public JButton getBtnNova() {
