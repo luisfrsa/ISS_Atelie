@@ -50,7 +50,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnNova" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="btnFinalizar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -82,7 +82,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDetalhes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNova" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFinalizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -194,12 +194,12 @@
         <Property name="text" type="java.lang.String" value="Criar Nova Sacola"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnFinalizar">
+    <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Finalizar Sacola"/>
+        <Property name="text" type="java.lang.String" value="Excluir Sacola"/>
       </Properties>
     </Component>
   </SubComponents>

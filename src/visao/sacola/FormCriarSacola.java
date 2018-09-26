@@ -53,7 +53,7 @@ public class FormCriarSacola extends javax.swing.JFrame {
         txtDataAcerto = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Criar Sacola");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
