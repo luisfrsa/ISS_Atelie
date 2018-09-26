@@ -2,6 +2,7 @@
 build/
 dist/
 nbproject/
+node_modules/
 ISS_Atelie.iml
 out/
 Banco/BancoAtelie
