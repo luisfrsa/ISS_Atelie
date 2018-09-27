@@ -3,6 +3,7 @@
   <persistence-unit name="AtelieJPA" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <class>modelo.Consultora</class>
     <class>modelo.ContasPagar</class>
     <class>modelo.ItemSacola</class>
@@ -14,6 +15,8 @@
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.password" value="administrador"/>
 =======
+=======
+>>>>>>> Stashed changes
     <class>modelo.Sacola</class>
     <class>modelo.Produto</class>
     <class>modelo.ContasPagar</class>
@@ -23,6 +26,9 @@
       <property name="javax.persistence.jdbc.user" value="Administrador"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.password" value="Administrador"/>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
     </properties>
