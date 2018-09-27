@@ -148,9 +148,7 @@ public class ContasPagar implements Serializable {
     }
 
     
-    public void setValor(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
     
     
     

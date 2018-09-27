@@ -10,3 +10,6 @@ nbproject
 *.jar
 *.class
 *.rapt
+private.properties
+/src/META-INF/
+

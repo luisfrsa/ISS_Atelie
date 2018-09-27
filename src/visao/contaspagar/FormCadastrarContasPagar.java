@@ -39,13 +39,13 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabelDescricao = new javax.swing.JLabel();
         jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
         jLabelValor = new javax.swing.JLabel();
         jLabelDataEntrada = new javax.swing.JLabel();
         jFormattedTextFieldDataEntrada = new javax.swing.JFormattedTextField();
         jComboBoxFormaPagamento = new javax.swing.JComboBox<>();
         jLabelFormaPagamento = new javax.swing.JLabel();
         jLabelNumeroParcelas = new javax.swing.JLabel();
-        jFormattedTextFieldValor = new javax.swing.JFormattedTextField();
         jTextFieldNumeroParcelas = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -71,7 +71,7 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         }
         jFormattedTextFieldDataEntrada.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "À vista ", "A Prazo 30/60/90..." }));
+        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "À vista ", "A Prazo" }));
 
         jLabelFormaPagamento.setText("Forma de Pagamento:");
 
@@ -114,20 +114,20 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabelNumeroParcelas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addComponent(jLabelFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 60, Short.MAX_VALUE)))
+                        .addGap(0, 119, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,12 +143,12 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
                     .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDescricao))
+                    .addComponent(jLabelDescricao)
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValor)
-                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataEntrada)
@@ -214,7 +214,6 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> jComboBoxFormaPagamento;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValor;
     private javax.swing.JLabel jLabelCadastrarContasPagar;
     private javax.swing.JLabel jLabelDataEntrada;
     private javax.swing.JLabel jLabelDescricao;
@@ -226,10 +225,15 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldFornecedor;
     private javax.swing.JTextField jTextFieldNumeroParcelas;
+    private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
         //Getters and Setters
     public JButton getBtnCadastrar() {
         return btnCadastrar;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
     }
 
     public void setBtnCadastrar(JButton btnCadastrar) {
@@ -252,28 +256,16 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         this.jComboBoxFormaPagamento = jComboBoxFormaPagamento;
     }
 
+    public JTextField getjTextFieldValor() {
+        return jTextFieldValor;
+    }
+
     public JFormattedTextField getjFormattedTextFieldDataEntrada() {
         return jFormattedTextFieldDataEntrada;
     }
 
     public void setjFormattedTextFieldDataEntrada(JFormattedTextField jFormattedTextFieldDataEntrada) {
         this.jFormattedTextFieldDataEntrada = jFormattedTextFieldDataEntrada;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldValor() {
-        return jFormattedTextFieldValor;
-    }
-
-    public void setjFormattedTextFieldValor(JFormattedTextField jFormattedTextFieldValor) {
-        this.jFormattedTextFieldValor = jFormattedTextFieldValor;
-    }
-
-    public JTextField getjTextFieldDescricao() {
-        return jTextFieldDescricao;
-    }
-
-    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
-        this.jTextFieldDescricao = jTextFieldDescricao;
     }
 
     public JTextField getjTextFieldFornecedor() {
