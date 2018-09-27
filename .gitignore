@@ -12,3 +12,4 @@ project.properties
 *.class
 *.rapt
 private.properties
+/src/META-INF/

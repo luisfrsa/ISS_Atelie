@@ -48,7 +48,6 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jFormattedTextFieldDataEntrada" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldDescricao" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jComboBoxFormaPagamento" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -56,9 +55,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTextFieldNumeroParcelas" min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jTextFieldFornecedor" min="-2" pref="181" max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextFieldValor" min="-2" pref="181" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldFornecedor" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldValor" alignment="0" pref="181" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -67,7 +67,7 @@
                               <Component id="jLabelFornecedor" min="-2" pref="71" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="60" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="119" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -88,13 +88,13 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jFormattedTextFieldValor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelValor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldValor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -143,6 +143,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldDescricao">
     </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldValor">
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabelValor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valor:"/>
@@ -168,7 +170,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="&#xc0; vista "/>
-            <StringItem index="1" value="A Prazo 30/60/90..."/>
+            <StringItem index="1" value="A Prazo"/>
           </StringArray>
         </Property>
       </Properties>
@@ -185,8 +187,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xb0; de Parcelas:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldValor">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNumeroParcelas">
     </Component>
