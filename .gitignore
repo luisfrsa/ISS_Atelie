@@ -11,5 +11,4 @@ nbproject
 *.class
 *.rapt
 private.properties
-/src/META-INF/
-
+/src/META-INF/persistence.xml
