@@ -11,4 +11,8 @@ nbproject
 *.class
 *.rapt
 private.properties
+<<<<<<< Updated upstream
 /src/META-INF/persistence.xml
+=======
+/src/META-INF/
+>>>>>>> Stashed changes
