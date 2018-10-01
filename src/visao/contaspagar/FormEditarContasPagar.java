@@ -35,20 +35,24 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
 
         jLabelCadastrarContasPagar = new javax.swing.JLabel();
         jLabelFornecedor = new javax.swing.JLabel();
-        jTextFieldFornecedor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabelDescricao = new javax.swing.JLabel();
-        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldFornecedor = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
         jLabelValor = new javax.swing.JLabel();
         jLabelVencimento = new javax.swing.JLabel();
+        jTextFieldDescricao = new javax.swing.JTextField();
         jFormattedTextFieldDataVencimento = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldValor = new javax.swing.JFormattedTextField();
-        btnCadastrar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabelDatadaBaixa = new javax.swing.JLabel();
-        jFormattedTextFieldDataVencimento1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDatadaBaixa = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        JTextFieldID = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldStatus = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Contas a Pagar");
 
         jLabelCadastrarContasPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -69,11 +73,11 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
         }
         jFormattedTextFieldDataVencimento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Salvar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setBackground(new java.awt.Color(0, 153, 102));
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -83,11 +87,32 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
         jLabelDatadaBaixa.setText("Data da Baixa:");
 
         try {
-            jFormattedTextFieldDataVencimento1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldDatadaBaixa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldDataVencimento1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jFormattedTextFieldDatadaBaixa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jFormattedTextFieldDatadaBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldDatadaBaixaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Id:");
+
+        JTextFieldID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTextFieldIDActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Status: ");
+
+        jTextFieldStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,29 +124,31 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCadastrarContasPagar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnCancelar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabelValor)
-                                            .addComponent(jLabelDatadaBaixa)
-                                            .addComponent(jLabelFornecedor)
-                                            .addComponent(jLabelDescricao)
-                                            .addComponent(jLabelVencimento))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jFormattedTextFieldDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jFormattedTextFieldDataVencimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(98, 98, 98)
+                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                    .addComponent(btnCancelar))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(47, 47, 47)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabelValor)
+                                        .addComponent(jLabelDatadaBaixa)
+                                        .addComponent(jLabelDescricao)
+                                        .addComponent(jLabelVencimento)
+                                        .addComponent(jLabelFornecedor)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jFormattedTextFieldDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                        .addComponent(jFormattedTextFieldDatadaBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldDescricao)
+                                        .addComponent(jTextFieldFornecedor)
+                                        .addComponent(JTextFieldID)
+                                        .addComponent(jTextFieldStatus)))))
                         .addGap(0, 98, Short.MAX_VALUE))
                     .addComponent(jSeparator1))
                 .addContainerGap())
@@ -131,20 +158,28 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jLabelCadastrarContasPagar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(JTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFornecedor)
                     .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDescricao))
+                    .addComponent(jLabelDescricao)
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValor)
-                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVencimento)
@@ -152,10 +187,10 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDatadaBaixa)
-                    .addComponent(jFormattedTextFieldDataVencimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextFieldDatadaBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
+                    .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
                 .addGap(22, 22, 22))
         );
@@ -164,9 +199,21 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jFormattedTextFieldDatadaBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDatadaBaixaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldDatadaBaixaActionPerformed
+
+    private void JTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTextFieldIDActionPerformed
+
+    private void jTextFieldStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +254,13 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JTextField JTextFieldID;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataVencimento;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataVencimento1;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValor;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDatadaBaixa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCadastrarContasPagar;
     private javax.swing.JLabel jLabelDatadaBaixa;
     private javax.swing.JLabel jLabelDescricao;
@@ -221,54 +270,47 @@ public class FormEditarContasPagar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldFornecedor;
+    private javax.swing.JTextField jTextFieldStatus;
+    private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
-        //Getters and Setters
-    public JButton getBtnCadastrar() {
-        return btnCadastrar;
+
+    
+    public JButton getBtnSalvar() {
+        return btnSalvar;
     }
 
-    public void setBtnCadastrar(JButton btnCadastrar) {
-        this.btnCadastrar = btnCadastrar;
+    public JTextField getjTextFieldStatus() {
+        return jTextFieldStatus;
     }
 
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
-    public void setBtnCancelar(JButton btnCancelar) {
-        this.btnCancelar = btnCancelar;
+    public JTextField getJTextFieldID() {
+        return JTextFieldID;
     }
+    
 
-    public JFormattedTextField getjFormattedTextFieldDataEntrada() {
+    public JFormattedTextField getjFormattedTextFieldDataVencimento() {
         return jFormattedTextFieldDataVencimento;
     }
 
-    public void setjFormattedTextFieldDataEntrada(JFormattedTextField jFormattedTextFieldDataEntrada) {
-        this.jFormattedTextFieldDataVencimento = jFormattedTextFieldDataEntrada;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldValor() {
-        return jFormattedTextFieldValor;
-    }
-
-    public void setjFormattedTextFieldValor(JFormattedTextField jFormattedTextFieldValor) {
-        this.jFormattedTextFieldValor = jFormattedTextFieldValor;
+    public JFormattedTextField getjFormattedTextFieldDatadaBaixa() {
+        return jFormattedTextFieldDatadaBaixa;
     }
 
     public JTextField getjTextFieldDescricao() {
         return jTextFieldDescricao;
     }
 
-    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
-        this.jTextFieldDescricao = jTextFieldDescricao;
-    }
-
     public JTextField getjTextFieldFornecedor() {
         return jTextFieldFornecedor;
     }
 
-    public void setjTextFieldFornecedor(JTextField jTextFieldFornecedor) {
-        this.jTextFieldFornecedor = jTextFieldFornecedor;
+    public JTextField getjTextFieldValor() {
+        return jTextFieldValor;
     }
-
+        //Getters and Setters
+   
 }

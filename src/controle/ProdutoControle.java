@@ -388,7 +388,5 @@ public class ProdutoControle {
     public ProdutoDAO getDaoProduto() {
         return daoProduto;
     }
-    
-    
-
+   
 }
