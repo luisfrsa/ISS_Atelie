@@ -43,8 +43,8 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         btnDetalhes = new javax.swing.JToggleButton();
         btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
-        lblDescricao = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
+        lblFornecedor = new javax.swing.JLabel();
+        txtFornecedor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnBaixar = new javax.swing.JButton();
@@ -62,11 +62,11 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Fornecedor", "Valor"
+                "ID", "Fornecedor", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -95,7 +95,7 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBusca.setText("Busca");
 
-        lblDescricao.setText("Fornecedor:");
+        lblFornecedor.setText("Fornecedor:");
 
         btnBaixar.setBackground(new java.awt.Color(255, 255, 51));
         btnBaixar.setText("Baixar Conta");
@@ -123,9 +123,9 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                             .addComponent(lblTitulo)
                             .addComponent(lblBusca)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDescricao)
+                                .addComponent(lblFornecedor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
                             .addComponent(lblListagem))
@@ -143,8 +143,8 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addComponent(lblBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescricao)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFornecedor)
+                    .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,19 +210,29 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblBusca;
-    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblFornecedor;
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblContasPagar;
-    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtFornecedor;
     // End of variables declaration//GEN-END:variables
 
     
     //Getters de componentes para uso do controle
     
+    public JTextField getTxtFornecedor() {
+        return txtFornecedor;
+    }
+
+    public JButton getBtnBaixar() {
+        return btnBaixar;
+    }
+
     public JButton getBtnBuscar() {
         return btnBuscar;
     }
+
+   
 
     public JButton getBtnCadastrar() {
         return btnCadastrar;
@@ -240,9 +250,6 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         return tblContasPagar;
     }
 
-    public JTextField getTxtDescricao() {
-        return txtDescricao;
-    }
-
+    
     
 }

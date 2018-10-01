@@ -5,6 +5,9 @@
  */
 package visao.contaspagar;
 
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 /**
  *
  * @author Ronnie
@@ -16,6 +19,7 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
      */
     public FormBaixarContasPagar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -31,11 +35,11 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabelDataBaixa = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jSalvar = new javax.swing.JButton();
+        jCancelar = new javax.swing.JButton();
+        jFormattedTextFieldDatadeEntrada = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Baixar Contas a Pagar");
 
         jLabelBaixarContasPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -43,12 +47,12 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
 
         jLabelDataBaixa.setText("Data da baixa:");
 
-        jButton1.setText("Salvar");
+        jSalvar.setText("Salvar");
 
-        jButton2.setText("Cancelar");
+        jCancelar.setText("Cancelar");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldDatadeEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -68,12 +72,12 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelDataBaixa)
                                 .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jFormattedTextFieldDatadeEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jButton1)
+                        .addComponent(jSalvar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(jCancelar)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,13 +90,13 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDataBaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                    .addComponent(jFormattedTextFieldDatadeEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jSalvar)
+                    .addComponent(jCancelar))
                 .addContainerGap())
         );
 
@@ -136,12 +140,26 @@ public class FormBaixarContasPagar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JButton jCancelar;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDatadeEntrada;
     private javax.swing.JLabel jLabelBaixarContasPagar;
     private javax.swing.JLabel jLabelDataBaixa;
+    private javax.swing.JButton jSalvar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getjCancelar() {
+        return jCancelar;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDatadeEntrada() {
+        return jFormattedTextFieldDatadeEntrada;
+    }
+
+    public JButton getjSalvar() {
+        return jSalvar;
+    }
+
+
 }

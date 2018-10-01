@@ -50,7 +50,7 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Conta a pagar");
 
         jLabelCadastrarContasPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
