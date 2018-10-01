@@ -9,23 +9,28 @@ public class ConsultoraBuilder {
     public Integer id;
     public String nome;
     public String cpf;
+    public String senha;
     public Date dataNascimento;
     public Boolean statusAtividade;
 
-
-    public ConsultoraBuilder(String nome){
+    public ConsultoraBuilder(String nome) {
         if (isNull(nome)) {
             throw new IllegalArgumentException("Não é possível criar uma consultora sem nome");
         }
         this.nome = nome;
     }
 
-    public Consultora build(){
+    public Consultora build() {
         return new Consultora(this);
     }
-    
+
     public ConsultoraBuilder setId(Integer id) {
         this.id = id;
+        return this;
+    }
+
+    public ConsultoraBuilder setSenha(String senha) {
+        this.senha = senha;
         return this;
     }
 

@@ -22,6 +22,9 @@ public class Consultora implements Serializable {
     @Column(name = "CPF")
     private String cpf;
 
+    @Column(name = "SENHA")
+    private String senha;
+
     @Basic
     @Temporal(TemporalType.DATE)
     @Column(name = "DATANASCIMENTO")
@@ -72,6 +75,24 @@ public class Consultora implements Serializable {
 
     public void setStatusAtividade(Boolean statusAtividade) {
         this.statusAtividade = statusAtividade;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public Consultora setSenha(String senha) {
+        this.senha = senha;
+        return this;
+    }
+
+    public boolean isStatusAtividade() {
+        return statusAtividade;
+    }
+
+    public Consultora setStatusAtividade(boolean statusAtividade) {
+        this.statusAtividade = statusAtividade;
+        return this;
     }
 
     @Override
