@@ -177,6 +177,8 @@ public class SacolaControle {
 
                 sacola.setDataCriacao(dataCricao);
                 sacola.setDataAcerto(dataAcerto);
+                sacola.setFinalizada(false);
+                
                 if (validaSacola(sacola)) {
                     daoSacola.inserir(sacola);
                     preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
