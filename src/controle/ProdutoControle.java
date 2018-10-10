@@ -65,7 +65,6 @@ public class ProdutoControle {
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
-    
     public void preencheTabelaProdutos(List<Produto> lista, JTable tabela) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
@@ -163,15 +162,16 @@ public class ProdutoControle {
         int numLetras = busca.length();
 
         for (Produto produto : daoProduto.buscarTodos()) {
-            if (produto.getDescricao().toLowerCase().substring(0, numLetras).equals(busca.toLowerCase())) {
-                listaDeBusca.add(produto);
+            if (numLetras <= produto.getDescricao().length()) {
+                if (produto.getDescricao().substring(0, numLetras).equalsIgnoreCase(busca)) {
+                    listaDeBusca.add(produto);
+                }
             }
         }
         return listaDeBusca;
     }
 
     //----- TELA CADASTRAR PRODUTO -----
-    
     private void evtBotaoCancelar() {
         actionListener = new ActionListener() {
             @Override
@@ -289,7 +289,6 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR PRODUTOS -----
-    
     private void evtBotaoSalvar() {
         actionListener = new ActionListener() {
             @Override
@@ -388,5 +387,5 @@ public class ProdutoControle {
     public ProdutoDAO getDaoProduto() {
         return daoProduto;
     }
-   
+
 }
