@@ -18,7 +18,6 @@ export default class Login extends React.Component {
     }
 
     onSubmit = () => {
-        console.log('asd');
         axios.get('http://localhost:8080/consultora/findByCpf/'+this.state.cpf+'/'+this.state.password)
             .then(response => {
                 this.state.error = '';

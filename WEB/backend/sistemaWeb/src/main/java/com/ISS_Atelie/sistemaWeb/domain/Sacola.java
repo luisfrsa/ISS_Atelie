@@ -29,23 +29,8 @@ public class Sacola {
     @JoinColumn(name = "CONSULTORA_ID")
     private Consultora consultora;
 
-//    @JoinTable(
-//            name = "TBL_SACOLA_TBL_ITEM_SACOLA",
-//            joinColumns = {
-//                    @JoinColumn(table = "TBL_SACOLA_TBL_ITEM_SACOLA", name = "TBL_SACOLA_ID", referencedColumnName = "ID")
-//            })
-//    @JoinTable(name = "TBL_SACOLA_TBL_ITEM_SACOLA")
-//    @JoinColumn(name = "TBL_TBL_SACOLA_ID", referencedColumnName = "TBL_TBL_SACOLA_ID")
 
-//    @JoinColumn(table="TBL_SACOLA_TBL_ITEM_SACOLA", name="fk_portation_id", referencedColumnName="id"))
-
-    //    @JoinTable(
-//            name = "TBL_SACOLA_TBL_ITEM_SACOLA",
-//            joinColumns = @JoinColumn(name = "TBL_SACOLA_ID"),
-//            inverseJoinColumns = @JoinColumn( name="ID")
-//            )
-    @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "TBL_SACOLA_TBL_ITEM_SACOLA")
+    @Transient
     private List<ItemSacola> listaItens = new ArrayList<>();
 
     //Contrutores
