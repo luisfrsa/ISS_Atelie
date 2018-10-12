@@ -27,14 +27,17 @@ public class Sacola {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     
+    @Column(name = "status_finilizada")
+    private boolean finalizada;
+    
     @Basic
     @Temporal(TemporalType.DATE)
-    @Column(name = "dataCriacao")
+    @Column(name = "data_criacao")
     private Date dataCriacao;
     
     @Basic
     @Temporal(TemporalType.DATE)
-    @Column(name = "dataAcerto")
+    @Column(name = "data_acerto")
     private Date dataAcerto;
     
     @OneToOne
@@ -95,6 +98,14 @@ public class Sacola {
 
     public void setListaProdutos(List<ItemSacola> listaItens) {
         this.listaItens = listaItens;
+    }
+
+    public boolean isFinalizada() {
+        return finalizada;
+    }
+
+    public void setFinalizada(boolean finalizada) {
+        this.finalizada = finalizada;
     }
     
     
