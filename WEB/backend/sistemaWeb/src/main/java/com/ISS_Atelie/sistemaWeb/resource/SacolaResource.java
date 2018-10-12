@@ -20,7 +20,9 @@ public class SacolaResource {
 
     @GetMapping("/")
     public List<Sacola> getAll() {
-        return sacolaService.findAll();
+        List<Sacola> list = sacolaService.findAll();
+        list.addAll(sacolaService.findAll());
+        return list;
     }
 
 }
