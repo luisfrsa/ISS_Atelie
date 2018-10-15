@@ -17,6 +17,7 @@ import modelo.Sacola;
 import util.Datas;
 import visao.sacola.FormAssociarProdutoSacola;
 import visao.sacola.FormCriarSacola;
+import visao.sacola.FormDetalhesSacola;
 import visao.sacola.FormGerenciarSacolas;
 
 public class SacolaControle {
@@ -29,18 +30,21 @@ public class SacolaControle {
     private static final FormGerenciarSacolas visaoGerenciarSacolas = new FormGerenciarSacolas();
     private static final FormCriarSacola visaoCriarSacola = new FormCriarSacola();
     private static final FormAssociarProdutoSacola visaoAssociarProduto = new FormAssociarProdutoSacola();
+    private static final FormDetalhesSacola visaoDetalhesSacola = new FormDetalhesSacola();
     private Sacola sacola = new Sacola();
     private ActionListener actionListener;
 
     private boolean ouvirEventosGerenciar = true;
     private boolean ouvirEventosCriar = true;
     private boolean ouvirEventosAssociarProduto = true;
+    private boolean ouvirEventosDetalhesSacola = true;
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
         if (ouvirEventosGerenciar) {
             evtBotaoCriarNova();
             evtBotaoExcluir();
+            evtBotaoDetalhes();
             ouvirEventosGerenciar = false;
         }
         preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
@@ -74,6 +78,22 @@ public class SacolaControle {
         visaoAssociarProduto.getTxtQuantidade().setText("");
         visaoAssociarProduto.getTxtDescricao().setText("");
         visaoAssociarProduto.setVisible(true);
+    }
+    
+    public void renderizaVisaoDetalhesSacola(Sacola sacola){
+        if(ouvirEventosDetalhesSacola){
+            evtBotaoFecharDetalhes();
+            ouvirEventosDetalhesSacola = false;
+        }
+        String nomeConsultora = sacola.getConsultora().getNome();
+        String dataCriacao = Datas.dateToString(sacola.getDataCriacao());
+        String dataAcerto = Datas.dateToString(sacola.getDataAcerto());
+        
+        visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
+        visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
+        visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
+        preencheTabelaItensSacola(sacola.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+        visaoDetalhesSacola.setVisible(true);
     }
 
     //----- TELA GERENCIAR SACOLAS -----
@@ -132,6 +152,23 @@ public class SacolaControle {
         for(ItemSacola item : sacola.getListaItens()){
             daoItemSacola.remover(item);
         }
+    }
+    
+    private void evtBotaoDetalhes(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int linha = visaoGerenciarSacolas.getTblSacolas().getSelectedRow();
+                if(linha <  0){
+                    JOptionPane.showMessageDialog(null, "Nenhuma Sacola selecionada!", "Erro", 0);
+                }else{
+                    Integer id = (Integer) visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 0); //ID do item selecionado
+                    Sacola sacola = daoSacola.buscarPorId(id);
+                    renderizaVisaoDetalhesSacola(sacola);
+                }
+            }
+        };
+        visaoGerenciarSacolas.getBtnDetalhes().addActionListener(actionListener);
     }
 
     //----- TELA CRIAR SACOLA -----
@@ -217,6 +254,7 @@ public class SacolaControle {
                 if (validaSacola(sacola)) {
                     daoSacola.inserir(sacola);
                     preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+                    JOptionPane.showMessageDialog(null, "Sacola cadastrada com Sucesso!", "Sucesso", 1);
                     visaoCriarSacola.dispose();
                 }
             }
@@ -359,6 +397,17 @@ public class SacolaControle {
         };
         visaoAssociarProduto.getBtnCancelar().addActionListener(actionListener);
 
+    }
+    
+    //----- TELA DETALHES DA SACOLA -----
+    private void evtBotaoFecharDetalhes(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoDetalhesSacola.dispose();
+            }
+        };
+        visaoDetalhesSacola.getBtnFechar().addActionListener(actionListener);
     }
 
 }
