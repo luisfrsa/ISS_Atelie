@@ -40,6 +40,7 @@ public class SacolaControle {
     public void renderizarVisaoGerenciarSacolas() {
         if (ouvirEventosGerenciar) {
             evtBotaoCriarNova();
+            evtBotaoExcluir();
             ouvirEventosGerenciar = false;
         }
         preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
@@ -97,6 +98,40 @@ public class SacolaControle {
             }
         };
         visaoGerenciarSacolas.getBtnNova().addActionListener(actionListener);
+    }
+    
+    private void evtBotaoExcluir(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+                int linha = visaoGerenciarSacolas.getTblSacolas().getSelectedRow();
+                if (linha < 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhuma Sacola selecionada!", "Erro", 0);
+                } else {
+                    int opcao = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da Sacola de "
+                            + visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 1)
+                            + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if(opcao == 0){
+                        Integer id = (Integer) visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 0); //ID do item selecionado
+                        //remover itens de sacola associados a sacola
+                        Sacola sacola = daoSacola.buscarPorId(id);
+                        excluiItensDaSacola(sacola);
+                        daoSacola.remover(sacola);
+                        JOptionPane.showMessageDialog(null, "Sacola excluida com Sucesso!", "Sucesso", 1);
+                        preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+                    }
+                }
+            }
+        };
+        visaoGerenciarSacolas.getBtnExcluir().addActionListener(actionListener);
+    }
+    
+    private void excluiItensDaSacola(Sacola sacola){
+        
+        for(ItemSacola item : sacola.getListaItens()){
+            daoItemSacola.remover(item);
+        }
     }
 
     //----- TELA CRIAR SACOLA -----
