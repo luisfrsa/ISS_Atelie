@@ -17,6 +17,7 @@ import modelo.Sacola;
 import util.Datas;
 import visao.sacola.FormAssociarProdutoSacola;
 import visao.sacola.FormCriarSacola;
+import visao.sacola.FormDetalhesSacola;
 import visao.sacola.FormGerenciarSacolas;
 
 public class SacolaControle {
@@ -29,18 +30,21 @@ public class SacolaControle {
     private static final FormGerenciarSacolas visaoGerenciarSacolas = new FormGerenciarSacolas();
     private static final FormCriarSacola visaoCriarSacola = new FormCriarSacola();
     private static final FormAssociarProdutoSacola visaoAssociarProduto = new FormAssociarProdutoSacola();
+    private static final FormDetalhesSacola visaoDetalhesSacola = new FormDetalhesSacola();
     private Sacola sacola = new Sacola();
     private ActionListener actionListener;
 
     private boolean ouvirEventosGerenciar = true;
     private boolean ouvirEventosCriar = true;
     private boolean ouvirEventosAssociarProduto = true;
+    private boolean ouvirEventosDetalhesSacola = true;
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
         if (ouvirEventosGerenciar) {
             evtBotaoCriarNova();
             evtBotaoExcluir();
+            evtBotaoDetalhes();
             ouvirEventosGerenciar = false;
         }
         preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
@@ -76,6 +80,22 @@ public class SacolaControle {
         visaoAssociarProduto.setVisible(true);
     }
 
+    public void renderizaVisaoDetalhesSacola(Sacola sacola) {
+        if (ouvirEventosDetalhesSacola) {
+            evtBotaoFecharDetalhes();
+            ouvirEventosDetalhesSacola = false;
+        }
+        String nomeConsultora = sacola.getConsultora().getNome();
+        String dataCriacao = Datas.dateToString(sacola.getDataCriacao());
+        String dataAcerto = Datas.dateToString(sacola.getDataAcerto());
+
+        visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
+        visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
+        visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
+        preencheTabelaItensSacola(sacola.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+        visaoDetalhesSacola.setVisible(true);
+    }
+
     //----- TELA GERENCIAR SACOLAS -----
     public void preencheTabelaSacolas(List<Sacola> lista, JTable tabela) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
@@ -99,12 +119,12 @@ public class SacolaControle {
         };
         visaoGerenciarSacolas.getBtnNova().addActionListener(actionListener);
     }
-    
-    private void evtBotaoExcluir(){
+
+    private void evtBotaoExcluir() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 int linha = visaoGerenciarSacolas.getTblSacolas().getSelectedRow();
                 if (linha < 0) {
                     JOptionPane.showMessageDialog(null, "Nenhuma Sacola selecionada!", "Erro", 0);
@@ -112,7 +132,7 @@ public class SacolaControle {
                     int opcao = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da Sacola de "
                             + visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 1)
                             + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
-                    if(opcao == 0){
+                    if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 0); //ID do item selecionado
                         //remover itens de sacola associados a sacola
                         Sacola sacola = daoSacola.buscarPorId(id);
@@ -126,12 +146,29 @@ public class SacolaControle {
         };
         visaoGerenciarSacolas.getBtnExcluir().addActionListener(actionListener);
     }
-    
-    private void excluiItensDaSacola(Sacola sacola){
-        
-        for(ItemSacola item : sacola.getListaItens()){
+
+    private void excluiItensDaSacola(Sacola sacola) {
+
+        for (ItemSacola item : sacola.getListaItens()) {
             daoItemSacola.remover(item);
         }
+    }
+
+    private void evtBotaoDetalhes() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int linha = visaoGerenciarSacolas.getTblSacolas().getSelectedRow();
+                if (linha < 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhuma Sacola selecionada!", "Erro", 0);
+                } else {
+                    Integer id = (Integer) visaoGerenciarSacolas.getTblSacolas().getValueAt(linha, 0); //ID do item selecionado
+                    Sacola sacola = daoSacola.buscarPorId(id);
+                    renderizaVisaoDetalhesSacola(sacola);
+                }
+            }
+        };
+        visaoGerenciarSacolas.getBtnDetalhes().addActionListener(actionListener);
     }
 
     //----- TELA CRIAR SACOLA -----
@@ -181,6 +218,16 @@ public class SacolaControle {
             visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
+        
+        for (Sacola s : daoSacola.buscarTodas()) {
+            if ((!s.isFinalizada()) && (s.getConsultora().equals(consultora))) {
+                JOptionPane.showMessageDialog(null, "Já existe uma Sacola ativa associada a esta Consultora.", "Erro na Validação", 0);
+                visaoCriarSacola.getTxtCpf().requestFocus();
+                visaoCriarSacola.getTxtCpf().setBackground(new java.awt.Color(255, 204, 204));
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -213,10 +260,11 @@ public class SacolaControle {
                 sacola.setDataCriacao(dataCricao);
                 sacola.setDataAcerto(dataAcerto);
                 sacola.setFinalizada(false);
-                
+
                 if (validaSacola(sacola)) {
                     daoSacola.inserir(sacola);
                     preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+                    JOptionPane.showMessageDialog(null, "Sacola cadastrada com Sucesso!", "Sucesso", 1);
                     visaoCriarSacola.dispose();
                 }
             }
@@ -246,6 +294,7 @@ public class SacolaControle {
             visaoCriarSacola.getBtnAdicionarProduto().requestFocus();
             return false;
         }
+
         return true;
     }
 
@@ -359,6 +408,17 @@ public class SacolaControle {
         };
         visaoAssociarProduto.getBtnCancelar().addActionListener(actionListener);
 
+    }
+
+    //----- TELA DETALHES DA SACOLA -----
+    private void evtBotaoFecharDetalhes() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoDetalhesSacola.dispose();
+            }
+        };
+        visaoDetalhesSacola.getBtnFechar().addActionListener(actionListener);
     }
 
 }
