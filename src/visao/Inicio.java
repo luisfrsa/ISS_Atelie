@@ -40,6 +40,7 @@ public class Inicio extends javax.swing.JFrame {
         menuSacolas = new javax.swing.JMenuItem();
         jMenu2Financeiro = new javax.swing.JMenu();
         jMenuContasPagar = new javax.swing.JMenuItem();
+        jMenuContasReceber = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ateliê Doce Beleza");
@@ -82,6 +83,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu2Financeiro.add(jMenuContasPagar);
 
+        jMenuContasReceber.setText("Contas a Receber");
+        jMenuContasReceber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuContasReceberActionPerformed(evt);
+            }
+        });
+        jMenu2Financeiro.add(jMenuContasReceber);
+
         jMenuBar1.add(jMenu2Financeiro);
 
         setJMenuBar(jMenuBar1);
@@ -118,6 +127,10 @@ public class Inicio extends javax.swing.JFrame {
     private void jMenuContasPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContasPagarActionPerformed
         inicioControle.abreView(Tela.CONTASPAGAR);
     }//GEN-LAST:event_jMenuContasPagarActionPerformed
+
+    private void jMenuContasReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContasReceberActionPerformed
+        inicioControle.abreView(Tela.CONTASRECEBER);
+    }//GEN-LAST:event_jMenuContasReceberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +172,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2Financeiro;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuContasPagar;
+    private javax.swing.JMenuItem jMenuContasReceber;
     private javax.swing.JMenuItem menuConsultoras;
     private javax.swing.JMenuItem menuProdutos;
     private javax.swing.JMenuItem menuSacolas;
