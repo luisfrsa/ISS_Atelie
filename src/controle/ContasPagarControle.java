@@ -271,7 +271,7 @@ public class ContasPagarControle {
                             contaspagar.setValor(valorparcela);
                             contaspagar.setDescricao(descricao);
                             contaspagar.setStatus("PENDENTE");
-
+                            
                            // -----Calculo do Vencimento (parcela)
                             vencimentoparcelas.add(Calendar.DAY_OF_MONTH, +30);
                             contaspagar.setVencimento(vencimentoparcelas.getTime());
@@ -279,6 +279,7 @@ public class ContasPagarControle {
                             contaspagar = new ContasPagar();
                         }
                     } else {
+                        
                         contaspagar.setVencimento(entrada);
                         contaspagar.setBaixa(entrada);
                         contaspagar.setStatus("LIQUIDADA");

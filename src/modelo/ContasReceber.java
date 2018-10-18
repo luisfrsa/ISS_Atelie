@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import modelo.builder.ContasPagarBuilder;
+import modelo.builder.ContasReceberBuilder;
 
 /**
  *
@@ -24,7 +24,7 @@ import modelo.builder.ContasPagarBuilder;
 @Entity
 @Table(name = "tbl_contas_pagar")
 
-public class ContasPagar implements Serializable {
+public class ContasReceber implements Serializable {
 //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,8 +51,8 @@ public class ContasPagar implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "fornecedor")
-    private String fornecedor;
+    @Column(name = "cliente")
+    private String cliente;
 
     @Column(name = "forma_pagamento")
     private String formaPagamento;
@@ -60,19 +60,19 @@ public class ContasPagar implements Serializable {
   
     
     //Construtores
-    public ContasPagar(){
+    public ContasReceber(){
     }
 
-    public ContasPagar(ContasPagarBuilder contasPagarBuilder) {
-        this.id = contasPagarBuilder.id;
-        this.baixa = contasPagarBuilder.baixa;
-        this.descricao = contasPagarBuilder.descricao;
-        this.valor = contasPagarBuilder.valor;
-        this.vencimento = contasPagarBuilder.vencimento;
-        this.entrada = contasPagarBuilder.entrada;
-        this.status = contasPagarBuilder.status;
-        this.fornecedor = contasPagarBuilder.fornecedor;
-        this.formaPagamento = contasPagarBuilder.formaPagamento;
+    public ContasReceber(ContasReceberBuilder contasReceberBuilder) {
+        this.id = contasReceberBuilder.id;
+        this.baixa = contasReceberBuilder.baixa;
+        this.descricao = contasReceberBuilder.descricao;
+        this.valor = contasReceberBuilder.valor;
+        this.vencimento = contasReceberBuilder.vencimento;
+        this.entrada = contasReceberBuilder.entrada;
+        this.status = contasReceberBuilder.status;
+        this.cliente = contasReceberBuilder.cliente;
+        this.formaPagamento = contasReceberBuilder.formaPagamento;
         
     }
 
@@ -84,12 +84,12 @@ public class ContasPagar implements Serializable {
         this.status = status;
     }
 
-    public String getFornecedor() {
-        return fornecedor;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setFornecedor(String fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public String getFormaPagamento() {
@@ -159,24 +159,24 @@ public class ContasPagar implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ContasPagar)) {
+        if (!(o instanceof ContasReceber)) {
             return false;
         }
-        ContasPagar that = (ContasPagar) o;
+        ContasReceber that = (ContasReceber) o;
         return Objects.equals(getId(), that.getId())
                 && Objects.equals(getValor(), that.getValor())
                 && Objects.equals(getDescricao(), that.getDescricao())
                 && Objects.equals(getEntrada(), that.getEntrada())
                 && Objects.equals(getBaixa(), that.getBaixa())
                 && Objects.equals(getVencimento(), that.getVencimento())
-                && Objects.equals(getFornecedor(), that.getFornecedor())
+                && Objects.equals(getCliente(), that.getCliente())
                 && Objects.equals(getStatus(), that.getStatus())
                 && Objects.equals(getFormaPagamento(), that.getFormaPagamento());
     }
 
      @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getFornecedor(), getFormaPagamento(), getStatus());
+        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getCliente(), getFormaPagamento(), getStatus());
     }
 
 
@@ -184,7 +184,7 @@ public class ContasPagar implements Serializable {
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", fornecedor='" + fornecedor + '\'' +
+                ", fornecedor='" + cliente + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", valor=" + valor +
                 ", entrada='" + entrada + '\'' +
