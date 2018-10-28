@@ -6,11 +6,13 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Produto;
 import dao.ProdutoDAO;
+import dao.ItemEstoqueDAO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import modelo.ItemEstoque;
 import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
 import visao.produto.FormEditarProduto;
@@ -20,6 +22,7 @@ public class ProdutoControle {
 
     //Atributos
     private static final ProdutoDAO daoProduto = new ProdutoDAO();
+    private static final ItemEstoqueDAO daoItemEstoque = new ItemEstoqueDAO();
     private static final FormGerenciarProdutos visaoGerenciarProdutos = new FormGerenciarProdutos();
     private static final FormCadastrarProduto visaoCadastrarProduto = new FormCadastrarProduto();
     private static final FormEditarProduto visaoEditarProduto = new FormEditarProduto();
@@ -128,6 +131,7 @@ public class ProdutoControle {
                             + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
+                        daoItemEstoque.remover(id); //Remove primeiro o item do estoque
                         daoProduto.remover(id);
                         JOptionPane.showMessageDialog(null, "Produto Excluido com Sucesso!", "Sucesso", 1);
                         preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após remoção
@@ -218,6 +222,13 @@ public class ProdutoControle {
                 String tamanho = visaoCadastrarProduto.getTxtTamanho().getText();
                 String marca = visaoCadastrarProduto.getTxtMarca().getText();
                 String modleo = visaoCadastrarProduto.getTxtModelo().getText();
+                
+                Integer quantidade;
+                if(visaoCadastrarProduto.getTxtQuantidade().getText().equals("")){
+                    quantidade = 0;
+                }else{
+                    quantidade = Integer.parseInt(visaoCadastrarProduto.getTxtQuantidade().getText());
+                }
 
                 //Criando objeto com as informações
                 Produto produto = new ProdutoBuilder(descricao)
@@ -231,6 +242,13 @@ public class ProdutoControle {
                 //Persistindo objeto
                 if (validaCadastroProduto(produto)) {
                     daoProduto.inserir(produto);
+                    
+                    //Inserindo produto ao estoque
+                    ItemEstoque itemEstoque = new ItemEstoque();
+                    itemEstoque.setProduto(produto);
+                    itemEstoque.setQuantidade(quantidade);
+                    daoItemEstoque.inserir(itemEstoque);
+                    
                     JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                     visaoCadastrarProduto.dispose();
                     preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após cadastro
