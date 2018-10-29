@@ -6,28 +6,37 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Produto;
 import dao.ProdutoDAO;
+import dao.ItemEstoqueDAO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import modelo.ItemEstoque;
 import modelo.builder.ProdutoBuilder;
 import visao.produto.FormCadastrarProduto;
+import visao.produto.FormEditarEstoqueProduto;
 import visao.produto.FormEditarProduto;
+import visao.produto.FormEstoqueProdutos;
 import visao.produto.FormGerenciarProdutos;
 
 public class ProdutoControle {
 
     //Atributos
     private static final ProdutoDAO daoProduto = new ProdutoDAO();
+    private static final ItemEstoqueDAO daoItemEstoque = new ItemEstoqueDAO();
     private static final FormGerenciarProdutos visaoGerenciarProdutos = new FormGerenciarProdutos();
     private static final FormCadastrarProduto visaoCadastrarProduto = new FormCadastrarProduto();
     private static final FormEditarProduto visaoEditarProduto = new FormEditarProduto();
+    private static final FormEstoqueProdutos visaoEstoqueProdutos = new FormEstoqueProdutos();
+    private static final FormEditarEstoqueProduto visaoEditarEstoque = new FormEditarEstoqueProduto();
     private ActionListener actionListener;
 
     private boolean ouvirEventosGerenciar = true;
     private boolean ouvirEventosCadastrar = true;
     private boolean ouvirEventosEditar = true;
+    private boolean ouvirEventosEstoque = true;
+    private boolean ouvirEventosEditarEstoque = true;
 
     //Métodos
     public void renderizarVisaoGerenciarProdutos() {
@@ -37,6 +46,7 @@ public class ProdutoControle {
             evtBotaoDetalhes();
             evtBotaoExcluir();
             evtBotaoBuscar();
+            evtBotaoEstoque();
             ouvirEventosGerenciar = false;
         }
         preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
@@ -62,6 +72,25 @@ public class ProdutoControle {
             ouvirEventosEditar = false;
         }
         visaoEditarProduto.setVisible(true);
+    }
+    
+    public void renderizaVisaoEstoque(){
+        if(ouvirEventosEstoque){
+            evtBotaoFecharEstoque();
+            evtBotaoEditarEstoque();
+            ouvirEventosEstoque = false;
+        }
+        preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
+        visaoEstoqueProdutos.setVisible(true);
+    }
+    
+    public void renderizaVisaoEditarEstoque(){
+        if(ouvirEventosEditarEstoque){
+            evtBotaoCancelarEditarEstoque();
+            evtBotaoSalvarEditarEstoque();
+            ouvirEventosEditarEstoque = false;
+        }
+        visaoEditarEstoque.setVisible(true);
     }
 
     //----- TELA GERENCIAR PRODUTOS -----
@@ -128,6 +157,7 @@ public class ProdutoControle {
                             + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarProdutos.getTblProdutos().getValueAt(linha, 0); //ID do item selecionado
+                        daoItemEstoque.remover(id); //Remove primeiro o item do estoque
                         daoProduto.remover(id);
                         JOptionPane.showMessageDialog(null, "Produto Excluido com Sucesso!", "Sucesso", 1);
                         preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após remoção
@@ -169,6 +199,16 @@ public class ProdutoControle {
             }
         }
         return listaDeBusca;
+    }
+    
+    private void evtBotaoEstoque(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                renderizaVisaoEstoque();
+            }
+        };
+        visaoGerenciarProdutos.getBtnEstoque().addActionListener(actionListener);
     }
 
     //----- TELA CADASTRAR PRODUTO -----
@@ -218,6 +258,13 @@ public class ProdutoControle {
                 String tamanho = visaoCadastrarProduto.getTxtTamanho().getText();
                 String marca = visaoCadastrarProduto.getTxtMarca().getText();
                 String modleo = visaoCadastrarProduto.getTxtModelo().getText();
+                
+                Integer quantidade;
+                if(visaoCadastrarProduto.getTxtQuantidade().getText().equals("")){
+                    quantidade = 0;
+                }else{
+                    quantidade = Integer.parseInt(visaoCadastrarProduto.getTxtQuantidade().getText());
+                }
 
                 //Criando objeto com as informações
                 Produto produto = new ProdutoBuilder(descricao)
@@ -231,6 +278,13 @@ public class ProdutoControle {
                 //Persistindo objeto
                 if (validaCadastroProduto(produto)) {
                     daoProduto.inserir(produto);
+                    
+                    //Inserindo produto ao estoque
+                    ItemEstoque itemEstoque = new ItemEstoque();
+                    itemEstoque.setProduto(produto);
+                    itemEstoque.setQuantidade(quantidade);
+                    daoItemEstoque.inserir(itemEstoque);
+                    
                     JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                     visaoCadastrarProduto.dispose();
                     preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após cadastro
@@ -323,8 +377,8 @@ public class ProdutoControle {
                 if (validaEdicaoProduto(novoProduto)) {
                     daoProduto.alterar(novoProduto);
                     JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
-                    visaoEditarProduto.dispose();
                     preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
+                    visaoEditarProduto.dispose();                    
                 }
             }
         };
@@ -383,7 +437,84 @@ public class ProdutoControle {
         };
         visaoEditarProduto.getBtnCancelar().addActionListener(actionListener);
     }
+    
+    //----- TELA ESTOQUE PRODUTOS -----
+    
+    public void preencheTabelaEstoque(List<ItemEstoque> lista, JTable tabela){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        modelo.setNumRows(0);
+        for (ItemEstoque itemEstoque : lista) {
+            modelo.addRow(new Object[]{
+                itemEstoque.getId(),
+                itemEstoque.getProduto().getDescricao(),
+                itemEstoque.getQuantidade()
+            });
+        }
+    }
+    
+    private void evtBotaoFecharEstoque(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoEstoqueProdutos.dispose();
+            }
+        };
+        visaoEstoqueProdutos.getBtnFechar().addActionListener(actionListener);
+    }
+    
+    private void evtBotaoEditarEstoque(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int linha = visaoEstoqueProdutos.getTblEstoqueProdutos().getSelectedRow();
+                if (linha < 0){
+                    JOptionPane.showMessageDialog(null, "Nenhum Prodruto selecionado!", "Erro", 0);
+                }else{
+                    Integer id = (Integer) visaoEstoqueProdutos.getTblEstoqueProdutos().getValueAt(linha, 0);
+                    ItemEstoque item = daoItemEstoque.buscarPorId(id);
+                    visaoEditarEstoque.getTxtId().setText(id.toString());
+                    visaoEditarEstoque.getTxtDescricao().setText(item.getProduto().getDescricao());
+                    visaoEditarEstoque.getTxtQuantidade().setText(item.getQuantidade().toString());
+                    renderizaVisaoEditarEstoque();
+                }
+            }
+        };
+        visaoEstoqueProdutos.getBtnEditar().addActionListener(actionListener);
+    }
 
+    //----- TELA EDITAR ESTOQUE PRODUTOS -----
+    
+    private void evtBotaoCancelarEditarEstoque(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoEditarEstoque.dispose();
+            }
+        };
+        visaoEditarEstoque.getBtnCancelar().addActionListener(actionListener);
+    }
+    
+    private void evtBotaoSalvarEditarEstoque(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Integer id = Integer.parseInt(visaoEditarEstoque.getTxtId().getText());
+                Integer quantidade = Integer.parseInt(visaoEditarEstoque.getTxtQuantidade().getText());
+                
+                ItemEstoque item = daoItemEstoque.buscarPorId(id);
+                item.setQuantidade(quantidade);
+                daoItemEstoque.alterar(item);
+                
+                JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
+                preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
+                visaoEditarEstoque.dispose();
+                
+            }
+        };
+        visaoEditarEstoque.getBtnSalvar().addActionListener(actionListener);
+    }
+    
     public ProdutoDAO getDaoProduto() {
         return daoProduto;
     }
