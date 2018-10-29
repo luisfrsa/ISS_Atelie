@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.contaspagar;
-
-
+package visao.usuario;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -16,12 +14,12 @@ import javax.swing.JToggleButton;
  *
  * @author willr
  */
-public class FormGerenciarContasPagar extends javax.swing.JFrame {
+public class FormGerenciarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form FormGerenciarProdutos
      */
-    public FormGerenciarContasPagar() {
+    public FormGerenciarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -38,32 +36,31 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblListagem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblContasPagar = new javax.swing.JTable();
+        tblUsuario = new javax.swing.JTable();
         btnCadastrar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JToggleButton();
         btnDetalhes = new javax.swing.JToggleButton();
         btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
-        lblFornecedor = new javax.swing.JLabel();
-        txtFornecedor = new javax.swing.JTextField();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        btnBaixar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Contas a Pagar");
+        setTitle("Gerenciar Usuário");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Gerenciar Contas a Pagar");
+        lblTitulo.setText("Gerenciar Usuário");
 
         lblListagem.setText("Listagem de Contas:");
 
-        tblContasPagar.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Fornecedor", "Valor", "Status"
+                "ID", "Nome", "Cargo", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -74,15 +71,15 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblContasPagar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tblContasPagar);
-        if (tblContasPagar.getColumnModel().getColumnCount() > 0) {
-            tblContasPagar.getColumnModel().getColumn(0).setResizable(false);
-            tblContasPagar.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tblUsuario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tblUsuario);
+        if (tblUsuario.getColumnModel().getColumnCount() > 0) {
+            tblUsuario.getColumnModel().getColumn(0).setResizable(false);
+            tblUsuario.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Cadastrar Conta");
+        btnCadastrar.setText("Cadastrar Usuário");
 
         btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
         btnExcluir.setText("Excluir");
@@ -96,15 +93,7 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblBusca.setText("Busca");
 
-        lblFornecedor.setText("Fornecedor:");
-
-        btnBaixar.setBackground(new java.awt.Color(255, 255, 51));
-        btnBaixar.setText("Baixar Conta");
-        btnBaixar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBaixarActionPerformed(evt);
-            }
-        });
+        lblNome.setText("Nome:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,11 +104,9 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDetalhes)
-                        .addGap(18, 18, 18)
+                        .addGap(65, 65, 65)
                         .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBaixar)
-                        .addGap(18, 18, 18)
                         .addComponent(btnExcluir))
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
@@ -128,14 +115,14 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitulo)
                             .addComponent(lblBusca)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblFornecedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar))
                             .addComponent(lblListagem))
-                        .addGap(0, 25, Short.MAX_VALUE)))
+                        .addGap(0, 306, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,8 +136,8 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addComponent(lblBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFornecedor)
-                    .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,8 +149,7 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetalhes)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnBaixar))
+                    .addComponent(btnExcluir))
                 .addContainerGap())
         );
 
@@ -173,10 +159,6 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void btnBaixarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaixarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBaixarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,14 +177,30 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -223,13 +221,12 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormGerenciarContasPagar().setVisible(true);
+                new FormGerenciarUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBaixar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JToggleButton btnDetalhes;
@@ -238,18 +235,18 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblBusca;
-    private javax.swing.JLabel lblFornecedor;
     private javax.swing.JLabel lblListagem;
+    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblContasPagar;
-    private javax.swing.JTextField txtFornecedor;
+    private javax.swing.JTable tblUsuario;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 
     
     //Getters de componentes para uso do controle
     
-    public JTextField getTxtFornecedor() {
-        return txtFornecedor;
+    public JTextField getTxtNome() {
+        return txtNome;
     }
 
 
@@ -271,13 +268,11 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         return btnExcluir;
     }
 
-    public JTable getTblContasPagar() {
-        return tblContasPagar;
+    public JTable getTblUsuario() {
+        return tblUsuario;
     }
 
-    public JButton getBtnBaixar() {
-        return btnBaixar;
-    }
+    
 
     
     
