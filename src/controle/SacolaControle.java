@@ -2,6 +2,7 @@ package controle;
 
 import dao.ItemSacolaDAO;
 import dao.SacolaDAO;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -10,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import modelo.Consultora;
 import modelo.ItemSacola;
 import modelo.Produto;
@@ -422,16 +424,16 @@ public class SacolaControle {
     }
 
     //----- CALCULO DE LUCRO -----
-    public void calculoLucro(List<Sacola> sacolas) {
+    public Double calculoLucroSacolas(List<Sacola> sacolas) {
+        return sacolas.stream()
+                .map(sacola -> calculoLucroSacolas(sacola))
+                .reduce(0.0, (a, b) -> a + b);
+    }
 
-        sacolas.stream()
-                .map(sacola -> {
-                   return sacola.getListaItens().stream()
-                            .map(itens->itens.getProduto().getValor() * itens.getQuantidade());
-//                                                return sacola;
-                });
-//                .sum();
-//                .reduce(0,(a,b) -> a+b);
+    public Double calculoLucroSacolas(Sacola sacola) {
+        return sacola.getListaItens().stream()
+                .map(itens -> itens.getProduto().getValor() * itens.getQuantidade())
+                .reduce(0.0, (a, b) -> a + b);
 
     }
 }
