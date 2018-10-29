@@ -46,6 +46,9 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        lblEstoque = new javax.swing.JLabel();
+        btnEstoque = new javax.swing.JToggleButton();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Produtos");
@@ -95,6 +98,12 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
 
         lblDescricao.setText("Descrição:");
 
+        lblEstoque.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblEstoque.setText("Estoque");
+
+        btnEstoque.setBackground(new java.awt.Color(153, 204, 255));
+        btnEstoque.setText("Ir para Estoque de Produtos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,14 +111,15 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDetalhes)
                         .addGap(70, 70, 70)
                         .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir))
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,8 +130,10 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
-                            .addComponent(lblListagem)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEstoque)
+                            .addComponent(btnEstoque)
+                            .addComponent(lblListagem))
                         .addGap(0, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -141,7 +153,13 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEstoque)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEstoque)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblListagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,12 +213,15 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JToggleButton btnDetalhes;
+    private javax.swing.JToggleButton btnEstoque;
     private javax.swing.JToggleButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblBusca;
     private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblProdutos;
@@ -232,6 +253,10 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
 
     public JTextField getTxtDescricao() {
         return txtDescricao;
+    }
+
+    public JToggleButton getBtnEstoque() {
+        return btnEstoque;
     }
 
     

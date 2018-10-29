@@ -5,6 +5,9 @@
  */
 package visao.produto;
 
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author willr
@@ -35,6 +38,8 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JToggleButton();
         btnCancelar = new javax.swing.JToggleButton();
+        lblId = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Estoque");
@@ -46,13 +51,17 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
 
         lblQuantidade.setText("Quantidade:");
 
-        txtDescricao.setEnabled(false);
+        txtDescricao.setEditable(false);
 
         btnSalvar.setBackground(new java.awt.Color(0, 153, 102));
         btnSalvar.setText("Salvar");
 
         btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelar.setText("Cancelar");
+
+        lblId.setText("ID:");
+
+        txtId.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,22 +70,21 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblQuantidade)
-                                    .addComponent(lblDescricao))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDescricao)
-                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblTitulo)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQuantidade)
+                            .addComponent(lblId, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDescricao)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(txtId))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,7 +92,11 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescricao)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -96,7 +108,7 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -141,9 +153,34 @@ public class FormEditarEstoqueProduto extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnCancelar;
     private javax.swing.JToggleButton btnSalvar;
     private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
+
+    public JToggleButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JToggleButton getBtnSalvar() {
+        return btnSalvar;
+    }
+
+    public JTextField getTxtDescricao() {
+        return txtDescricao;
+    }
+
+    public JTextField getTxtQuantidade() {
+        return txtQuantidade;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    
+
 }
