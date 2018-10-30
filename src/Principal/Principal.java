@@ -1,10 +1,9 @@
 package Principal;
 
 import conexao.ConexaoBanco;
-import controle.ProdutoControle;
-import dao.ProdutoDAO;
-import visao.Inicio;
-import visao.produto.FormGerenciarProdutos;
+import controle.LoginControle;
+import visao.login.FormLogin;
+//import visao.Inicio;
 
 public class Principal {
 
@@ -21,8 +20,10 @@ public class Principal {
     }
 
     public static void run() {
-        Inicio inicio = new Inicio();
-        inicio.setVisible(true);
+        LoginControle logincontrole = new LoginControle();
+        logincontrole.renderizarVisaoLogin();
+       //    Inicio inicio = new Inicio();
+        //    inicio.setVisible(true);
     }
 
 }

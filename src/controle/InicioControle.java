@@ -12,8 +12,9 @@ public class InicioControle {
     private static final SacolaControle SacolaControle = new SacolaControle();
     private static final ContasPagarControle contasPagarControle = new ContasPagarControle();
     private static final ContasReceberControle contasReceberControle = new ContasReceberControle();
-            
-   public void abreView(Tela tela) {
+    private static final UsuarioControle usuarioControle = new UsuarioControle();
+
+    public void abreView(Tela tela) {
         switch (tela) {
             case PRODUTO:
                 ProdutoControle.renderizarVisaoGerenciarProdutos();
@@ -30,7 +31,10 @@ public class InicioControle {
             case CONTASRECEBER:
                 contasReceberControle.renderizarVisaoGerenciarContasReceber();
                 break;
-                
+            case USUARIO:
+                usuarioControle.renderizarVisaoGerenciarUsuario();
+                break;
+
             default:
                 throw new RuntimeException(format("Tela %s ainda não implementada", tela.getNome()));
         }
