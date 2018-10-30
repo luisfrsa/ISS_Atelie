@@ -39,6 +39,7 @@ public class Inicio extends javax.swing.JFrame {
         menuConsultoras = new javax.swing.JMenuItem();
         menuSacolas = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenuItem();
+        menuUsuario1 = new javax.swing.JMenuItem();
         jMenu2Financeiro = new javax.swing.JMenu();
         jMenuContasPagar = new javax.swing.JMenuItem();
         jMenuContasReceber = new javax.swing.JMenuItem();
@@ -79,6 +80,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menuUsuario);
+
+        menuUsuario1.setText("Notificacao");
+        menuUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUsuario1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuUsuario1);
 
         jMenuBar1.add(jMenu1);
 
@@ -145,6 +154,10 @@ public class Inicio extends javax.swing.JFrame {
         inicioControle.abreView(Tela.USUARIO);
     }//GEN-LAST:event_menuUsuarioActionPerformed
 
+    private void menuUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuario1ActionPerformed
+        inicioControle.abreView(Tela.NOTIFICACAO);
+    }//GEN-LAST:event_menuUsuario1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,5 +203,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuProdutos;
     private javax.swing.JMenuItem menuSacolas;
     private javax.swing.JMenuItem menuUsuario;
+    private javax.swing.JMenuItem menuUsuario1;
     // End of variables declaration//GEN-END:variables
 }

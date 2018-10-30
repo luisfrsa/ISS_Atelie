@@ -28,7 +28,7 @@ export default class Tabela extends React.Component {
 
     render() {
         return (
-            <table className="centering table table-responsive table-striped">
+            <table className="tabela table table-responsive table-striped">
                 <thead>
                 <tr>
                     <th>Status</th>

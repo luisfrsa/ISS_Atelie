@@ -13,6 +13,7 @@ public class InicioControle {
     private static final ContasPagarControle contasPagarControle = new ContasPagarControle();
     private static final ContasReceberControle contasReceberControle = new ContasReceberControle();
     private static final UsuarioControle usuarioControle = new UsuarioControle();
+    private static final NotificacaoControle notificacaoControle = new NotificacaoControle();
 
     public void abreView(Tela tela) {
         switch (tela) {
@@ -34,7 +35,9 @@ public class InicioControle {
             case USUARIO:
                 usuarioControle.renderizarVisaoGerenciarUsuario();
                 break;
-
+            case NOTIFICACAO:
+                notificacaoControle.renderizarVisao();
+                break;
             default:
                 throw new RuntimeException(format("Tela %s ainda não implementada", tela.getNome()));
         }
