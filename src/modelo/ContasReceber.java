@@ -22,7 +22,7 @@ import modelo.builder.ContasReceberBuilder;
  * @author Ronnie
  */
 @Entity
-@Table(name = "tbl_contas_pagar")
+@Table(name = "tbl_contas_receber")
 
 public class ContasReceber implements Serializable {
 //Atributos

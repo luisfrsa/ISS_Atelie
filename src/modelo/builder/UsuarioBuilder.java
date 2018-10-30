@@ -41,14 +41,14 @@ public class UsuarioBuilder {
         this.nome = nome;
         return this;
     }
-
-    public UsuarioBuilder setCargo(String cargo) {
+    
+        public UsuarioBuilder setCargo(String cargo) {
         this.cargo = cargo;
         return this;
 
     }
 
-    public UsuarioBuilder setBaixa(String usuario) {
+    public UsuarioBuilder setUsuario(String usuario) {
         this.usuario = usuario;
         return this;
     }
