@@ -2,26 +2,37 @@ import React, {Component} from 'react';
 import {Button, Input, Checkbox} from 'antd';
 import axios from "axios";
 import Tabela from "./Tabela";
+import Alert from "./Alert";
 // import './App.css';
 
 export default class Home extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.getData();
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {vendas:[]};
+        this.state = {vendas: [],notificacoes:[]};
     }
 
     getData = () => {
         axios.get('http://localhost:8080/sacola/')
             .then(request => {
-                //Ve o que retorna
-                this.setState({ vendas: request.data });
+                this.setState({vendas: request.data});
             })
-            .catch(e=>{
+            .catch(e => {
+                try {
+                    alert(e.response.data.message);
+                } catch (err) {
+                    alert("Erro interno");
+                }
+            });
+        axios.get('http://localhost:8080/notificacoes/')
+            .then(request => {
+                this.setState({notificacoes: request.data});
+            })
+            .catch(e => {
                 try {
                     alert(e.response.data.message);
                 } catch (err) {
@@ -31,13 +42,14 @@ export default class Home extends React.Component {
     }
 
     render() {
-        console.log('Rendering ', this.state.vendas);
+        // console.log('Rendering ', this.state.vendas);
         return (
-            <div className="Home container mt-5">
+            <div className="Home container md-8">
                 <div className="row justify-content-md-center">
-                    <div className="col col-md-5">
-                        <h1 className="text-center">Home</h1>
-                        <Tabela vendas={this.state.vendas}/>
+                    <div className="col col-md-8">
+                        <h1 className="text-center titulo">Relatório de vendas</h1>
+                        <Alert notificacoes={this.state.notificacoes}/>
+                        <Tabela  vendas={this.state.vendas}/>
                     </div>
                 </div>
             </div>

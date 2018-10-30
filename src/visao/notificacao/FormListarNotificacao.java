@@ -3,27 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.consultora;
+package visao.notificacao;
 
-import controle.ConsultoraControle;
-import java.awt.Point;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
+import controle.NotificacaoControle;
+
+import javax.swing.*;
 
 /**
  *
  * @author willr
  */
-public class FormListarConsultora extends javax.swing.JFrame {
+public class FormListarNotificacao extends javax.swing.JFrame {
 
-    private static final ConsultoraControle consultoraControle = new ConsultoraControle();
+    private static final NotificacaoControle notificacaoControle = new NotificacaoControle();
 
     /**
      * Creates new form FormGerenciarProdutos
      */
-    public FormListarConsultora() {
+    public FormListarNotificacao() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -40,7 +37,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblListagem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsultora = new javax.swing.JTable();
+        tblNotificacao = new javax.swing.JTable();
         btnCadastrar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
@@ -54,36 +51,36 @@ public class FormListarConsultora extends javax.swing.JFrame {
         setTitle("Gerenciar Produtos");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Gerenciar Consultoras");
+        lblTitulo.setText("Gerenciar Notificacao");
 
-        lblListagem.setText("Listagem de Consultoras:");
+        lblListagem.setText("Listagem de Notificacao:");
 
-        tblConsultora.setModel(new javax.swing.table.DefaultTableModel(
+        tblNotificacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Status"
+                "ID", "Nome", "Data", "Prioridade", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblConsultora.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblConsultora.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblNotificacao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblNotificacao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblConsultoraMouseClicked(evt);
+                tblNotificacaoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblConsultora);
-        if (tblConsultora.getColumnModel().getColumnCount() > 0) {
-            tblConsultora.getColumnModel().getColumn(0).setResizable(false);
-            tblConsultora.getColumnModel().getColumn(0).setPreferredWidth(20);
+        jScrollPane1.setViewportView(tblNotificacao);
+        if (tblNotificacao.getColumnModel().getColumnCount() > 0) {
+            tblNotificacao.getColumnModel().getColumn(0).setResizable(false);
+            tblNotificacao.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
         btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
@@ -175,21 +172,21 @@ public class FormListarConsultora extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        consultoraControle.renderizarVisaoCadastro();
+        notificacaoControle.renderizarVisaoCadastro();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void tblConsultoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConsultoraMouseClicked
+    private void tblNotificacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNotificacaoMouseClicked
         // TODO add your handling code here:
         JTable table = (JTable) evt.getSource();
         int row = table.rowAtPoint(evt.getPoint());
         Integer id = (Integer) table.getValueAt(row, 0);
-        consultoraControle.renderizarVisaoAlterar(id);
-    }//GEN-LAST:event_tblConsultoraMouseClicked
+        notificacaoControle.renderizarVisaoAlterar(id);
+    }//GEN-LAST:event_tblNotificacaoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         String stringBusca = buscarNome.getText();
-        consultoraControle.buscarPorNome(stringBusca);
+        notificacaoControle.buscarPorNome(stringBusca);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar1ActionPerformed
@@ -203,7 +200,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -213,13 +210,13 @@ public class FormListarConsultora extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormListarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormListarNotificacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormListarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormListarNotificacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormListarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormListarNotificacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormListarConsultora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormListarNotificacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -227,7 +224,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormListarConsultora().setVisible(true);
+                new FormListarNotificacao().setVisible(true);
             }
         });
     }
@@ -244,7 +241,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblConsultora;
+    private javax.swing.JTable tblNotificacao;
     // End of variables declaration//GEN-END:variables
 
     //Getters de componentes para uso do controle
@@ -257,8 +254,8 @@ public class FormListarConsultora extends javax.swing.JFrame {
     }
 
 
-    public JTable getTblConsultora() {
-        return tblConsultora;
+    public JTable getTblNotificacao() {
+        return tblNotificacao;
     }
 
     public JTextField getTxtDescricao() {
