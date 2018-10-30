@@ -62,11 +62,11 @@ public class FormListarConsultora extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF"
+                "ID", "Nome", "CPF", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

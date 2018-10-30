@@ -17,18 +17,21 @@ public class Sacola {
 
     @Basic
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATACRIACAO")
+    @Column(name = "DATA_CRIACAO")
     private Date dataCriacao;
 
     @Basic
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATAACERTO")
+    @Column(name = "DATA_ACERTO")
     private Date dataAcerto;
 
     @OneToOne
     @JoinColumn(name = "CONSULTORA_ID")
     private Consultora consultora;
 
+
+    @Column(name = "status_finilizada")
+    private boolean finalizada;
 
     @Transient
     private List<ItemSacola> listaItens = new ArrayList<>();
@@ -79,5 +82,17 @@ public class Sacola {
         this.listaItens = listaItens;
     }
 
+    public boolean isFinalizada() {
+        return finalizada;
+    }
 
+    public Sacola setFinalizada(boolean finalizada) {
+        this.finalizada = finalizada;
+        return this;
+    }
+
+    public Sacola setListaItens(List<ItemSacola> listaItens) {
+        this.listaItens = listaItens;
+        return this;
+    }
 }
