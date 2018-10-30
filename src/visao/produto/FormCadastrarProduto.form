@@ -46,7 +46,7 @@
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="lblValor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtValor" pref="200" max="32767" attributes="0"/>
+                              <Component id="txtValor" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
@@ -67,19 +67,28 @@
                                   <Component id="txtCor" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="btnCadastrar" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblModelo" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblMarca" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtModelo" pref="200" max="32767" attributes="0"/>
-                                  <Component id="txtMarca" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblQuantidade" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtQuantidade" min="-2" pref="121" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblModelo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMarca" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtModelo" pref="200" max="32767" attributes="0"/>
+                                          <Component id="txtMarca" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="btnCadastrar" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -122,7 +131,12 @@
                   <Component id="lblModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -198,6 +212,13 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblQuantidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quantidade em Estoque:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtQuantidade">
     </Component>
   </SubComponents>
 </Form>

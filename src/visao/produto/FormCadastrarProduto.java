@@ -46,6 +46,8 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblQuantidade = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Produto");
@@ -71,6 +73,8 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelar.setText("Cancelar");
 
+        lblQuantidade.setText("Quantidade em Estoque:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,7 +97,7 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                                 .addGap(22, 22, 22)
                                 .addComponent(lblValor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addComponent(txtValor))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblDescricao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -108,16 +112,22 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTamanho)
                                     .addComponent(txtCor)))
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblModelo)
-                                    .addComponent(lblMarca))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtMarca)))
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblQuantidade)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblModelo)
+                                            .addComponent(lblMarca))
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                            .addComponent(txtMarca))))))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -149,7 +159,11 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblModelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantidade)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnCancelar))
@@ -201,6 +215,7 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTamanho;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
@@ -208,6 +223,7 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTamanho;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
@@ -245,4 +261,9 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
         return txtValor;
     }
 
+    public JTextField getTxtQuantidade() {
+        return txtQuantidade;
+    }
+
+    
 }

@@ -57,7 +57,7 @@ public class ContasPagar implements Serializable {
     @Column(name = "forma_pagamento")
     private String formaPagamento;
     
-  
+    
     
     //Construtores
     public ContasPagar(){
@@ -149,10 +149,7 @@ public class ContasPagar implements Serializable {
     }
 
     
- 
-    
-    
-    
+
     
     @Override
     public boolean equals(Object o) {
@@ -182,7 +179,7 @@ public class ContasPagar implements Serializable {
 
     @Override
     public String toString() {
-        return "Produto{" +
+        return "ContasPagar{" +
                 "id=" + id +
                 ", fornecedor='" + fornecedor + '\'' +
                 ", descricao='" + descricao + '\'' +
