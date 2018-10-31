@@ -518,5 +518,9 @@ public class ProdutoControle {
     public ProdutoDAO getDaoProduto() {
         return daoProduto;
     }
+    
+    public ItemEstoqueDAO getDaoItemEstoque(){
+        return daoItemEstoque;
+    }
 
 }

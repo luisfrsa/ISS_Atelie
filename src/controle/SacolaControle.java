@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Consultora;
+import modelo.ItemEstoque;
 import modelo.ItemSacola;
 import modelo.Produto;
 import modelo.Sacola;
@@ -109,7 +110,7 @@ public class SacolaControle {
                 sacola.getConsultora().getNome(),
                 Datas.formatoData.format(sacola.getDataCriacao()),
                 Datas.formatoData.format(sacola.getDataAcerto()),
-                sacola.isFinalizada()?"Finalizada":"Não finalizada"                    
+                sacola.isFinalizada() ? "Finalizada" : "Não finalizada"
             });
         }
     }
@@ -266,6 +267,7 @@ public class SacolaControle {
                 sacola.setFinalizada(false);
 
                 if (validaSacola(sacola)) {
+                    atualizaEstoqueCriarSacola(sacola);
                     daoSacola.inserir(sacola);
                     preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
                     JOptionPane.showMessageDialog(null, "Sacola cadastrada com Sucesso!", "Sucesso", 1);
@@ -274,6 +276,17 @@ public class SacolaControle {
             }
         };
         visaoCriarSacola.getBtnCriarSacola().addActionListener(actionListener);
+    }
+    
+    private void atualizaEstoqueCriarSacola(Sacola sacola){
+        Integer idProduto;
+        ItemEstoque itemEstoque;
+        for ( ItemSacola itemSacola: sacola.getListaItens()){
+            idProduto = itemSacola.getProduto().getId();
+            itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(idProduto);
+            itemEstoque.setQuantidade(itemEstoque.getQuantidade() - itemSacola.getQuantidade());
+            controleProduto.getDaoItemEstoque().alterar(itemEstoque);
+        }
     }
 
     private boolean validaSacola(Sacola sacola) {
@@ -383,7 +396,18 @@ public class SacolaControle {
         }
 
         try {
-            Integer.parseInt(visaoAssociarProduto.getTxtQuantidade().getText());
+            Integer quantidadeDigitada = Integer.parseInt(visaoAssociarProduto.getTxtQuantidade().getText());
+            Integer idProduto = (Integer) visaoAssociarProduto.getTblProdutos().getValueAt(linha, 0);
+            ItemEstoque itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(idProduto);
+            Integer quantidadeEstoque = itemEstoque.getQuantidade();
+
+            if (quantidadeDigitada > quantidadeEstoque) {
+                JOptionPane.showMessageDialog(null, "A Quantidade digitada ultrapassa a Quantidade em Estoque do Produto!", "Erro na Validação", 0);
+                visaoAssociarProduto.getTxtQuantidade().requestFocus();
+                visaoAssociarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 204, 204));
+                return false;
+            }
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "O campo 'Quantidade' aceita apenas número inteiros!", "Erro na Validação", 0);
             visaoAssociarProduto.getTxtQuantidade().requestFocus();
