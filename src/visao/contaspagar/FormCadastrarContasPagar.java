@@ -21,6 +21,8 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
      */
     public FormCadastrarContasPagar() {
         initComponents();
+        jTextFieldNumeroParcelas.setEditable(false);
+        jTextFieldValordaParcela.setEditable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -49,6 +51,8 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         jTextFieldNumeroParcelas = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldValordaParcela = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Conta a pagar");
@@ -72,21 +76,35 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
         jFormattedTextFieldDataEntrada.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "À vista ", "A Prazo" }));
+        jComboBoxFormaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFormaPagamentoActionPerformed(evt);
+            }
+        });
 
         jLabelFormaPagamento.setText("Forma de Pagamento:");
 
         jLabelNumeroParcelas.setText("N° de Parcelas:");
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNumeroParcelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                jTextFieldNumeroParcelasActionPerformed(evt);
             }
         });
 
+        btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
+        btnCadastrar.setText("Cadastrar");
+
         btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelar.setText("Cancelar");
+
+        jLabel1.setText("Valor da Parcela:");
+
+        jTextFieldValordaParcela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldValordaParcelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,35 +118,41 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
                         .addComponent(btnCadastrar)
                         .addGap(31, 31, 31)
                         .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1)
+                        .addGap(159, 159, 159))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCadastrarContasPagar)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelFormaPagamento, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelValor, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelDataEntrada, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCadastrarContasPagar)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabelNumeroParcelas)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelFormaPagamento, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabelValor, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabelDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabelDataEntrada, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabelFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 119, Short.MAX_VALUE)))
-                .addContainerGap())
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jTextFieldValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+                                            .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabelNumeroParcelas)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldValordaParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jLabelFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator1))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +173,7 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValor)
                     .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataEntrada)
                     .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,20 +182,46 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
                     .addComponent(jLabelFormaPagamento)
                     .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNumeroParcelas)
-                    .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldValordaParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnCancelar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void jComboBoxFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormaPagamentoActionPerformed
+        String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
+
+        if (formaPagamento.equals("A Prazo")) {
+            jTextFieldNumeroParcelas.setEditable(true);
+            jTextFieldValordaParcela.setEditable(true);
+        } else {
+            jTextFieldValordaParcela.setText("");
+            jTextFieldNumeroParcelas.setText("");
+            jTextFieldNumeroParcelas.setEditable(false);
+            jTextFieldValordaParcela.setEditable(false);
+        }
+    }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
+
+    private void jTextFieldValordaParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValordaParcelaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_jTextFieldValordaParcelaActionPerformed
+
+    private void jTextFieldNumeroParcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumeroParcelasActionPerformed
+        
+        if(jComboBoxFormaPagamento.getSelectedItem().toString().equals("A Prazo")&& jTextFieldValor.getText()!=null){
+         Double valor =Double.parseDouble(jTextFieldValor.getText());
+         Double numeroParcela= Double.parseDouble(jTextFieldNumeroParcelas.getText());
+         Double parcela = valor/numeroParcela;
+         jTextFieldValordaParcela.setText(Double.toString(parcela));
+        }
+    }//GEN-LAST:event_jTextFieldNumeroParcelasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,6 +264,7 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> jComboBoxFormaPagamento;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCadastrarContasPagar;
     private javax.swing.JLabel jLabelDataEntrada;
     private javax.swing.JLabel jLabelDescricao;
@@ -226,12 +277,24 @@ public class FormCadastrarContasPagar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldFornecedor;
     private javax.swing.JTextField jTextFieldNumeroParcelas;
     private javax.swing.JTextField jTextFieldValor;
+    private javax.swing.JTextField jTextFieldValordaParcela;
     // End of variables declaration//GEN-END:variables
         //Getters and Setters
+    
+    
     public JButton getBtnCadastrar() {
         return btnCadastrar;
     }
 
+    public JTextField getjTextFieldValordaParcela() {
+        return jTextFieldValordaParcela;
+    }
+
+    public void setjTextFieldValordaParcela(JTextField jTextFieldValordaParcela) {
+        this.jTextFieldValordaParcela = jTextFieldValordaParcela;
+    }
+    
+    
     public JTextField getjTextFieldDescricao() {
         return jTextFieldDescricao;
     }

@@ -25,6 +25,7 @@ import visao.contaspagar.FormCadastrarContasPagar;
 import visao.contaspagar.FormEditarContasPagar;
 import visao.contaspagar.FormGerenciarContasPagar;
 
+
 /**
  *
  * @author Ronnie
@@ -211,7 +212,7 @@ public class ContasPagarControle {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
+                
                 //Obtendo os dados inseridos na visão
                 String descricao = visaoCadastrarContasPagar.getjTextFieldDescricao().getText();
 
@@ -229,6 +230,14 @@ public class ContasPagarControle {
                     parcelas = 0;
                 }
 
+                Double valorparcela;
+                 try {
+                    valorparcela = Double.parseDouble(visaoCadastrarContasPagar.getjTextFieldValordaParcela().getText());
+                } catch (NumberFormatException e) {
+                    valorparcela= null;
+                }
+                
+                
                 String fornecedor = visaoCadastrarContasPagar.getjTextFieldFornecedor().getText();
                 String formaDePagamento = (String) visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem();
                 Date entrada = Datas.stringToData(visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().getText());
@@ -256,20 +265,22 @@ public class ContasPagarControle {
                     vencimentoparcelas.setTime(entrada);
                     if (parcelas > 0 && contaspagar.getFormaPagamento() == "A Prazo") {
                         for (int i = 0; i < parcelas; i++) {
-                            ContasPagar contasAux = new ContasPagar();
-                            contasAux.setEntrada(entrada);
-                            contasAux.setFormaPagamento(formaDePagamento);
-                            contasAux.setFornecedor(fornecedor);
-                            contasAux.setValor(valor);
-                            contasAux.setDescricao(descricao);
-                            contasAux.setStatus("PENDENTE");
-
-                            // calculo do vencimento
+                            
+                            contaspagar.setEntrada(entrada);
+                            contaspagar.setFormaPagamento(formaDePagamento);
+                            contaspagar.setFornecedor(fornecedor);
+                            contaspagar.setValor(valorparcela);
+                            contaspagar.setDescricao(descricao);
+                            contaspagar.setStatus("PENDENTE");
+                            
+                           // -----Calculo do Vencimento (parcela)
                             vencimentoparcelas.add(Calendar.DAY_OF_MONTH, +30);
-                            contasAux.setVencimento(vencimentoparcelas.getTime());
-                            contasPagarDao.inserir(contasAux);
+                            contaspagar.setVencimento(vencimentoparcelas.getTime());
+                            contasPagarDao.inserir(contaspagar);
+                            contaspagar = new ContasPagar();
                         }
                     } else {
+                        
                         contaspagar.setVencimento(entrada);
                         contaspagar.setBaixa(entrada);
                         contaspagar.setStatus("LIQUIDADA");
@@ -277,6 +288,7 @@ public class ContasPagarControle {
                     }
                     JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!", "Sucesso", 1);
                     preencheTabela(contasPagarDao.buscarTodos(), visaoGerenciarContasPagar.getTblContasPagar()); //Atualiza tabela após cadastro
+                    
                     limparCamposCadastro();
                     visaoCadastrarContasPagar.dispose();
                 }
@@ -290,6 +302,19 @@ public class ContasPagarControle {
 
     private boolean validaCadastroContasPagar(ContasPagar contaspagar) {
         restauraCorCamposCadastro();
+        if (contaspagar.getFormaPagamento()== "A Prazo" && visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de parcelas' não pode ser vazio !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && visaoCadastrarContasPagar.getjTextFieldValordaParcela().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser vazio !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldValordaParcela().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldValordaParcela().setBackground(Color.yellow);
+            return false;
+        }
+        
         if (contaspagar.getEntrada() == null) {
             JOptionPane.showMessageDialog(null, "O campo 'Data da entrada' não pode ser vazio !", "Erro na Validação", 0);
             visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().requestFocus();
@@ -327,6 +352,7 @@ public class ContasPagarControle {
         visaoCadastrarContasPagar.getjTextFieldValor().setBackground(Color.white);
         visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().setBackground(Color.white);
         visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.white);
+        visaoCadastrarContasPagar.getjTextFieldValordaParcela().setBackground(Color.white);
     }
 
     private void limparCamposCadastro() {
@@ -335,7 +361,7 @@ public class ContasPagarControle {
         visaoCadastrarContasPagar.getjTextFieldValor().setText("");
         visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().setText("");
         visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setText("");
-
+        visaoCadastrarContasPagar.getjTextFieldValordaParcela().setText("");
     }
     private void evtBotaoCancelarCadastro() {
         actionListener = new ActionListener() {
@@ -478,13 +504,14 @@ private void evtBotaoBaixarSalvar() {
                             + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarContasPagar.getTblContasPagar().getValueAt(linha, 0); //ID do item selecionado
-                        Date entrada = Datas.stringToData(visaoBaixarContasPagar.getjFormattedTextFieldDatadeEntrada().getText());
+                        Date baixa = Datas.stringToData(visaoBaixarContasPagar.getjFormattedTextFieldDatadeEntrada().getText());
                         ContasPagar contaLiquidada = contasPagarDao.buscarPorId(id);
-                        contaLiquidada.setEntrada(entrada);
+                        contaLiquidada.setBaixa(baixa);
                         contaLiquidada.setStatus("LIQUIDADA");
                         contasPagarDao.alterar(contaLiquidada);
                         JOptionPane.showMessageDialog(null, "Conta Liquidada com Sucesso!", "Sucesso", 1);
                         preencheTabela(contasPagarDao.buscarTodos(), visaoGerenciarContasPagar.getTblContasPagar()); //Atualiza tabela após remoção
+                        visaoBaixarContasPagar.dispose();
                     }
                 }
             }

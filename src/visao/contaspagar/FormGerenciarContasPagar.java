@@ -6,6 +6,7 @@
 package visao.contaspagar;
 
 
+
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -99,6 +100,11 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
 
         btnBaixar.setBackground(new java.awt.Color(255, 255, 51));
         btnBaixar.setText("Baixar Conta");
+        btnBaixar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBaixarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,6 +170,14 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnBaixarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaixarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBaixarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,6 +203,20 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormGerenciarContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -224,9 +252,6 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
         return txtFornecedor;
     }
 
-    public JButton getBtnBaixar() {
-        return btnBaixar;
-    }
 
     public JButton getBtnBuscar() {
         return btnBuscar;
@@ -248,6 +273,10 @@ public class FormGerenciarContasPagar extends javax.swing.JFrame {
 
     public JTable getTblContasPagar() {
         return tblContasPagar;
+    }
+
+    public JButton getBtnBaixar() {
+        return btnBaixar;
     }
 
     

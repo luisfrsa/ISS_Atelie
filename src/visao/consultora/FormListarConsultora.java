@@ -48,6 +48,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
         buscarNome = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        btnCadastrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Produtos");
@@ -62,11 +63,11 @@ public class FormListarConsultora extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF"
+                "ID", "Nome", "CPF", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -106,6 +107,14 @@ public class FormListarConsultora extends javax.swing.JFrame {
 
         lblDescricao.setText("Nome:");
 
+        btnCadastrar1.setBackground(new java.awt.Color(0, 153, 102));
+        btnCadastrar1.setText("Alterar");
+        btnCadastrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,7 +138,8 @@ public class FormListarConsultora extends javax.swing.JFrame {
                             .addComponent(lblListagem))
                         .addGap(0, 51, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCadastrar)))
                 .addContainerGap())
         );
@@ -154,7 +164,9 @@ public class FormListarConsultora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnCadastrar1))
                 .addContainerGap())
         );
 
@@ -179,6 +191,10 @@ public class FormListarConsultora extends javax.swing.JFrame {
         String stringBusca = buscarNome.getText();
         consultoraControle.buscarPorNome(stringBusca);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastrar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +235,7 @@ public class FormListarConsultora extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCadastrar1;
     private javax.swing.JTextField buscarNome;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
