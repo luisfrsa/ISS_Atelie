@@ -154,7 +154,18 @@ public class SacolaControle {
 
     private void excluiItensDaSacola(Sacola sacola) {
 
+        Integer quantidade;
+        Produto produto;
+        ItemEstoque itemEstoque;
+
         for (ItemSacola item : sacola.getListaItens()) {
+
+            produto = item.getProduto();
+            quantidade = item.getQuantidade();
+            itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(produto.getId()); //busca o item no estoque
+            itemEstoque.setQuantidade(itemEstoque.getQuantidade() + quantidade); //devolve a quantidade ao estoque
+            controleProduto.getDaoItemEstoque().alterar(itemEstoque);
+
             daoItemSacola.remover(item);
         }
     }
@@ -277,11 +288,11 @@ public class SacolaControle {
         };
         visaoCriarSacola.getBtnCriarSacola().addActionListener(actionListener);
     }
-    
-    private void atualizaEstoqueCriarSacola(Sacola sacola){
+
+    private void atualizaEstoqueCriarSacola(Sacola sacola) {
         Integer idProduto;
         ItemEstoque itemEstoque;
-        for ( ItemSacola itemSacola: sacola.getListaItens()){
+        for (ItemSacola itemSacola : sacola.getListaItens()) {
             idProduto = itemSacola.getProduto().getId();
             itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(idProduto);
             itemEstoque.setQuantidade(itemEstoque.getQuantidade() - itemSacola.getQuantidade());
