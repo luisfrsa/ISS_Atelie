@@ -5,8 +5,8 @@
  */
 package visao.sacola;
 
-import controle.ConsultoraControle;
 import controle.SacolaControle;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
@@ -53,6 +53,7 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
         lblDataCriacao = new javax.swing.JLabel();
         lblCodigo = new javax.swing.JLabel();
         lblInfoConsultora1 = new javax.swing.JLabel();
+        btnDevolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Detalhes da Sacola");
@@ -78,11 +79,11 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Descrição", "Quantidade"
+                "ID Item", "Descrição", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,7 +92,7 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblItensDeSacola);
 
-        btnFinalizar.setBackground(new java.awt.Color(153, 204, 255));
+        btnFinalizar.setBackground(new java.awt.Color(0, 153, 102));
         btnFinalizar.setText("Finalizar Sacola");
         btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,46 +113,51 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
         lblInfoConsultora1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblInfoConsultora1.setText("Código:");
 
+        btnDevolver.setBackground(new java.awt.Color(153, 204, 255));
+        btnDevolver.setText("Devolver Produto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblTitulo)
-                                .addComponent(jSeparator1)
                                 .addComponent(lblInfoProdutos)
-                                .addComponent(jSeparator2)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(jSeparator3)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblInfoDataAcerto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblDataAcerto))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnFinalizar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                                    .addComponent(btnFechar)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblInfoDataAcerto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblDataAcerto))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblInfoDataCriacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDataCriacao))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblInfoConsultora1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblCodigo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblInfoConsultora)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblNomeConsultora)))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnDevolver)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnFechar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                .addComponent(jSeparator2)
+                                .addComponent(jSeparator1)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addComponent(lblInfoDataCriacao)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblDataCriacao))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblInfoConsultora1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lblCodigo))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblInfoConsultora)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lblNomeConsultora))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,9 +191,10 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizar)
+                    .addComponent(btnDevolver)
                     .addComponent(btnFechar))
                 .addContainerGap())
         );
@@ -238,6 +245,7 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDevolver;
     private javax.swing.JToggleButton btnFechar;
     private javax.swing.JToggleButton btnFinalizar;
     private javax.swing.JScrollPane jScrollPane1;
@@ -284,5 +292,10 @@ public class FormDetalhesSacola extends javax.swing.JFrame {
     public JLabel getLblCodigo() {
         return lblCodigo;
     }
+
+    public JButton getBtnDevolver() {
+        return btnDevolver;
+    }
+    
     
 }

@@ -21,6 +21,7 @@ import util.Datas;
 import visao.sacola.FormAssociarProdutoSacola;
 import visao.sacola.FormCriarSacola;
 import visao.sacola.FormDetalhesSacola;
+import visao.sacola.FormDevolverProduto;
 import visao.sacola.FormGerenciarSacolas;
 
 public class SacolaControle {
@@ -34,6 +35,7 @@ public class SacolaControle {
     private static final FormCriarSacola visaoCriarSacola = new FormCriarSacola();
     private static final FormAssociarProdutoSacola visaoAssociarProduto = new FormAssociarProdutoSacola();
     private static final FormDetalhesSacola visaoDetalhesSacola = new FormDetalhesSacola();
+    private static final FormDevolverProduto visaoDevolverProduto = new FormDevolverProduto();
     private Sacola sacola = new Sacola();
     private ActionListener actionListener;
 
@@ -41,6 +43,7 @@ public class SacolaControle {
     private boolean ouvirEventosCriar = true;
     private boolean ouvirEventosAssociarProduto = true;
     private boolean ouvirEventosDetalhesSacola = true;
+    private boolean ouvirEventosDevolver = true;
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
@@ -65,7 +68,7 @@ public class SacolaControle {
         }
         restauraFormCriarSacola();
         sacola = new Sacola();
-        preencheTabelaItensSacola(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
+        //preencheTabelaItensSacolaSemId(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
         visaoCriarSacola.setVisible(true);
     }
 
@@ -86,13 +89,14 @@ public class SacolaControle {
     public void renderizaVisaoDetalhesSacola(Sacola sacola) {
         if (ouvirEventosDetalhesSacola) {
             evtBotaoFecharDetalhes();
+            evtBotaoDevolverProdutos();
             ouvirEventosDetalhesSacola = false;
         }
         String nomeConsultora = sacola.getConsultora().getNome();
         String dataCriacao = Datas.dateToString(sacola.getDataCriacao());
         String dataAcerto = Datas.dateToString(sacola.getDataAcerto());
 
-        visaoDetalhesSacola.getLblCodigo().setText(sacola.getConsultora().getId().toString());
+        visaoDetalhesSacola.getLblCodigo().setText(sacola.getId().toString());
         visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
         visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
         visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
@@ -100,18 +104,30 @@ public class SacolaControle {
         visaoDetalhesSacola.setVisible(true);
     }
 
+    public void renderizarVisaoDevolverProduto() {
+        if (ouvirEventosDevolver) {
+            evtBotaoCancelarDevolver();
+            evtBotaoDevolver();
+            ouvirEventosDevolver = false;
+        }
+        visaoDevolverProduto.getTxtQuantidade().setText("");
+        visaoDevolverProduto.setVisible(true);
+    }
+
     //----- TELA GERENCIAR SACOLAS -----
     public void preencheTabelaSacolas(List<Sacola> lista, JTable tabela) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
         for (Sacola sacola : lista) {
-            modelo.addRow(new Object[]{
-                sacola.getId(),
-                sacola.getConsultora().getNome(),
-                Datas.formatoData.format(sacola.getDataCriacao()),
-                Datas.formatoData.format(sacola.getDataAcerto()),
-                sacola.isFinalizada() ? "Finalizada" : "Não finalizada"
-            });
+            if (!sacola.isFinalizada()) {
+                modelo.addRow(new Object[]{
+                    sacola.getId(),
+                    sacola.getConsultora().getNome(),
+                    Datas.formatoData.format(sacola.getDataCriacao()),
+                    Datas.formatoData.format(sacola.getDataAcerto()),
+                    sacola.isFinalizada() ? "Finalizada" : "Não finalizada"
+                });
+            }
         }
     }
 
@@ -119,6 +135,7 @@ public class SacolaControle {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                sacola = new Sacola();
                 renderizarVisaoCriarSacola();
             }
         };
@@ -199,6 +216,18 @@ public class SacolaControle {
     }
 
     public void preencheTabelaItensSacola(List<ItemSacola> lista, JTable tabela) {
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        modelo.setNumRows(0);
+        for (ItemSacola item : lista) {
+            modelo.addRow(new Object[]{
+                item.getId(),
+                item.getProduto().getDescricao(),
+                item.getQuantidade()
+            });
+        }
+    }
+    
+    public void preencheTabelaItensSacolaSemId(List<ItemSacola> lista, JTable tabela) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
         for (ItemSacola item : lista) {
@@ -377,7 +406,7 @@ public class SacolaControle {
                     itemSacola.setProduto(produto);
                     itemSacola.setQuantidade(quantidade);
                     sacola.getListaItens().add(itemSacola);
-                    preencheTabelaItensSacola(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
+                    preencheTabelaItensSacolaSemId(sacola.getListaItens(), visaoCriarSacola.getTblItensDeSacola());
                     visaoAssociarProduto.dispose();
                 }
 
@@ -464,14 +493,77 @@ public class SacolaControle {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Você realmente deseja finalizar esta sacola?", "Atenção", dialogButton);
         if (dialogResult == 0) {
-            Sacola sacola = daoSacola.buscarPorId(id);
+            sacola = daoSacola.buscarPorId(id);
             sacola.setFinalizada(true);
+            Calendar calendario = Calendar.getInstance();
+            Date dataFinalizada = calendario.getTime();
+            sacola.setDataFinalizada(dataFinalizada);
             daoSacola.alterar(sacola);
+            JOptionPane.showMessageDialog(null, "Sacola finalizada com Sucesso!", "Sucesso", 1);
+            preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
+            visaoDetalhesSacola.dispose();
+
         }
-        visaoDetalhesSacola.getBtnFechar().addActionListener(actionListener);
 
     }
 
+    public void evtBotaoDevolverProdutos() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int linha = visaoDetalhesSacola.getTblItensDeSacola().getSelectedRow();
+                if (linha < 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhum produto selecionado na tabela.", "Erro", 0);
+                } else {
+                    Integer idItem = (Integer) visaoDetalhesSacola.getTblItensDeSacola().getValueAt(linha, 0);
+                    ItemSacola item = daoItemSacola.buscarPorId(idItem);
+                    Produto produto = item.getProduto();
+
+                    visaoDevolverProduto.getLblDescricao().setText(produto.getDescricao());
+                    visaoDevolverProduto.getLblIdItem().setText(item.getId().toString());
+                    renderizarVisaoDevolverProduto();
+                }
+            }
+        };
+        visaoDetalhesSacola.getBtnDevolver().addActionListener(actionListener);
+    }
+
+    //----- TELA DEVOLVER PRODUTO -----
+    
+    private void evtBotaoCancelarDevolver(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                visaoDevolverProduto.dispose();
+            }
+        };
+        visaoDevolverProduto.getBtnCancelar().addActionListener(actionListener);
+    }
+    
+    private void evtBotaoDevolver(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Integer idSacola = Integer.parseInt(visaoDetalhesSacola.getLblCodigo().getText());
+                sacola = daoSacola.buscarPorId(idSacola);
+                Integer id = Integer.parseInt(visaoDevolverProduto.getLblIdItem().getText());
+                ItemSacola item = daoItemSacola.buscarPorId(id);
+                Integer quantidadeDigitada = Integer.parseInt(visaoDevolverProduto.getTxtQuantidade().getText());
+                item.setQuantidade(item.getQuantidade() - quantidadeDigitada);
+                daoItemSacola.alterar(item);
+                Produto produto = item.getProduto();
+                ItemEstoque itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(produto.getId());
+                itemEstoque.setQuantidade(itemEstoque.getQuantidade() + quantidadeDigitada);
+                controleProduto.getDaoItemEstoque().alterar(itemEstoque);
+                JOptionPane.showMessageDialog(null, "Produto devolvido ao Estoque!", "Sucesso", 1);
+                preencheTabelaItensSacola(sacola.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+                visaoDevolverProduto.dispose();
+            }
+        };
+        visaoDevolverProduto.getBtnDevolver().addActionListener(actionListener);
+    }
+    
+    
     //----- CALCULO DE LUCRO -----
     public Double calculoLucroSacolas(List<Sacola> sacolas) {
         return sacolas.stream()
