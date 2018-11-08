@@ -285,6 +285,7 @@ public class ProdutoControle {
                     //Inserindo produto ao estoque
                     ItemEstoque itemEstoque = new ItemEstoque();
                     itemEstoque.setProduto(produto);
+                    itemEstoque.setId(produto.getId());
                     itemEstoque.setQuantidade(quantidade);
                     daoItemEstoque.inserir(itemEstoque);
 
@@ -464,6 +465,11 @@ public class ProdutoControle {
     }
 
     //----- TELA ESTOQUE PRODUTOS -----
+    
+    public void atualizaTabelaEstoque(){
+        preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
+    }    
+    
     public void preencheTabelaEstoque(List<ItemEstoque> lista, JTable tabela) {
 
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
