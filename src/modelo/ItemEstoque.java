@@ -14,7 +14,6 @@ import javax.persistence.Table;
 public class ItemEstoque {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
     @OneToOne

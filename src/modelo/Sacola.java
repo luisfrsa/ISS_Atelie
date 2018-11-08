@@ -41,6 +41,11 @@ public class Sacola {
     @Column(name = "data_acerto")
     private Date dataAcerto;
     
+    @Basic
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_finalizada")
+    private Date dataFinalizada;
+    
     @OneToOne
     @JoinColumn(name = "consultora_id")
     private Consultora consultora;
@@ -112,6 +117,15 @@ public class Sacola {
     public void setListaItens(List<ItemSacola> listaItens) {
         this.listaItens = listaItens;
     }
+
+    public Date getDataFinalizada() {
+        return dataFinalizada;
+    }
+
+    public void setDataFinalizada(Date dataFinalizada) {
+        this.dataFinalizada = dataFinalizada;
+    }
+    
 
     @Override
     public String toString() {
