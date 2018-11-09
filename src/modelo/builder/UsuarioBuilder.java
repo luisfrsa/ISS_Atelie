@@ -18,6 +18,9 @@ public class UsuarioBuilder {
     public String cargo;
     public String usuario;
     public String senha;
+    public String tipo;
+    public String lembrete;
+    public String resposta;
     public String status;
     public String cpf;
     
@@ -58,6 +61,21 @@ public class UsuarioBuilder {
         return this;
     }
 
+    public UsuarioBuilder setTipo(String tipo) {
+        this.tipo = tipo;
+        return this;
+    }
+
+    public UsuarioBuilder setLembrete(String lembrete) {
+        this.lembrete = lembrete;
+        return this;
+    }
+
+    public UsuarioBuilder setResposta(String resposta) {
+        this.resposta = resposta;
+        return this;
+    }
+
     public UsuarioBuilder setStatus(String status) {
         this.status = status;
         return this;
@@ -67,6 +85,5 @@ public class UsuarioBuilder {
         this.cpf = cpf;
         return this;
     }
-
 
 }
