@@ -101,6 +101,7 @@ public class SacolaControleTest {
                 .setListaProdutos(listaItens)
                 .build();
         double lucro = sacolaControle.calculoLucroSacolas(sacola);
+        
         assertEquals((int)1182,(int) lucro);     
     }
  

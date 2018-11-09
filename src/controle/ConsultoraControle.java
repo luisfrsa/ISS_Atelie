@@ -2,6 +2,7 @@ package controle;
 
 import dao.ConsultoraDAO;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.isNull;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
@@ -49,18 +50,26 @@ public class ConsultoraControle {
             consultoraDAO.alterar(consultora);
             fecharTela();
         }
-
     }
 
-    public void salvar(Consultora consultora) {
-        if (validarConsultora(consultora)) {
-            if (isNull(consultora.getId())) {
-                consultoraDAO.inserir(consultora);
-            } else {
-                consultoraDAO.alterar(consultora);
-            }
+    public void excluirFisicamente(Integer id) {
+        Consultora consultora = consultoraDAO.buscarPorId(id);
+        consultoraDAO.remover(consultora);
+    }
+
+    public Consultora salvar(Consultora consultora) {
+        String erro = validarConsultora(consultora);
+        if (isNull(erro)) {
             fecharTela();
+            if (isNull(consultora.getId())) {
+                return consultoraDAO.inserir(consultora);
+            } else {
+                return consultoraDAO.alterar(consultora);
+            }
+        } else {
+            JError.alert(erro, "Erro validação");
         }
+        return null;
     }
 
     public void buscarPorNome(String stringBusca) {
@@ -81,21 +90,21 @@ public class ConsultoraControle {
         return null;
     }
 
-    private Boolean validarConsultora(Consultora consultora) {
-        Boolean erro = false;
-        if (consultora.getNome().length() < 3) {
-            erro = true;
-            JError.alert("O Nome deve possuir no mínimo 3 caracteres", "Erro validação");
+    public String validarConsultora(Consultora consultora) {
+        String erroMsg = null;
+        if (isNull(consultora.getNome()) || consultora.getNome().length() < 3) {
+            return "O Nome deve possuir no mínimo 3 caracteres";
         }
-        if (!validaCPF(consultora.getCpf())) {
-            erro = true;
-            JError.alert("CPF Inválido", "Erro validação");
+        if (isNull(consultora.getNome()) || consultora.getNome().length() > 50) {
+            return "O Nome deve possuir no máximo 50 caracteres";
+        }
+        if (isNull(consultora.getCpf()) || !validaCPF(consultora.getCpf())) {
+            return "CPF Inválido";
         }
         if (isNull(consultora.getDataNascimento())) {
-            erro = true;
-            JError.alert("Não foi possível converter data de nascimento, favor informar dd/mm/yyyy", "Erro validação");
+            return "Não foi possível converter data de nascimento, favor informar dd/mm/yyyy";
         }
-        return !erro;
+        return null;
     }
 
     private void atualizaTabela() {
@@ -111,7 +120,7 @@ public class ConsultoraControle {
                 consultora.getId(),
                 consultora.getNome(),
                 adicionaPontuacaoCPF(consultora.getCpf()),
-                consultora.getStatusAtividade()?"Ativo":"Inativo"
+                consultora.getStatusAtividade() ? "Ativo" : "Inativo"
             });
         });
     }
