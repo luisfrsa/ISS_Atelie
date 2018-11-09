@@ -7,6 +7,8 @@ package visao;
 
 import controle.ConsultoraControle;
 import controle.InicioControle;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import modelo.enums.Tela;
 
 /**
@@ -33,6 +35,9 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextFieldCódigo = new javax.swing.JTextField();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jTextFieldTipo = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuProdutos = new javax.swing.JMenuItem();
@@ -45,6 +50,22 @@ public class Inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ateliê Doce Beleza");
+
+        jTextFieldCódigo.setToolTipText("Código do Usuário");
+        jTextFieldCódigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCódigoActionPerformed(evt);
+            }
+        });
+
+        jTextFieldUsuario.setToolTipText("Nome do Usuário");
+
+        jTextFieldTipo.setToolTipText("Tipo de Permissão de usuário");
+        jTextFieldTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTipoActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Menu");
 
@@ -108,11 +129,22 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 358, Short.MAX_VALUE)
+                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jTextFieldCódigo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCódigo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 266, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,6 +176,14 @@ public class Inicio extends javax.swing.JFrame {
     private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
         inicioControle.abreView(Tela.USUARIO);
     }//GEN-LAST:event_menuUsuarioActionPerformed
+
+    private void jTextFieldCódigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCódigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCódigoActionPerformed
+
+    private void jTextFieldTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,9 +226,41 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuContasPagar;
     private javax.swing.JMenuItem jMenuContasReceber;
+    private javax.swing.JTextField jTextFieldCódigo;
+    private javax.swing.JTextField jTextFieldTipo;
+    private javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JMenuItem menuConsultoras;
     private javax.swing.JMenuItem menuProdutos;
     private javax.swing.JMenuItem menuSacolas;
     private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
+//----------------Getters and Setters------------------------------------------------------------------
+    public JTextField getjTextFieldCódigo() {
+        return jTextFieldCódigo;
+    }
+
+    public void setjTextFieldCódigo(JTextField jTextFieldCódigo) {
+        this.jTextFieldCódigo = jTextFieldCódigo;
+    }
+
+    public JTextField getjTextFieldTipo() {
+        return jTextFieldTipo;
+    }
+
+    public void setjTextFieldTipo(JTextField jTextFieldTipo) {
+        this.jTextFieldTipo = jTextFieldTipo;
+    }
+
+    public JTextField getjTextFieldUsuario() {
+        return jTextFieldUsuario;
+    }
+
+    public void setjTextFieldUsuario(JTextField jTextFieldUsuario) {
+        this.jTextFieldUsuario = jTextFieldUsuario;
+    }
+       
+    
+   
 }
+
+

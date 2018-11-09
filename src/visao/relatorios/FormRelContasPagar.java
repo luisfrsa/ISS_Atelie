@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.usuario;
+package visao.relatorios;
+
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -14,12 +15,12 @@ import javax.swing.JToggleButton;
  *
  * @author willr
  */
-public class FormGerenciarUsuario extends javax.swing.JFrame {
+public class FormRelContasPagar extends javax.swing.JFrame {
 
     /**
      * Creates new form FormGerenciarProdutos
      */
-    public FormGerenciarUsuario() {
+    public FormRelContasPagar() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -36,64 +37,52 @@ public class FormGerenciarUsuario extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblListagem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblUsuario = new javax.swing.JTable();
-        btnCadastrar = new javax.swing.JButton();
-        btnAtivarDesati = new javax.swing.JToggleButton();
-        btnDetalhes = new javax.swing.JToggleButton();
+        tblContasPagar = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
-        lblUsuario = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        lblFornecedor = new javax.swing.JLabel();
+        txtFornecedor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Usuário");
+        setTitle("Relatório: Contas a Pagar");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setText("Gerenciar Usuário");
+        lblTitulo.setText("Relatórios Contas a Pagar");
 
         lblListagem.setText("Listagem de Contas:");
 
-        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tblContasPagar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Usuário", "Tipo de permissão", "Status"
+                "ID", "Fornecedor", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblUsuario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tblUsuario);
-        if (tblUsuario.getColumnModel().getColumnCount() > 0) {
-            tblUsuario.getColumnModel().getColumn(0).setResizable(false);
-            tblUsuario.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tblContasPagar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tblContasPagar);
+        if (tblContasPagar.getColumnModel().getColumnCount() > 0) {
+            tblContasPagar.getColumnModel().getColumn(0).setResizable(false);
+            tblContasPagar.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
-
-        btnCadastrar.setBackground(new java.awt.Color(0, 153, 102));
-        btnCadastrar.setText("Cadastrar Usuário");
-
-        btnAtivarDesati.setBackground(new java.awt.Color(255, 102, 102));
-        btnAtivarDesati.setText("Ativar/Destivar");
-
-        btnDetalhes.setBackground(new java.awt.Color(153, 204, 255));
-        btnDetalhes.setText("Mais Detalhes");
 
         btnBuscar.setBackground(new java.awt.Color(153, 204, 255));
         btnBuscar.setText("Buscar");
 
         lblBusca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblBusca.setText("Busca");
+        lblBusca.setText("Filtros");
 
-        lblUsuario.setText("Usuário:");
+        lblFornecedor.setText("Fornecedor:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,27 +92,24 @@ public class FormGerenciarUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDetalhes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnAtivarDesati))
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addComponent(lblBusca)
-                            .addComponent(lblListagem))
-                        .addGap(0, 306, Short.MAX_VALUE))
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTitulo)
+                                    .addComponent(lblBusca)
+                                    .addComponent(lblListagem))
+                                .addGap(0, 423, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUsuario)
+                        .addComponent(lblFornecedor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUsuario)
+                        .addComponent(txtFornecedor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar)))
-                .addContainerGap())
+                        .addComponent(btnBuscar)
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,20 +122,15 @@ public class FormGerenciarUsuario extends javax.swing.JFrame {
                 .addComponent(lblBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFornecedor)
+                    .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblListagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDetalhes)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnAtivarDesati))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -177,13 +158,13 @@ public class FormGerenciarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRelContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRelContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRelContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormGerenciarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRelContasPagar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -221,59 +202,27 @@ public class FormGerenciarUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormGerenciarUsuario().setVisible(true);
+                new FormRelContasPagar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnAtivarDesati;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCadastrar;
-    private javax.swing.JToggleButton btnDetalhes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblBusca;
+    private javax.swing.JLabel lblFornecedor;
     private javax.swing.JLabel lblListagem;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTable tblUsuario;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTable tblContasPagar;
+    private javax.swing.JTextField txtFornecedor;
     // End of variables declaration//GEN-END:variables
 
     
     //Getters de componentes para uso do controle
     
-    public JTextField getTxtUsuario() {
-        return txtUsuario;
-    }
-
-
-    public JButton getBtnBuscar() {
-        return btnBuscar;
-    }
-
    
-
-    public JButton getBtnCadastrar() {
-        return btnCadastrar;
-    }
-
-    public JToggleButton getBtnDetalhes() {
-        return btnDetalhes;
-    }
-
-    public JToggleButton getBtnAtivarDesati() {
-        return btnAtivarDesati;
-    }
-
-    public JTable getTblUsuario() {
-        return tblUsuario;
-    }
-
-    
-
-    
     
 }

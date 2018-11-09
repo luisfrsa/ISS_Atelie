@@ -34,6 +34,15 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
 
+    @Column(name = "tipo")
+    private String tipo;
+    
+    @Column(name = "lembrete")
+    private String lembrete;
+    
+    @Column(name = "resposta")
+    private String resposta;
+    
     @Column(name = "status")
     private String status;
 
@@ -49,6 +58,9 @@ public class Usuario implements Serializable {
         this.cargo = usuarioBuilder.cargo;
         this.usuario = usuarioBuilder.usuario;
         this.senha = usuarioBuilder.senha;
+        this.tipo = usuarioBuilder.tipo;
+        this.lembrete=usuarioBuilder.lembrete;
+        this.resposta=usuarioBuilder.resposta;
         this.status = usuarioBuilder.status;
         this.cpf = usuarioBuilder.cpf;
     }
@@ -93,6 +105,30 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getLembrete() {
+        return lembrete;
+    }
+
+    public void setLembrete(String lembrete) {
+        this.lembrete = lembrete;
+    }
+
+    public String getResposta() {
+        return resposta;
+    }
+
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -124,24 +160,30 @@ public class Usuario implements Serializable {
                 && Objects.equals(getCargo(), that.getCargo())
                 && Objects.equals(getUsuario(), that.getUsuario())
                 && Objects.equals(getSenha(), that.getSenha())
+                && Objects.equals(getTipo(), that.getTipo())
+                && Objects.equals(getLembrete(), that.getLembrete())
+                && Objects.equals(getResposta(), that.getResposta())
                 && Objects.equals(getCpf(), that.getCpf())
                 && Objects.equals(getStatus(), that.getStatus());
                 
     }
     
      public int hashCode() {
-        return Objects.hash(getId(), getNome(), getCargo(), getUsuario(), getSenha(), getCpf(), getStatus());
+        return Objects.hash(getId(), getNome(), getCargo(), getUsuario(), getSenha(),getTipo(), getLembrete(),getResposta(), getCpf(), getStatus());
     }
     
     @Override
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", fornecedor='" + nome + '\'' +
-                ", descricao='" + cargo + '\'' +
-                ", valor=" + usuario +
-                ", entrada='" + senha + '\'' +
-                ", baixa='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", usuario=" + usuario +
+                ", senha='" + senha + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", lembrete='" + lembrete + '\'' +
+                ", resposta='" + resposta + '\'' +
+                ", cpf='" + cpf + '\'' +
                 ", status='" + status + '\'' +
                '}';
     }    

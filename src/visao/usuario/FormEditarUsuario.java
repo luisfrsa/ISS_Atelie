@@ -37,7 +37,7 @@ public class FormEditarUsuario extends javax.swing.JFrame {
 
         jLabelNome = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabelCadastrarContasPagar = new javax.swing.JLabel();
+        jLabelEditarUsuario = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelSenha = new javax.swing.JLabel();
@@ -53,14 +53,17 @@ public class FormEditarUsuario extends javax.swing.JFrame {
         jPasswordSenha = new javax.swing.JPasswordField();
         jPasswordSenha1 = new javax.swing.JPasswordField();
         jTextFieldCargo = new javax.swing.JTextField();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
+        jLabelTipo = new javax.swing.JLabel();
+        jTextFieldTipo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar Contas a Pagar");
+        setTitle("Editar Usuário");
 
         jLabelNome.setText("Nome:");
 
-        jLabelCadastrarContasPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelCadastrarContasPagar.setText("Editar Contas a Pagar");
+        jLabelEditarUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelEditarUsuario.setText("Editar Usuário");
 
         jLabelUsuario.setText("Usuário:");
 
@@ -97,6 +100,15 @@ public class FormEditarUsuario extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Convidado", "Administrador" }));
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
+        jLabelTipo.setText("Tipo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,8 +117,8 @@ public class FormEditarUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelCadastrarContasPagar)
-                        .addGap(0, 315, Short.MAX_VALUE))
+                        .addComponent(jLabelEditarUsuario)
+                        .addGap(0, 368, Short.MAX_VALUE))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +136,8 @@ public class FormEditarUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabelSenha1)
                                     .addComponent(jLabelNome)
                                     .addComponent(jLabelID)
-                                    .addComponent(jLabelStatus))
+                                    .addComponent(jLabelStatus)
+                                    .addComponent(jLabelTipo))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
@@ -133,18 +146,21 @@ public class FormEditarUsuario extends javax.swing.JFrame {
                                     .addComponent(jTextFieldStatus)
                                     .addComponent(jPasswordSenha)
                                     .addComponent(jPasswordSenha1)
-                                    .addComponent(jTextFieldCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
-                        .addGap(164, 164, 164)))
+                                    .addComponent(jTextFieldCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldTipo))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabelCadastrarContasPagar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelEditarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelStatus))
@@ -152,14 +168,22 @@ public class FormEditarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelID)
                     .addComponent(JTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUsuario)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelTipo)
+                            .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelNome)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelUsuario))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSenha)
@@ -194,6 +218,10 @@ public class FormEditarUsuario extends javax.swing.JFrame {
     private void jTextFieldStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldStatusActionPerformed
+
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,13 +269,15 @@ public class FormEditarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldID;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabelCadastrarContasPagar;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabelCargo;
+    private javax.swing.JLabel jLabelEditarUsuario;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelSenha1;
     private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JLabel jLabelTipo;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JPasswordField jPasswordSenha1;
@@ -255,6 +285,7 @@ public class FormEditarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCargo;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldStatus;
+    private javax.swing.JTextField jTextFieldTipo;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 
@@ -294,7 +325,15 @@ public class FormEditarUsuario extends javax.swing.JFrame {
         return jTextFieldUsuario;
     }
 
- 
+    public JComboBox<String> getjComboBoxTipo() {
+        return jComboBoxTipo;
+    }
+
+    public JTextField getjTextFieldTipo() {
+        return jTextFieldTipo;
+    }
+
+    
     
     
    
