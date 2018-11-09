@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,6 +40,11 @@ public class Sacola {
     @Temporal(TemporalType.DATE)
     @Column(name = "data_acerto")
     private Date dataAcerto;
+    
+    @Basic
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_finalizada")
+    private Date dataFinalizada;
     
     @OneToOne
     @JoinColumn(name = "consultora_id")
@@ -107,6 +113,70 @@ public class Sacola {
     public void setFinalizada(boolean finalizada) {
         this.finalizada = finalizada;
     }
+
+    public void setListaItens(List<ItemSacola> listaItens) {
+        this.listaItens = listaItens;
+    }
+
+    public Date getDataFinalizada() {
+        return dataFinalizada;
+    }
+
+    public void setDataFinalizada(Date dataFinalizada) {
+        this.dataFinalizada = dataFinalizada;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Sacola{" + "id=" + id + ", finalizada=" + finalizada + ", dataCriacao=" + dataCriacao + ", dataAcerto=" + dataAcerto + ", consultora=" + consultora + ", listaItens=" + listaItens + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + (this.finalizada ? 1 : 0);
+        hash = 97 * hash + Objects.hashCode(this.dataCriacao);
+        hash = 97 * hash + Objects.hashCode(this.dataAcerto);
+        hash = 97 * hash + Objects.hashCode(this.consultora);
+        hash = 97 * hash + Objects.hashCode(this.listaItens);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sacola other = (Sacola) obj;
+        if (this.finalizada != other.finalizada) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataCriacao, other.dataCriacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataAcerto, other.dataAcerto)) {
+            return false;
+        }
+        if (!Objects.equals(this.consultora, other.consultora)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaItens, other.listaItens)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
     

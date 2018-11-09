@@ -44,7 +44,9 @@ public class ConsultoraControle {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Você realmente deseja excluir este registro", "Atenção", dialogButton);
         if (dialogResult == 0) {
-            consultoraDAO.remover(id);
+            Consultora consultora = consultoraDAO.buscarPorId(id);
+            consultora.setStatusAtividade(false);
+            consultoraDAO.alterar(consultora);
             fecharTela();
         }
 
@@ -68,13 +70,13 @@ public class ConsultoraControle {
                 .collect(Collectors.toList());
         preencheTabela(consultoras);
     }
-    
-    public Consultora buscaPorCpf(String cpf){
+
+    public Consultora buscaPorCpf(String cpf) {
         List<Consultora> consultoras = consultoraDAO.buscarTodos();
-        for(Consultora consultora: consultoras){
-            if(consultora.getCpf().equals(cpf)){
+        for (Consultora consultora : consultoras) {
+            if (consultora.getCpf().equals(cpf)) {
                 return consultora;
-            }            
+            }
         }
         return null;
     }
@@ -108,7 +110,8 @@ public class ConsultoraControle {
             modelo.addRow(new Object[]{
                 consultora.getId(),
                 consultora.getNome(),
-                adicionaPontuacaoCPF(consultora.getCpf())
+                adicionaPontuacaoCPF(consultora.getCpf()),
+                consultora.getStatusAtividade()?"Ativo":"Inativo"
             });
         });
     }
@@ -121,7 +124,5 @@ public class ConsultoraControle {
     public ConsultoraDAO getConsultoraDAO() {
         return consultoraDAO;
     }
-    
-    
 
 }

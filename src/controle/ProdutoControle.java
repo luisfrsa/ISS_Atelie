@@ -61,6 +61,8 @@ public class ProdutoControle {
             evtBotaoCancelar();
             ouvirEventosCadastrar = false;
         }
+        limparCamposCadastro();
+        restauraCorCamposCadastro();
         visaoCadastrarProduto.setVisible(true);
     }
 
@@ -73,9 +75,9 @@ public class ProdutoControle {
         }
         visaoEditarProduto.setVisible(true);
     }
-    
-    public void renderizaVisaoEstoque(){
-        if(ouvirEventosEstoque){
+
+    public void renderizaVisaoEstoque() {
+        if (ouvirEventosEstoque) {
             evtBotaoFecharEstoque();
             evtBotaoEditarEstoque();
             ouvirEventosEstoque = false;
@@ -83,9 +85,9 @@ public class ProdutoControle {
         preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
         visaoEstoqueProdutos.setVisible(true);
     }
-    
-    public void renderizaVisaoEditarEstoque(){
-        if(ouvirEventosEditarEstoque){
+
+    public void renderizaVisaoEditarEstoque() {
+        if (ouvirEventosEditarEstoque) {
             evtBotaoCancelarEditarEstoque();
             evtBotaoSalvarEditarEstoque();
             ouvirEventosEditarEstoque = false;
@@ -200,8 +202,8 @@ public class ProdutoControle {
         }
         return listaDeBusca;
     }
-    
-    private void evtBotaoEstoque(){
+
+    private void evtBotaoEstoque() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -236,7 +238,8 @@ public class ProdutoControle {
                 && visaoCadastrarProduto.getTxtCor().getText().equals("")
                 && visaoCadastrarProduto.getTxtTamanho().getText().equals("")
                 && visaoCadastrarProduto.getTxtMarca().getText().equals("")
-                && visaoCadastrarProduto.getTxtModelo().getText().equals("");
+                && visaoCadastrarProduto.getTxtModelo().getText().equals("")
+                && visaoCadastrarProduto.getTxtQuantidade().getText().equals("");
     }
 
     private void evtBotaoCadastrarNovo() {
@@ -250,7 +253,7 @@ public class ProdutoControle {
                 Double valor;
                 try {
                     valor = Double.parseDouble(visaoCadastrarProduto.getTxtValor().getText());
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     valor = null;
                 }
 
@@ -258,12 +261,12 @@ public class ProdutoControle {
                 String tamanho = visaoCadastrarProduto.getTxtTamanho().getText();
                 String marca = visaoCadastrarProduto.getTxtMarca().getText();
                 String modleo = visaoCadastrarProduto.getTxtModelo().getText();
-                
+
                 Integer quantidade;
-                if(visaoCadastrarProduto.getTxtQuantidade().getText().equals("")){
-                    quantidade = 0;
-                }else{
+                try {
                     quantidade = Integer.parseInt(visaoCadastrarProduto.getTxtQuantidade().getText());
+                } catch (NumberFormatException e) {
+                    quantidade = null;
                 }
 
                 //Criando objeto com as informações
@@ -276,15 +279,16 @@ public class ProdutoControle {
                         .build();
 
                 //Persistindo objeto
-                if (validaCadastroProduto(produto)) {
+                if (validaCadastroProduto(produto) && validaQuantidadeEstoque(quantidade)) {
                     daoProduto.inserir(produto);
-                    
+
                     //Inserindo produto ao estoque
                     ItemEstoque itemEstoque = new ItemEstoque();
                     itemEstoque.setProduto(produto);
+                    itemEstoque.setId(produto.getId());
                     itemEstoque.setQuantidade(quantidade);
                     daoItemEstoque.inserir(itemEstoque);
-                    
+
                     JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!", "Sucesso", 1);
                     visaoCadastrarProduto.dispose();
                     preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos()); //Atualiza tabela após cadastro
@@ -293,6 +297,26 @@ public class ProdutoControle {
             }
         };
         visaoCadastrarProduto.getBtnCadastrar().addActionListener(actionListener);
+    }
+
+    private boolean validaQuantidadeEstoque(Integer quantidade) {
+
+        if (quantidade == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Quantidade' é obrigatório!"
+                    + "\nPermitidos apenas números inteiros.", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtQuantidade().requestFocus();
+            visaoCadastrarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+
+        if (quantidade < 0) {
+            JOptionPane.showMessageDialog(null, "O campo 'Quantidade' não aceita números negativos!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtQuantidade().requestFocus();
+            visaoCadastrarProduto.getTxtQuantidade().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+
+        return true;
     }
 
     private boolean validaCadastroProduto(Produto produto) {
@@ -331,6 +355,7 @@ public class ProdutoControle {
         visaoCadastrarProduto.getTxtTamanho().setBackground(Color.white);
         visaoCadastrarProduto.getTxtMarca().setBackground(Color.white);
         visaoCadastrarProduto.getTxtModelo().setBackground(Color.white);
+        visaoCadastrarProduto.getTxtQuantidade().setBackground(Color.white);
     }
 
     private void limparCamposCadastro() {
@@ -340,6 +365,7 @@ public class ProdutoControle {
         visaoCadastrarProduto.getTxtTamanho().setText("");
         visaoCadastrarProduto.getTxtMarca().setText("");
         visaoCadastrarProduto.getTxtModelo().setText("");
+        visaoCadastrarProduto.getTxtQuantidade().setText("");
     }
 
     //----- TELA EDITAR PRODUTOS -----
@@ -378,7 +404,7 @@ public class ProdutoControle {
                     daoProduto.alterar(novoProduto);
                     JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
                     preencheTabelaProdutos(daoProduto.buscarTodos(), visaoGerenciarProdutos.getTblProdutos());
-                    visaoEditarProduto.dispose();                    
+                    visaoEditarProduto.dispose();
                 }
             }
         };
@@ -437,11 +463,15 @@ public class ProdutoControle {
         };
         visaoEditarProduto.getBtnCancelar().addActionListener(actionListener);
     }
-    
+
     //----- TELA ESTOQUE PRODUTOS -----
     
-    public void preencheTabelaEstoque(List<ItemEstoque> lista, JTable tabela){
-        
+    public void atualizaTabelaEstoque(){
+        preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
+    }    
+    
+    public void preencheTabelaEstoque(List<ItemEstoque> lista, JTable tabela) {
+
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
         for (ItemEstoque itemEstoque : lista) {
@@ -452,8 +482,8 @@ public class ProdutoControle {
             });
         }
     }
-    
-    private void evtBotaoFecharEstoque(){
+
+    private void evtBotaoFecharEstoque() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -462,15 +492,15 @@ public class ProdutoControle {
         };
         visaoEstoqueProdutos.getBtnFechar().addActionListener(actionListener);
     }
-    
-    private void evtBotaoEditarEstoque(){
+
+    private void evtBotaoEditarEstoque() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 int linha = visaoEstoqueProdutos.getTblEstoqueProdutos().getSelectedRow();
-                if (linha < 0){
+                if (linha < 0) {
                     JOptionPane.showMessageDialog(null, "Nenhum Prodruto selecionado!", "Erro", 0);
-                }else{
+                } else {
                     Integer id = (Integer) visaoEstoqueProdutos.getTblEstoqueProdutos().getValueAt(linha, 0);
                     ItemEstoque item = daoItemEstoque.buscarPorId(id);
                     visaoEditarEstoque.getTxtId().setText(id.toString());
@@ -484,8 +514,7 @@ public class ProdutoControle {
     }
 
     //----- TELA EDITAR ESTOQUE PRODUTOS -----
-    
-    private void evtBotaoCancelarEditarEstoque(){
+    private void evtBotaoCancelarEditarEstoque() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -494,29 +523,33 @@ public class ProdutoControle {
         };
         visaoEditarEstoque.getBtnCancelar().addActionListener(actionListener);
     }
-    
-    private void evtBotaoSalvarEditarEstoque(){
+
+    private void evtBotaoSalvarEditarEstoque() {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Integer id = Integer.parseInt(visaoEditarEstoque.getTxtId().getText());
                 Integer quantidade = Integer.parseInt(visaoEditarEstoque.getTxtQuantidade().getText());
-                
+
                 ItemEstoque item = daoItemEstoque.buscarPorId(id);
                 item.setQuantidade(quantidade);
                 daoItemEstoque.alterar(item);
-                
+
                 JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
                 preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
                 visaoEditarEstoque.dispose();
-                
+
             }
         };
         visaoEditarEstoque.getBtnSalvar().addActionListener(actionListener);
     }
-    
+
     public ProdutoDAO getDaoProduto() {
         return daoProduto;
+    }
+
+    public ItemEstoqueDAO getDaoItemEstoque() {
+        return daoItemEstoque;
     }
 
 }
