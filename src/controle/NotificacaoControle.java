@@ -9,11 +9,13 @@ import visao.notificacao.FormListarNotificacao;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import static java.util.Objects.isNull;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
+import modelo.Consultora;
 import modelo.enums.Prioridade;
 import static util.Datas.dateToString;
+import static util.Datas.safeDateToString;
 import static util.Documentos.adicionaPontuacaoCPF;
 import static util.Documentos.validaCPF;
 
@@ -55,15 +57,25 @@ public class NotificacaoControle {
 
     }
 
-    public void salvar(Notificacao notificacao) {
-        if (validarNotificacao(notificacao)) {
-            if (isNull(notificacao.getId())) {
-                notificacaoDAO.inserir(notificacao);
-            } else {
-                notificacaoDAO.alterar(notificacao);
-            }
+    public void excluirFisicamente(Integer id) {
+        Notificacao notificacao = notificacaoDAO.buscarPorId(id);
+        notificacaoDAO.remover(notificacao);
+    }
+
+    public Notificacao salvar(Notificacao notificacao) {
+        String erro = validarNotificacao(notificacao);
+        if (isNull(erro)) {
+            validarNotificacao(notificacao);
             fecharTela();
+            if (isNull(notificacao.getId())) {
+                return notificacaoDAO.inserir(notificacao);
+            } else {
+                return notificacaoDAO.alterar(notificacao);
+            }
+        } else {
+            JError.alert(erro, "Erro validação");
         }
+        return null;
     }
 
     public void buscarPorNome(String stringBusca) {
@@ -74,17 +86,21 @@ public class NotificacaoControle {
         preencheTabela(notificacaos);
     }
 
-    private Boolean validarNotificacao(Notificacao notificacao) {
-        Boolean erro = false;
-        if (notificacao.getNome().length() < 3) {
-            erro = true;
-            JError.alert("O Nome deve possuir no mínimo 3 caracteres", "Erro validação");
+    public String validarNotificacao(Notificacao notificacao) {
+        String erroMsg = null;
+        if (isNull(notificacao.getNome()) || notificacao.getNome().length() < 3) {
+            erroMsg = "O Nome deve possuir no mínimo 3 caracteres";
         }
-        if (notificacao.getDescricao().length() < 3) {
-            erro = true;
-            JError.alert("A descrição deve possuir no mínimo 3 caracteres", "Erro validação");
+        if (isNull(notificacao.getNome()) || notificacao.getNome().length() > 50) {
+            erroMsg = "O Nome deve possuir no máximo 50 caracteres";
         }
-        return !erro;
+        if (isNull(notificacao.getDescricao()) || notificacao.getDescricao().length() < 3) {
+            erroMsg = "A descrição deve possuir no mínimo 3 caracteres";
+        }
+        if (isNull(notificacao.getDescricao()) || notificacao.getDescricao().length() > 300) {
+            erroMsg = "A descrição deve possuir no máximo 300 caracteres";
+        }
+        return erroMsg;
     }
 
     private void atualizaTabela() {
@@ -93,7 +109,6 @@ public class NotificacaoControle {
     }
 
     private void preencheTabela(List<Notificacao> lista) {
-        System.out.println(lista);
         DefaultTableModel modelo = (DefaultTableModel) formListarNotificacao.getTblNotificacao().getModel();
         modelo.setNumRows(0);
         lista.stream().forEach(notificacao -> {
