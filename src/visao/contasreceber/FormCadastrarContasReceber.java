@@ -87,6 +87,7 @@ public class FormCadastrarContasReceber extends javax.swing.JFrame {
 
         jLabelNumeroParcelas.setText("N° de Parcelas:");
 
+        jTextFieldNumeroParcelas.setToolTipText("Digite o número das parcelas e aperte a tecla \"Enter\" para autopreencher o valor da parcela");
         jTextFieldNumeroParcelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNumeroParcelasActionPerformed(evt);

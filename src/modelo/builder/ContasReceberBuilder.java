@@ -24,6 +24,10 @@ public class ContasReceberBuilder {
     public String status;
     public String cliente;
     public String formaPagamento;
+    public String user_entrada;
+    public String user_baixa;
+    public String user_remocao;
+    public Date atraso;
     
     public ContasReceberBuilder(String descricao) {
         if (isNull(descricao)) {
@@ -77,4 +81,26 @@ public class ContasReceberBuilder {
         return this;
     }
 
+    public ContasReceberBuilder setUser_entrada(String user_entrada) {
+        this.user_entrada = user_entrada;
+        return this;
+    }
+
+    public ContasReceberBuilder setUser_baixa(String user_baixa) {
+        this.user_baixa = user_baixa;
+        return this;
+    }
+
+    public ContasReceberBuilder setUser_remocao(String user_remocao) {
+        this.user_remocao = user_remocao;
+        return this;
+    }
+    
+    public ContasReceberBuilder setAtraso(Date atraso) {
+        this.atraso=atraso;
+        return this;
+    }
+    
+    
+    
 }

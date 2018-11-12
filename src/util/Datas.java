@@ -4,6 +4,7 @@ import dao.AbstractDAOImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static java.util.Objects.isNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,17 @@ public class Datas {
     }
 
     public static String dateToString(Date date) {
+        if (isNull(date)) {
+            return "Data nula";
+        }
         return formatoData.format(date);
+    }
+
+    public static String safeDateToString(Date date) {
+        if (isNull(date)) {
+            return "Data nula";
+        }
+        return date.getDay() + "/" + date.getMonth() + "/" + date.getYear();
     }
 
 }

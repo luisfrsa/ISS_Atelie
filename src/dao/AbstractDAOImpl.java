@@ -58,9 +58,13 @@ public class AbstractDAOImpl<T> implements DAOInterface<T> {
                 if (Modifier.isPrivate(field.getModifiers())) {
                     boolean accessible = field.isAccessible();
                     field.setAccessible(true);
-                    log.info("Valor antigo: "+field.get(objetoAntigo).toString()+"; Valor novo: "+field.get(object).toString());
-                    field.set(objetoAntigo,field.get(object));
-                    field.setAccessible(accessible);
+                    try {
+                        log.info("Valor antigo: " + field.get(objetoAntigo).toString() + "; Valor novo: " + field.get(object).toString());
+                        field.set(objetoAntigo, field.get(object));
+                        field.setAccessible(accessible);
+                    } catch (Exception e) {
+                        log.info("Erro ao realizar log de valor antigo e valor novo");
+                    }
                 }
             }
             return inserir((T) objetoAntigo);
@@ -110,5 +114,5 @@ public class AbstractDAOImpl<T> implements DAOInterface<T> {
         em.getTransaction().commit();
         return lista;
     }
-    
+
 }

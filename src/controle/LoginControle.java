@@ -25,7 +25,8 @@ public class LoginControle {
 
     private static final UsuarioDao usuarioDAO = new UsuarioDao();
     private static final FormLogin visaoLogin = new FormLogin();
-
+    private static final Inicio inicio = new Inicio();
+    
     private boolean ouvirVisaoLogin = true;
 
     private ActionListener actionListener;
@@ -47,9 +48,10 @@ public class LoginControle {
                 validarLogin();
             }
         };
+
         visaoLogin.getBtnAcessar().addActionListener(actionListener);
     }
- 
+
     public void validarLogin() {
         
        Usuario admBuilder =usuarioDAO.buscarPorId(1); //Criar Administrador 
@@ -59,6 +61,7 @@ public class LoginControle {
                 .setCargo("Administrador")
                 .setUsuario("adm")
                 .setSenha("123456")
+                .setTipo("Administrador")
                 .setStatus("ATIVO")
                 .build();
             usuarioDAO.inserir(admBuilder);
@@ -69,7 +72,19 @@ public class LoginControle {
 
         if (validaSenhaLogin(usuario, senha)) {
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso", "Sucesso", 1);
-            Inicio inicio = new Inicio();
+            Usuario user = buscaPorUsuario(usuario, senha);
+            util.DadosUsuario.id=user.getId();
+            util.DadosUsuario.tipo=user.getTipo();
+            util.DadosUsuario.user=user.getUsuario();
+            inicio.getjTextFieldUsuario().setBorder(null);
+            inicio.getjTextFieldCódigo().setBorder(null);
+            inicio.getjTextFieldTipo().setBorder(null);
+            inicio.getjTextFieldUsuario().setText(user.getUsuario());
+            inicio.getjTextFieldCódigo().setText(Integer.toString(user.getId()));
+            inicio.getjTextFieldTipo().setText(user.getTipo());
+            inicio.getjTextFieldUsuario().setEnabled(false);
+            inicio.getjTextFieldCódigo().setEnabled(false);
+            inicio.getjTextFieldTipo().setEnabled(false);
             inicio.setVisible(true);
             visaoLogin.dispose();
         }
@@ -107,6 +122,11 @@ public class LoginControle {
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválida!", "Erro na Validação", 0);
             visaoLogin.getjPasswordSenha().requestFocus();
             visaoLogin.getjPasswordSenha().setBackground(Color.yellow);
+            return false;
+        }
+       
+        if (user.getStatus().equals("DESATIVADO")) {
+            JOptionPane.showMessageDialog(null, "O usuário " + user.getUsuario() + " foi desativado do sistema! Contacte o Administrador.", "Erro na Validação", 0);
             return false;
         }
         

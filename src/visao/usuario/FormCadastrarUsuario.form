@@ -27,87 +27,103 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSeparator1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <Component id="jLabelCadastrarUsuario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="512" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabelSenhaRepetir" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCPF" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelSenha" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNome1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCargo" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNome" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelTipodeUsuario" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelCadastrarUsuario" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelSenhaRepetir" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelCPF" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelSenha" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelNome1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelCargo" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelNome" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldUsuario" min="-2" pref="178" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jTextFieldNome" min="-2" pref="179" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldCargo" min="-2" pref="179" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jTextFieldCPF" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                  <Component id="jPasswordSenha" min="-2" pref="178" max="-2" attributes="0"/>
-                                  <Component id="jPasswordSenha1" min="-2" pref="178" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="jTextFieldUsuario" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="jTextFieldNome" min="-2" pref="179" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCargo" min="-2" pref="179" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jPasswordSenha" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="jPasswordSenha1" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="jComboBoxTipodeUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCPF" min="-2" pref="178" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jSeparator1" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelLembrete" max="32767" attributes="0"/>
+                              <Component id="jPasswordResposta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelRespostaRecuperacao1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelRespostaRecuperacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldLembrete" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jPasswordResposta1" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-              <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jLabelCadastrarUsuario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelLembrete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldLembrete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelNome1" alignment="3" max="32767" attributes="0"/>
+                  <Component id="jLabelRespostaRecuperacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jPasswordSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPasswordResposta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelSenhaRepetir" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jPasswordSenha1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelRespostaRecuperacao1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPasswordResposta1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelTipodeUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTipodeUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -184,6 +200,46 @@
     <Component class="javax.swing.JLabel" name="jLabelNome1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelLembrete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pergunta ou lembrete de recupera&#xe7;&#xe3;o de senha"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldLembrete">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTipodeUsuario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo de Usu&#xe1;rio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxTipodeUsuario">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Convidado"/>
+            <StringItem index="1" value="Administrador"/>
+          </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelRespostaRecuperacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Resposta da recupera&#xe7;&#xe3;o de senha"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordResposta">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordResposta1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelRespostaRecuperacao1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Confirma&#xe7;&#xe3;o da resposta"/>
       </Properties>
     </Component>
   </SubComponents>
