@@ -86,21 +86,24 @@ public class SacolaControle {
         visaoAssociarProduto.setVisible(true);
     }
 
-    public void renderizaVisaoDetalhesSacola(Sacola sacola) {
+    public void renderizaVisaoDetalhesSacola(Sacola sac) {
         if (ouvirEventosDetalhesSacola) {
             evtBotaoFecharDetalhes();
             evtBotaoDevolverProdutos();
+            evtBotaoGerarTermo();
             ouvirEventosDetalhesSacola = false;
         }
-        String nomeConsultora = sacola.getConsultora().getNome();
-        String dataCriacao = Datas.dateToString(sacola.getDataCriacao());
-        String dataAcerto = Datas.dateToString(sacola.getDataAcerto());
+        String nomeConsultora = sac.getConsultora().getNome();
+        String dataCriacao = Datas.dateToString(sac.getDataCriacao());
+        String dataAcerto = Datas.dateToString(sac.getDataAcerto());
+        String valorTotal = calculaValorTotalSacola(sac).toString();
 
-        visaoDetalhesSacola.getLblCodigo().setText(sacola.getId().toString());
+        visaoDetalhesSacola.getLblCodigo().setText(sac.getId().toString());
         visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
         visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
         visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
-        preencheTabelaItensSacola(sacola.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+        visaoDetalhesSacola.getLblValorTotal().setText("R$ " + valorTotal);
+        preencheTabelaItensSacola(sac.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
         visaoDetalhesSacola.setVisible(true);
     }
 
@@ -158,7 +161,7 @@ public class SacolaControle {
                         //remover itens de sacola associados a sacola
                         Sacola sacola = daoSacola.buscarPorId(id);
                         excluiItensDaSacola(sacola);
-                        daoSacola.remover(sacola);                        
+                        daoSacola.remover(sacola);
                         preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
                         controleProduto.atualizaTabelaEstoque();
                         JOptionPane.showMessageDialog(null, "Sacola excluida com Sucesso!", "Sucesso", 1);
@@ -290,7 +293,7 @@ public class SacolaControle {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                //Implementar validação
+
                 String dataString = visaoCriarSacola.getTxtDataAcerto().getText();
                 Date dataAcerto = null;
                 try {
@@ -311,8 +314,15 @@ public class SacolaControle {
                     daoSacola.inserir(sacola);
                     preencheTabelaSacolas(daoSacola.buscarTodas(), visaoGerenciarSacolas.getTblSacolas());
                     controleProduto.atualizaTabelaEstoque();
-                    JOptionPane.showMessageDialog(null, "Sacola cadastrada com Sucesso!", "Sucesso", 1);
+                    JOptionPane.showMessageDialog(null, "Sacola cadastrada com Sucesso!\n", "Sucesso", 1);
                     visaoCriarSacola.dispose();
+                    //Gerando o termo de ciência
+                    int opcao = JOptionPane.showConfirmDialog(null, "Deseja gerar o Termo de Ciência da Consultora? ", "Gerar Termo de Ciência", JOptionPane.YES_NO_OPTION);
+                    if (opcao == 0) {
+                        TermoDeCiencia termoDeCiencia = new TermoDeCiencia(sacola);
+                        termoDeCiencia.gerar();
+                    }
+
                 }
             }
         };
@@ -528,6 +538,19 @@ public class SacolaControle {
         };
         visaoDetalhesSacola.getBtnDevolver().addActionListener(actionListener);
     }
+    
+    public void evtBotaoGerarTermo(){
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Integer idSacola = Integer.parseInt(visaoDetalhesSacola.getLblCodigo().getText());
+                Sacola sac = daoSacola.buscarPorId(idSacola);
+                TermoDeCiencia termoDeCiencia = new TermoDeCiencia(sac);
+                termoDeCiencia.gerar();
+            }
+        };
+        visaoDetalhesSacola.getBtnGerarTermo().addActionListener(actionListener);
+    }
 
     //----- TELA DEVOLVER PRODUTO -----
     private void evtBotaoCancelarDevolver() {
@@ -544,12 +567,12 @@ public class SacolaControle {
         actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 Integer idSacola = Integer.parseInt(visaoDetalhesSacola.getLblCodigo().getText());
                 Sacola sac = daoSacola.buscarPorId(idSacola);
                 Integer idItem = Integer.parseInt(visaoDevolverProduto.getLblIdItem().getText());
                 ItemSacola item = daoItemSacola.buscarPorId(idItem);
-                
+
                 if (validaQuantidadeDevolve(item)) {
                     //Removendo produto da sacola
                     Integer quantidadeDigitada = Integer.parseInt(visaoDevolverProduto.getTxtQuantidade().getText());
@@ -559,14 +582,14 @@ public class SacolaControle {
                     Produto produto = item.getProduto();
                     ItemEstoque itemEstoque = controleProduto.getDaoItemEstoque().buscarPorId(produto.getId());
                     itemEstoque.setQuantidade(itemEstoque.getQuantidade() + quantidadeDigitada);
-                    controleProduto.getDaoItemEstoque().alterar(itemEstoque);  
-                    
+                    controleProduto.getDaoItemEstoque().alterar(itemEstoque);
+
                     //Remove o item da sacola caso tenha sido devolvido pro completo
-                    if(item.getQuantidade() == 0){
+                    if (item.getQuantidade() == 0) {
                         sac.getListaItens().remove(item);
                         daoItemSacola.remover(item);
                     }
-                    
+
                     controleProduto.atualizaTabelaEstoque();
                     preencheTabelaItensSacola(sac.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
                     JOptionPane.showMessageDialog(null, "Produto devolvido ao Estoque!", "Sucesso", 1);
@@ -579,7 +602,7 @@ public class SacolaControle {
 
     private boolean validaQuantidadeDevolve(ItemSacola item) {
         Integer quantidadeDigitada = null;
-        
+
         try {
             quantidadeDigitada = Integer.parseInt(visaoDevolverProduto.getTxtQuantidade().getText());
         } catch (NumberFormatException e) {
@@ -588,19 +611,19 @@ public class SacolaControle {
             visaoDevolverProduto.getTxtQuantidade().requestFocus();
             return false;
         }
-        
-        if(quantidadeDigitada <=0){
+
+        if (quantidadeDigitada <= 0) {
             JOptionPane.showMessageDialog(null, "A quantidade a ser devolvida deve ser maior que zero!", "Erro na Validação", 0);
             visaoDevolverProduto.getTxtQuantidade().requestFocus();
             return false;
         }
-        
-        if(quantidadeDigitada > item.getQuantidade()){
+
+        if (quantidadeDigitada > item.getQuantidade()) {
             JOptionPane.showMessageDialog(null, "A quantidade devolvida é maior do que a quantidade do Produto na Sacola!", "Erro na Validação", 0);
             visaoDevolverProduto.getTxtQuantidade().requestFocus();
             return false;
-        }        
-        
+        }
+
         return true;
     }
 
@@ -616,6 +639,25 @@ public class SacolaControle {
                 .map(itens -> itens.getProduto().getValor() * itens.getQuantidade())
                 .reduce(0.0, (a, b) -> a + b);
 
+    }
+
+    public Double calculaValorTotalSacola(Sacola sacola) {
+        Double valorTotal = 0.0;
+
+        for (ItemSacola item : sacola.getListaItens()) {
+            valorTotal += item.getProduto().getValor() * item.getQuantidade();
+        }
+        return valorTotal;
+    }
+
+    public Integer calculaQuantidadeProdutosSacola(Sacola sacola) {
+        Integer quantidade = 0;
+
+        for (ItemSacola item : sacola.getListaItens()) {
+            quantidade += item.getQuantidade();
+        }
+
+        return quantidade;
     }
 
 }
