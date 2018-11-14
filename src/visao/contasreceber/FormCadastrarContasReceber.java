@@ -200,12 +200,11 @@ public class FormCadastrarContasReceber extends javax.swing.JFrame {
 
         if (formaPagamento.equals("A Prazo")) {
             jTextFieldNumeroParcelas.setEditable(true);
-            jTextFieldValordaParcela.setEditable(true);
+            
         } else {
             jTextFieldValordaParcela.setText("");
             jTextFieldNumeroParcelas.setText("");
             jTextFieldNumeroParcelas.setEditable(false);
-            jTextFieldValordaParcela.setEditable(false);
         }
     }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
 

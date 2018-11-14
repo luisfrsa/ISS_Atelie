@@ -153,6 +153,7 @@ public class ContasPagarControle {
                     if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarContasPagar.getTblContasPagar().getValueAt(linha, 0); //ID do item selecionado
                         ContasPagar contaRemovida = contasPagarDao.buscarPorId(id);
+                        contaRemovida.setUser_remocao(util.DadosUsuario.user);
                         contaRemovida.setStatus("REMOVIDA");
                         contasPagarDao.alterar(contaRemovida);
                         JOptionPane.showMessageDialog(null, "Conta Excluida com Sucesso!", "Sucesso", 1);
@@ -259,8 +260,9 @@ public class ContasPagarControle {
                 contaspagar.setValor(valor);
                 contaspagar.setDescricao(descricao);
                 contaspagar.setStatus("PENDENTE");
-
-                if (validaCadastroContasPagar(contaspagar)) {
+                contaspagar.setUser_entrada(util.DadosUsuario.user);
+                
+                if (validaCadastroContasPagar(contaspagar, parcelas)) {
                     Calendar vencimentoparcelas = Calendar.getInstance();//variáveL que calcula vencimento das parcelas
                     vencimentoparcelas.setTime(entrada);
                     if (parcelas > 0 && contaspagar.getFormaPagamento() == "A Prazo") {
@@ -272,8 +274,9 @@ public class ContasPagarControle {
                             contaspagar.setValor(valorparcela);
                             contaspagar.setDescricao(descricao);
                             contaspagar.setStatus("PENDENTE");
-                            
-                           // -----Calculo do Vencimento (parcela)
+                            contaspagar.setUser_entrada(util.DadosUsuario.user);
+                           
+                            // -----Calculo do Vencimento (parcela)
                             vencimentoparcelas.add(Calendar.DAY_OF_MONTH, +30);
                             contaspagar.setVencimento(vencimentoparcelas.getTime());
                             contasPagarDao.inserir(contaspagar);
@@ -300,31 +303,20 @@ public class ContasPagarControle {
         visaoCadastrarContasPagar.getBtnCadastrar().addActionListener(actionListener);
     }
 
-    private boolean validaCadastroContasPagar(ContasPagar contaspagar) {
+    private boolean validaCadastroContasPagar(ContasPagar contaspagar, Integer parcela) {
         restauraCorCamposCadastro();
-        if (contaspagar.getFormaPagamento()== "A Prazo" && visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo 'Número de parcelas' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
-            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
-            return false;
-        }
-        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && visaoCadastrarContasPagar.getjTextFieldValordaParcela().getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasPagar.getjTextFieldValordaParcela().requestFocus();
-            visaoCadastrarContasPagar.getjTextFieldValordaParcela().setBackground(Color.yellow);
-            return false;
-        }
-        
-        if (contaspagar.getEntrada() == null) {
-            JOptionPane.showMessageDialog(null, "O campo 'Data da entrada' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().requestFocus();
-            visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().setBackground(Color.yellow);
-            return false;
-        }
+
         if (contaspagar.getFornecedor().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Fornecedor' é obrigatório!", "Erro na Validação", 0);
             visaoCadastrarContasPagar.getjTextFieldFornecedor().requestFocus();
             visaoCadastrarContasPagar.getjTextFieldFornecedor().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (contaspagar.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldDescricao().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldDescricao().setBackground(Color.yellow);
             return false;
         }
 
@@ -340,6 +332,48 @@ public class ContasPagarControle {
             JOptionPane.showMessageDialog(null, "O Valor de uma Conta deve ser maior que zero!", "Erro na Validação", 0);
             visaoCadastrarContasPagar.getjTextFieldValor().requestFocus();
             visaoCadastrarContasPagar.getjTextFieldValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (contaspagar.getFormaPagamento() == "A Prazo" && visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de parcelas' não pode ser vazio!", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela < 0) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de Parcelas ' não pode ser negativo !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela == 0) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de Parcelas ' inválido !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && visaoCadastrarContasPagar.getjTextFieldValordaParcela().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser vazio! Digite enter no campo nº de parcelas para autocompletar o valor da parcela!", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldValordaParcela().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldValordaParcela().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasPagar.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela < 1) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser menor que 1 !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (contaspagar.getEntrada() == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Data da entrada' não pode ser vazio !", "Erro na Validação", 0);
+            visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().requestFocus();
+            visaoCadastrarContasPagar.getjFormattedTextFieldDataEntrada().setBackground(Color.yellow);
             return false;
         }
 
@@ -363,6 +397,7 @@ public class ContasPagarControle {
         visaoCadastrarContasPagar.getjTextFieldNumeroParcelas().setText("");
         visaoCadastrarContasPagar.getjTextFieldValordaParcela().setText("");
     }
+
     private void evtBotaoCancelarCadastro() {
         actionListener = new ActionListener() {
             @Override
@@ -507,6 +542,7 @@ private void evtBotaoBaixarSalvar() {
                         Date baixa = Datas.stringToData(visaoBaixarContasPagar.getjFormattedTextFieldDatadeEntrada().getText());
                         ContasPagar contaLiquidada = contasPagarDao.buscarPorId(id);
                         contaLiquidada.setBaixa(baixa);
+                        contaLiquidada.setUser_baixa(util.DadosUsuario.user);
                         contaLiquidada.setStatus("LIQUIDADA");
                         contasPagarDao.alterar(contaLiquidada);
                         JOptionPane.showMessageDialog(null, "Conta Liquidada com Sucesso!", "Sucesso", 1);
