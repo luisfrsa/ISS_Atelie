@@ -24,6 +24,10 @@ public class ContasPagarBuilder {
     public String status;
     public String fornecedor;
     public String formaPagamento;
+    public String user_entrada;
+    public String user_baixa;
+    public String user_remocao;
+    public Date atraso;
     
     public ContasPagarBuilder(String descricao) {
         if (isNull(descricao)) {
@@ -76,5 +80,27 @@ public class ContasPagarBuilder {
         this.formaPagamento = formaPagamento;
         return this;
     }
+
+    public ContasPagarBuilder setUser_entrada(String user_entrada) {
+        this.user_entrada = user_entrada;
+        return this;
+    }
+
+    public ContasPagarBuilder setUser_baixa(String user_baixa) {
+        this.user_baixa = user_baixa;
+        return this;
+    }
+
+    public ContasPagarBuilder setUser_remocao(String user_remocao) {
+        this.user_remocao = user_remocao;
+        return this;
+    }
+
+    public ContasPagarBuilder setAtraso(Date atraso) {
+        this.atraso = atraso;
+        return this;
+    }
+
+
 
 }
