@@ -57,7 +57,18 @@ public class ContasPagar implements Serializable {
     @Column(name = "forma_pagamento")
     private String formaPagamento;
     
+    @Column(name = "user_entrada")
+    private String user_entrada;
     
+    @Column(name = "user_baixa")
+    private String user_baixa;
+    
+    @Column(name = "user_remocao")
+    private String user_remocao;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "atraso")
+    private Date atraso;
     
     //Construtores
     public ContasPagar(){
@@ -73,7 +84,10 @@ public class ContasPagar implements Serializable {
         this.status = contasPagarBuilder.status;
         this.fornecedor = contasPagarBuilder.fornecedor;
         this.formaPagamento = contasPagarBuilder.formaPagamento;
-        
+        this.user_entrada=contasPagarBuilder.user_entrada;
+        this.user_baixa=contasPagarBuilder.user_baixa;
+        this.user_remocao=contasPagarBuilder.user_remocao;
+        this.atraso=contasPagarBuilder.atraso;
     }
 
     public String getStatus() {
@@ -148,6 +162,38 @@ public class ContasPagar implements Serializable {
         this.vencimento = vencimento;
     }
 
+    public String getUser_entrada() {
+        return user_entrada;
+    }
+
+    public void setUser_entrada(String user_entrada) {
+        this.user_entrada = user_entrada;
+    }
+
+    public String getUser_baixa() {
+        return user_baixa;
+    }
+
+    public void setUser_baixa(String user_baixa) {
+        this.user_baixa = user_baixa;
+    }
+
+    public String getUser_remocao() {
+        return user_remocao;
+    }
+
+    public void setUser_remocao(String user_remocao) {
+        this.user_remocao = user_remocao;
+    }
+
+    public Date getAtraso() {
+        return atraso;
+    }
+
+    public void setAtraso(Date atraso) {
+        this.atraso = atraso;
+    }
+
     
 
     
@@ -168,12 +214,17 @@ public class ContasPagar implements Serializable {
                 && Objects.equals(getVencimento(), that.getVencimento())
                 && Objects.equals(getFornecedor(), that.getFornecedor())
                 && Objects.equals(getStatus(), that.getStatus())
-                && Objects.equals(getFormaPagamento(), that.getFormaPagamento());
+                && Objects.equals(getFormaPagamento(), that.getFormaPagamento())
+                && Objects.equals(getUser_entrada(), that.getUser_entrada())
+                && Objects.equals(getUser_baixa(), that.getUser_baixa())
+                && Objects.equals(getUser_remocao(), that.getUser_remocao())
+                && Objects.equals(getAtraso(), that.getAtraso());
+                
     }
 
      @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getFornecedor(), getFormaPagamento(), getStatus());
+        return Objects.hash(getId(), getDescricao(), getValor(), getEntrada(), getBaixa(), getVencimento(), getFornecedor(), getFormaPagamento(), getStatus(), getStatus(), getUser_entrada(), getUser_baixa(), getUser_remocao(), getAtraso());
     }
 
 
@@ -188,8 +239,12 @@ public class ContasPagar implements Serializable {
                 ", baixa='" + baixa + '\'' +
                 ", vencimento='" + vencimento + '\'' +
                 ", status='" + status + '\'' +
-                ", formadePagemento='" + formaPagamento + '\'' +
-               '}';
+                ", formadePagamento='" + formaPagamento + '\'' +
+                ", user_entrada='" + user_entrada + '\'' +
+                ", user_baixa='" + user_baixa + '\'' +
+                ", user_remocao='" + user_remocao + '\'' +
+                ", atraso='" + atraso + '\'' +
+                '}';
     }
 
 

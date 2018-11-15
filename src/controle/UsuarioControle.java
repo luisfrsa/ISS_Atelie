@@ -43,6 +43,7 @@ public class UsuarioControle {
      
     public void renderizarVisaoGerenciarUsuario() {
         if (ouvirGerenciarUsuario) {
+            evtBotaoBuscar();
             evtBotaoCadastrar();
             evtBotaoAtivaDesativa();
             evtBotaoMaisDetalhes();
@@ -86,6 +87,38 @@ public class UsuarioControle {
         }
     }
 
+     private void evtBotaoBuscar() {
+        actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                String busca = visaoGerenciarUsuario.getTxtUsuario().getText();
+                if (busca.equals("")) {
+                    preencheTabela(usuarioDAO.buscarTodos(), visaoGerenciarUsuario.getTblUsuario());
+                } else {
+                    List<Usuario> listaDeBusca = buscaPorUsuarioLista(busca);
+                    preencheTabela(listaDeBusca, visaoGerenciarUsuario.getTblUsuario());
+                }
+            }
+        };
+        visaoGerenciarUsuario.getBtnBuscar().addActionListener(actionListener);
+
+    }
+    
+    public List<Usuario> buscaPorUsuarioLista(String usuario) {
+
+        List<Usuario> listaDeBusca = new ArrayList<>();
+        int tamanho = usuarioDAO.buscarTodos().size();
+        List<Usuario> listaAux = usuarioDAO.buscarTodos();
+        
+        for (int k = 0; k < tamanho; k++) {
+            if (listaAux.get(k).getUsuario().equals(usuario)) {
+                listaDeBusca.add(listaAux.get(k));
+            }
+        }
+        return listaDeBusca;
+    }
+    
     private void evtBotaoCadastrar() {
 
         Usuario user = usuarioDAO.buscarPorId(DadosUsuario.id);

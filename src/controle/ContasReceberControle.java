@@ -151,6 +151,7 @@ public class ContasReceberControle {
                     if (opcao == 0) {
                         Integer id = (Integer) visaoGerenciarContasReceber.getTblContasReceber().getValueAt(linha, 0); //ID do item selecionado
                         ContasReceber contaRemovida = contasReceberDao.buscarPorId(id);
+                        contaRemovida.setUser_remocao(util.DadosUsuario.user);
                         contaRemovida.setStatus("REMOVIDA");
                         contasReceberDao.alterar(contaRemovida);
                         JOptionPane.showMessageDialog(null, "Conta Excluida com Sucesso!", "Sucesso", 1);
@@ -257,21 +258,22 @@ public class ContasReceberControle {
                 contasReceber.setValor(valor);
                 contasReceber.setDescricao(descricao);
                 contasReceber.setStatus("PENDENTE");
-
-                if (validaCadastroContasPagar(contasReceber)) {
+                contasReceber.setUser_entrada(util.DadosUsuario.user);  
+                
+                    if (validaCadastroContasPagar(contasReceber, parcelas)) {
                     Calendar vencimentoparcelas = Calendar.getInstance();//variáveL que calcula vencimento das parcelas
                     vencimentoparcelas.setTime(entrada);
                     if (parcelas > 0 && contasReceber.getFormaPagamento() == "A Prazo") {
                         for (int i = 0; i < parcelas; i++) {
-                            
+
                             contasReceber.setEntrada(entrada);
                             contasReceber.setFormaPagamento(formaDePagamento);
                             contasReceber.setCliente(cliente);
                             contasReceber.setValor(valorparcela);
                             contasReceber.setDescricao(descricao);
                             contasReceber.setStatus("PENDENTE");
-                            
-                           // -----Calculo do Vencimento (parcela)
+                            contasReceber.setUser_entrada(util.DadosUsuario.user);
+                            // -----Calculo do Vencimento (parcela)
                             vencimentoparcelas.add(Calendar.DAY_OF_MONTH, +30);
                             contasReceber.setVencimento(vencimentoparcelas.getTime());
                             contasReceberDao.inserir(contasReceber);
@@ -281,6 +283,8 @@ public class ContasReceberControle {
                         
                         contasReceber.setVencimento(entrada);
                         contasReceber.setBaixa(entrada);
+                        contasReceber.setUser_entrada(util.DadosUsuario.user);
+                        contasReceber.setUser_baixa(util.DadosUsuario.user);
                         contasReceber.setStatus("LIQUIDADA");
                         contasReceberDao.inserir(contasReceber);
                     }
@@ -298,27 +302,9 @@ public class ContasReceberControle {
         visaoCadastrarContasReceber.getBtnCadastrar().addActionListener(actionListener);
     }
 
-    private boolean validaCadastroContasPagar(ContasReceber contasReceber) {
+    private boolean validaCadastroContasPagar(ContasReceber contasReceber, Integer parcela) {
         restauraCorCamposCadastro();
-        if (contasReceber.getFormaPagamento()== "A Prazo" && visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo 'Número de parcelas' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().requestFocus();
-            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
-            return false;
-        }
-        if (visaoCadastrarContasReceber.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && visaoCadastrarContasReceber.getjTextFieldValordaParcela().getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasReceber.getjTextFieldValordaParcela().requestFocus();
-            visaoCadastrarContasReceber.getjTextFieldValordaParcela().setBackground(Color.yellow);
-            return false;
-        }
         
-        if (contasReceber.getEntrada() == null) {
-            JOptionPane.showMessageDialog(null, "O campo 'Data da entrada' não pode ser vazio !", "Erro na Validação", 0);
-            visaoCadastrarContasReceber.getjFormattedTextFieldDataEntrada().requestFocus();
-            visaoCadastrarContasReceber.getjFormattedTextFieldDataEntrada().setBackground(Color.yellow);
-            return false;
-        }
         if (contasReceber.getCliente().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo 'Cliente' é obrigatório!", "Erro na Validação", 0);
             visaoCadastrarContasReceber.getjTextFieldCliente().requestFocus();
@@ -326,6 +312,13 @@ public class ContasReceberControle {
             return false;
         }
 
+        if (contasReceber.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Descrição' é obrigatório!", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldDescricao().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldDescricao().setBackground(Color.yellow);
+            return false;
+        }
+        
         if (contasReceber.getValor() == null) {
             JOptionPane.showMessageDialog(null, "O campo 'Valor' é obrigatório!"
                     + "\nPermitidos apenas números inteiros ou reais.", "Erro na Validação", 0);
@@ -338,6 +331,48 @@ public class ContasReceberControle {
             JOptionPane.showMessageDialog(null, "O Valor de uma Conta deve ser maior que zero!", "Erro na Validação", 0);
             visaoCadastrarContasReceber.getjTextFieldValor().requestFocus();
             visaoCadastrarContasReceber.getjTextFieldValor().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (contasReceber.getFormaPagamento() == "A Prazo" && visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de parcelas' não pode ser vazio!", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasReceber.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela < 0) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de Parcelas ' não pode ser negativo !", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasReceber.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela == 0) {
+            JOptionPane.showMessageDialog(null, "O campo 'Número de Parcelas ' inválido !", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasReceber.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && visaoCadastrarContasReceber.getjTextFieldValordaParcela().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser vazio ! Digite enter no campo nº de parcelas para autocompletar o valor da parcela!", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldValordaParcela().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldValordaParcela().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (visaoCadastrarContasReceber.getjComboBoxFormaPagamento().getSelectedItem().toString().equals("A Prazo") && parcela < 1) {
+            JOptionPane.showMessageDialog(null, "O campo 'Valor da Parcela ' não pode ser menor que 1 !", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().requestFocus();
+            visaoCadastrarContasReceber.getjTextFieldNumeroParcelas().setBackground(Color.yellow);
+            return false;
+        }
+
+        if (contasReceber.getEntrada() == null) {
+            JOptionPane.showMessageDialog(null, "O campo 'Data da entrada' não pode ser vazio !", "Erro na Validação", 0);
+            visaoCadastrarContasReceber.getjFormattedTextFieldDataEntrada().requestFocus();
+            visaoCadastrarContasReceber.getjFormattedTextFieldDataEntrada().setBackground(Color.yellow);
             return false;
         }
 
@@ -505,6 +540,7 @@ private void evtBotaoBaixarSalvar() {
                         Date baixa = Datas.stringToData(visaoBaixarContasReceber.getjFormattedTextFieldDatadeEntrada().getText());
                         ContasReceber contaLiquidada = contasReceberDao.buscarPorId(id);
                         contaLiquidada.setBaixa(baixa);
+                        contaLiquidada.setUser_baixa(util.DadosUsuario.user);
                         contaLiquidada.setStatus("LIQUIDADA");
                         contasReceberDao.alterar(contaLiquidada);
                         JOptionPane.showMessageDialog(null, "Conta Liquidada com Sucesso!", "Sucesso", 1);
