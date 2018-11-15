@@ -11,13 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import static java.util.Objects.isNull;
 import java.util.stream.Collectors;
-
-import modelo.Consultora;
 import modelo.enums.Prioridade;
 import static util.Datas.dateToString;
-import static util.Datas.safeDateToString;
-import static util.Documentos.adicionaPontuacaoCPF;
-import static util.Documentos.validaCPF;
 
 public class NotificacaoControle {
 
