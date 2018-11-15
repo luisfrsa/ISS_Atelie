@@ -6,18 +6,14 @@
 package visao.consultora;
 
 import controle.ConsultoraControle;
-import controle.ProdutoControle;
 import java.util.Date;
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import visao.produto.*;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import util.Datas;
 import static util.Datas.dateToString;
-import util.Documentos;
 import static util.Documentos.adicionaPontuacaoCPF;
 import static util.Documentos.removePontuacao;
 

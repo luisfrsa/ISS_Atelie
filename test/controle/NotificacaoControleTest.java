@@ -5,14 +5,9 @@
  */
 package controle;
 
-import dao.NotificacaoDAO;
 import java.util.Calendar;
-import java.util.Date;
-import modelo.Consultora;
-import modelo.Notificacao;
 import modelo.Notificacao;
 import modelo.builder.NotificacaoBuilder;
-import modelo.enums.Prioridade;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

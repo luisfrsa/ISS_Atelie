@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import modelo.Consultora;
 import modelo.ItemSacola;
-import modelo.Produto;
 import modelo.Sacola;
 
 public class SacolaBuilder {

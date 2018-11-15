@@ -5,10 +5,8 @@
  */
 package visao.usuario;
 
-import visao.contaspagar.*;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
