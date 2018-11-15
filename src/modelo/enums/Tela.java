@@ -8,7 +8,8 @@ public enum Tela {
     CONTASPAGAR(3, "ContasPagar"),
     CONTASRECEBER(4, "ContasReceber"),
     USUARIO(5, "Usuario"),
-    NOTIFICACAO(6, "Notificacao");
+    NOTIFICACAO(6, "Notificacao"),
+    FREQUENCIA(7, "Frequência");
 
     private Integer codigo;
     private String nome;
