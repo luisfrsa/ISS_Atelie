@@ -48,6 +48,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2Financeiro = new javax.swing.JMenu();
         jMenuContasPagar = new javax.swing.JMenuItem();
         jMenuContasReceber = new javax.swing.JMenuItem();
+        menuRelatorios = new javax.swing.JMenu();
+        menuFrequencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ateliê Doce Beleza");
@@ -132,6 +134,18 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2Financeiro);
 
+        menuRelatorios.setText("Relatórios");
+
+        menuFrequencia.setText("Frequência");
+        menuFrequencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFrequenciaActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuFrequencia);
+
+        jMenuBar1.add(menuRelatorios);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,6 +211,10 @@ public class Inicio extends javax.swing.JFrame {
         inicioControle.abreView(Tela.NOTIFICACAO);
     }//GEN-LAST:event_menuUsuario1ActionPerformed
 
+    private void menuFrequenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFrequenciaActionPerformed
+        inicioControle.abreView(Tela.FREQUENCIA);
+    }//GEN-LAST:event_menuFrequenciaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,7 +260,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTipo;
     private javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JMenuItem menuConsultoras;
+    private javax.swing.JMenuItem menuFrequencia;
     private javax.swing.JMenuItem menuProdutos;
+    private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenuItem menuSacolas;
     private javax.swing.JMenuItem menuUsuario;
     private javax.swing.JMenuItem menuUsuario1;

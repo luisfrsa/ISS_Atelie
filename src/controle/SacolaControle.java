@@ -44,6 +44,10 @@ public class SacolaControle {
     private boolean ouvirEventosAssociarProduto = true;
     private boolean ouvirEventosDetalhesSacola = true;
     private boolean ouvirEventosDevolver = true;
+    
+    public SacolaDAO getDaoSacola(){
+        return daoSacola;
+    }
 
     //Métodos
     public void renderizarVisaoGerenciarSacolas() {
@@ -93,17 +97,7 @@ public class SacolaControle {
             evtBotaoGerarTermo();
             ouvirEventosDetalhesSacola = false;
         }
-        String nomeConsultora = sac.getConsultora().getNome();
-        String dataCriacao = Datas.dateToString(sac.getDataCriacao());
-        String dataAcerto = Datas.dateToString(sac.getDataAcerto());
-        String valorTotal = calculaValorTotalSacola(sac).toString();
-
-        visaoDetalhesSacola.getLblCodigo().setText(sac.getId().toString());
-        visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
-        visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
-        visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
-        visaoDetalhesSacola.getLblValorTotal().setText("R$ " + valorTotal);
-        preencheTabelaItensSacola(sac.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+        atualizaInformacoesDetalhesSacola(sac);
         visaoDetalhesSacola.setVisible(true);
     }
 
@@ -490,6 +484,22 @@ public class SacolaControle {
     }
 
     //----- TELA DETALHES DA SACOLA -----
+    
+    public void atualizaInformacoesDetalhesSacola(Sacola sac){
+        String nomeConsultora = sac.getConsultora().getNome();
+        String dataCriacao = Datas.dateToString(sac.getDataCriacao());
+        String dataAcerto = Datas.dateToString(sac.getDataAcerto());
+        String valorTotal = calculaValorTotalSacola(sac).toString();
+
+        visaoDetalhesSacola.getLblCodigo().setText(sac.getId().toString());
+        visaoDetalhesSacola.getLblNomeConsultora().setText(nomeConsultora);
+        visaoDetalhesSacola.getLblDataCriacao().setText(dataCriacao);
+        visaoDetalhesSacola.getLblDataAcerto().setText(dataAcerto);
+        visaoDetalhesSacola.getLblValorTotal().setText("R$ " + valorTotal);
+        preencheTabelaItensSacola(sac.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
+    }
+    
+    
     private void evtBotaoFecharDetalhes() {
         actionListener = new ActionListener() {
             @Override
@@ -593,6 +603,7 @@ public class SacolaControle {
                     controleProduto.atualizaTabelaEstoque();
                     preencheTabelaItensSacola(sac.getListaItens(), visaoDetalhesSacola.getTblItensDeSacola());
                     JOptionPane.showMessageDialog(null, "Produto devolvido ao Estoque!", "Sucesso", 1);
+                    atualizaInformacoesDetalhesSacola(sac);
                     visaoDevolverProduto.dispose();
                 }
             }
