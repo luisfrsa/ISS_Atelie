@@ -5,18 +5,13 @@
  */
 package controle;
 
-import dao.ConsultoraDAO;
 import java.util.Calendar;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 /**
  *

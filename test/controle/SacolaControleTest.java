@@ -6,9 +6,7 @@
 package controle;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.swing.JTable;
 import modelo.ItemSacola;
 import modelo.Produto;
 import modelo.Sacola;
@@ -20,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import util.Datas;
 
 /**
  *

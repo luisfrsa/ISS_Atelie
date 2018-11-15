@@ -16,8 +16,7 @@ import java.util.Date;
 import static java.util.Objects.nonNull;
 import modelo.enums.Prioridade;
 import static util.Datas.dateToString;
-import static util.Documentos.adicionaPontuacaoCPF;
-import static util.Documentos.removePontuacao;
+
 
 /**
  *
