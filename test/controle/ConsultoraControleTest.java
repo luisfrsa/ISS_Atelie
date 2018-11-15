@@ -54,6 +54,7 @@ public class ConsultoraControleTest {
     @Test
     public void testAlterar() {
         Consultora consultora = criaConsultoraCorreta();
+        consultora.setCpf("287.217.720-53");
         consultora.setId(null);
         Consultora retorno = consultoraControle.salvar(consultora);
         retorno.setNome("NOVO NOME");      

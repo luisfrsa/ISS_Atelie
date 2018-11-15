@@ -4,6 +4,7 @@ import dao.ConsultoraDAO;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.isNull;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -58,14 +59,17 @@ public class ConsultoraControle {
     }
 
     public Consultora salvar(Consultora consultora) {
+        Consultora novaConsultora = null;
         String erro = validarConsultora(consultora);
         if (isNull(erro)) {
             fecharTela();
             if (isNull(consultora.getId())) {
-                return consultoraDAO.inserir(consultora);
+                novaConsultora = consultoraDAO.inserir(consultora);
             } else {
-                return consultoraDAO.alterar(consultora);
+                novaConsultora = consultoraDAO.alterar(consultora);
             }
+            atualizaTabela();
+            return novaConsultora;
         } else {
             JError.alert(erro, "Erro validação");
         }
@@ -104,7 +108,9 @@ public class ConsultoraControle {
         if (isNull(consultora.getDataNascimento())) {
             return "Não foi possível converter data de nascimento, favor informar dd/mm/yyyy";
         }
-        return null;
+
+        return validarCPFUnico(consultora);
+
     }
 
     private void atualizaTabela() {
@@ -132,6 +138,21 @@ public class ConsultoraControle {
 
     public ConsultoraDAO getConsultoraDAO() {
         return consultoraDAO;
+    }
+
+    private String validarCPFUnico(Consultora consultoraValidacao) {
+        List<Consultora> consultorasList = consultoraDAO.buscarTodos();
+        List<Consultora> consultorasRepetidas = consultorasList
+                .stream()
+                .filter(consultora -> consultora.getCpf().equals(consultoraValidacao.getCpf()))
+                .collect(Collectors.toList());
+        for (Consultora repetida : consultorasRepetidas) {
+            if (!repetida.getId().equals(consultoraValidacao.getId())) {
+                return "Consultora " + repetida.getNome() + " já possui CPF " + repetida.getCpf();
+            }
+        }
+        return null;
+
     }
 
 }
