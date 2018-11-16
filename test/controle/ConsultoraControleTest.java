@@ -79,7 +79,7 @@ public class ConsultoraControleTest {
         Consultora retorno = consultoraControle.salva(consultora);
     }
 
-    public void testInserirNomeGrandeOk2() {
+    public void testInserirNomeGrandeOk() {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setNome("Nome com 49 caracteres Nome com 49 caracteres Nom");
         Consultora retorno = consultoraControle.salva(consultora);
@@ -87,7 +87,7 @@ public class ConsultoraControleTest {
         consultoraControle.excluirFisicamente(retorno.getId());
     }
 
-    public void testInserirNomeGrandeOk() {
+    public void testInserirNomeGrandeOk1() {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setNome("Nome com 50 caracteres Nome com 50 caracteres Nome");
         Consultora retorno = consultoraControle.salva(consultora);
