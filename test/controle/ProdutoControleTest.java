@@ -1,10 +1,5 @@
 package controle;
 
-import dao.ItemEstoqueDAO;
-import dao.ProdutoDAO;
-import java.util.List;
-import javax.swing.JTable;
-import modelo.ItemEstoque;
 import modelo.Produto;
 import modelo.builder.ProdutoBuilder;
 import org.junit.After;
@@ -12,7 +7,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import controle.ProdutoControle;
 import static org.junit.Assert.*;
 
 /**
@@ -21,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class ProdutoControleTest {
 
-    private ProdutoControle controleProduto = new ProdutoControle();
+    private final ProdutoControle controleProduto = new ProdutoControle();
 
     public ProdutoControleTest() {
     }
@@ -52,7 +46,6 @@ public class ProdutoControleTest {
                 .build();
     }
 
-    //TESTE DE CAIXA PRETA    
     @Test
     public void testInserir() {
         //Criando novo Produto válido
@@ -98,109 +91,238 @@ public class ProdutoControleTest {
         controleProduto.getDaoProduto().remover(produto);
     }
 
-    //TESTE DE CAIXA BRANCA
-    //Análise de Valor Limite    
+    //--------------- PARTICIONAMENTO DE EQUIVALENCIA ---------------
+    
     @Test
-    public void testValidaCadastroProduto() {
+    /*Cobertura: Validar cadastro de Produto válido
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto1() {
         Boolean retorno;
         Produto produto;
 
-        //Validando Produto (válido)
         produto = criaProdutoValido();
         retorno = controleProduto.validaCadastroProduto(produto);
         assertTrue(retorno);
+    }
 
-        //Validando Produto (inválido)
+    @Test
+    /*Cobertura: Validar cadastro de Produto sem valor
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto2() {
+        Boolean retorno;
+        Produto produto;
+
         produto = criaProdutoValido();
         produto.setValor(null);
-        retorno = controleProduto.validaCadastroProduto(produto);
-        assertFalse(retorno);
-
-        //Validando Produto (inválido)
-        produto = criaProdutoValido();
-        produto.setDescricao("");
-        retorno = controleProduto.validaCadastroProduto(produto);
-        assertFalse(retorno);
-
-        //Validando Produto (inválido)
-        produto = criaProdutoValido();
-        produto.setValor(Double.valueOf(0));
-        retorno = controleProduto.validaCadastroProduto(produto);
-        assertFalse(retorno);
-
-        //Validando Produto (válido)
-        produto = criaProdutoValido();
-        produto.setValor(Double.valueOf(1));
-        retorno = controleProduto.validaCadastroProduto(produto);
-        assertTrue(retorno);
-
-        //Validando Produto (inválido)
-        produto = criaProdutoValido();
-        produto.setValor(Double.valueOf(-1));
         retorno = controleProduto.validaCadastroProduto(produto);
         assertFalse(retorno);
     }
 
     @Test
-    public void testValidaQuantidadeEstoque() {
+    /*Cobertura: Validar cadastro de Produto sem descrição
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto3() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setDescricao("");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com valor = -34
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto4() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(Double.valueOf(-34));
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com valor = 27.5
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto5() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(27.5);
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto sem quantidade de estoque
+    Resultado esperado: Retorno falso*/
+    public void testValidaQuantidadeEstoque1() {
         Boolean retorno;
 
-        //Validando quantidade (inválida)
         retorno = controleProduto.validaQuantidadeEstoque(null);
         assertFalse(retorno);
+    }
 
-        //Validando quantidade (inválida)
-        retorno = controleProduto.validaQuantidadeEstoque(-1);
+    @Test
+    /*Cobertura: Validar cadastro de Produto com quantidade de estoque = -97
+    Resultado esperado: Retorno falso*/
+    public void testValidaQuantidadeEstoque2() {
+        Boolean retorno;
+
+        retorno = controleProduto.validaQuantidadeEstoque(-97);
         assertFalse(retorno);
+    }
 
-        //Validando quantidade (válida)
-        retorno = controleProduto.validaQuantidadeEstoque(0);
-        assertTrue(retorno);
+    @Test
+    /*Cobertura: Validar cadastro de Produto com quantidade de estoque = 532
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaQuantidadeEstoque3() {
+        Boolean retorno;
 
-        //Validando quantidade (válida)
-        retorno = controleProduto.validaQuantidadeEstoque(1);
+        retorno = controleProduto.validaQuantidadeEstoque(532);
         assertTrue(retorno);
     }
 
     @Test
-    public void testValidaEdicaoProduto() {
+    /*Cobertura: Validar edição de Produto válido
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaEdicaoProduto1() {
         Boolean retorno;
         Produto produto;
 
-        //Validando Produto (válido)
         produto = criaProdutoValido();
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertTrue(retorno);
+    }
 
-        //Validando Produto (inválido)
+    @Test
+    /*Cobertura: Validar edição de Produto sem valor
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto2() {
+        Boolean retorno;
+        Produto produto;
+
         produto = criaProdutoValido();
         produto.setValor(null);
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertFalse(retorno);
+    }
 
-        //Validando Produto (inválido)
+    @Test
+    /*Cobertura: Validar edição de Produto sem descrição
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto3() {
+        Boolean retorno;
+        Produto produto;
+
         produto = criaProdutoValido();
         produto.setDescricao("");
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertFalse(retorno);
+    }
 
-        //Validando Produto (inválido)
+    @Test
+    /*Cobertura: Validar edição de Produto com valor = -305.7
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto4() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(-305.7);
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar edição de Produto com valor = 19
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto5() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(Double.valueOf(19));
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertTrue(retorno);
+    }
+
+    //--------------- ANALISE DE VALOR LIMITE ---------------
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com valor = 0
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto6() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(Double.valueOf(0));
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com valor = 1
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto7() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setValor(Double.valueOf(1));
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com quantidade de estoque = -1
+    Resultado esperado: Retorno falso*/
+    public void testValidaQuantidadeEstoque4() {
+        Boolean retorno;
+
+        retorno = controleProduto.validaQuantidadeEstoque(-1);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com quantidade de estoque = 0
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaQuantidadeEstoque5() {
+        Boolean retorno;
+
+        retorno = controleProduto.validaQuantidadeEstoque(0);
+        assertTrue(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar edição de Produto com valor = 0
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto6() {
+        Boolean retorno;
+        Produto produto;
+
         produto = criaProdutoValido();
         produto.setValor(Double.valueOf(0));
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertFalse(retorno);
+    }
 
-        //Validando Produto (válido)
+    @Test
+    /*Cobertura: Validar edição de Produto com valor = 1
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto7() {
+        Boolean retorno;
+        Produto produto;
+
         produto = criaProdutoValido();
         produto.setValor(Double.valueOf(1));
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertTrue(retorno);
-
-        //Validando Produto (inválido)
-        produto = criaProdutoValido();
-        produto.setValor(Double.valueOf(-1));
-        retorno = controleProduto.validaEdicaoProduto(produto);
-        assertFalse(retorno);
     }
 
 }
