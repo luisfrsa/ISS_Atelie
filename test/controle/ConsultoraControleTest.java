@@ -6,6 +6,7 @@
 package controle;
 
 import java.util.Calendar;
+import java.util.List;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import org.junit.After;
@@ -26,11 +27,10 @@ public class ConsultoraControleTest {
 
     @Before
     public void setUp() {
-//        Mockito.when(consultoraDAO.inserir(Mockito.any(Consultora.class))).thenReturn(consultora);
-    }
-
-    @After
-    public void tearDown() {
+        List<Consultora> consultoras = consultoraControle.buscarTodas();
+        for (Consultora c : consultoras) {
+            consultoraControle.excluirFisicamente(c.getId());
+        }
     }
 
     /*Teste caixa preta*/
@@ -38,10 +38,60 @@ public class ConsultoraControleTest {
     public void testInserir() {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setId(null);
-        Consultora retorno = consultoraControle.salvar(consultora);
+        Consultora retorno = consultoraControle.salva(consultora);
         assertEquals("Nome de tamanho ok", retorno.getNome());
         assertEquals("581.547.790-72", retorno.getCpf());
         assertEquals("123456", retorno.getSenha());
+        consultoraControle.excluirFisicamente(retorno.getId());
+
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testInserirNomePequeno() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("No");
+        Consultora retorno = consultoraControle.salva(consultora);
+    }
+
+    public void testInserirNomeOk() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nom");
+        Consultora retorno = consultoraControle.salva(consultora);
+        assertEquals("Nom", retorno.getNome());
+
+        consultoraControle.excluirFisicamente(retorno.getId());
+
+    }
+
+    public void testInserirNomeOk1() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome");
+        Consultora retorno = consultoraControle.salva(consultora);
+        assertEquals("Nome", retorno.getNome());
+
+        consultoraControle.excluirFisicamente(retorno.getId());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testInserirNomeGrande() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome com 51 caracteres Nome com 51 caracteres Nome ");
+        Consultora retorno = consultoraControle.salva(consultora);
+    }
+
+    public void testInserirNomeGrandeOk() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome com 49 caracteres Nome com 49 caracteres Nom");
+        Consultora retorno = consultoraControle.salva(consultora);
+        assertEquals("Nome com 49 caracteres Nome com 49 caracteres Nom", retorno.getNome());
+        consultoraControle.excluirFisicamente(retorno.getId());
+    }
+
+    public void testInserirNomeGrandeOk1() {
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome com 50 caracteres Nome com 50 caracteres Nome");
+        Consultora retorno = consultoraControle.salva(consultora);
+        assertEquals("Nome com 50 caracteres Nome com 50 caracteres Nome", retorno.getNome());
         consultoraControle.excluirFisicamente(retorno.getId());
 
     }
@@ -51,10 +101,10 @@ public class ConsultoraControleTest {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setCpf("287.217.720-53");
         consultora.setId(null);
-        Consultora retorno = consultoraControle.salvar(consultora);
-        retorno.setNome("NOVO NOME");      
+        Consultora retorno = consultoraControle.salva(consultora);
+        retorno.setNome("NOVO NOME");
         retorno.setSenha("NOVA SENHA");
-        retorno = consultoraControle.salvar(consultora);
+        retorno = consultoraControle.salva(consultora);
         assertEquals("NOVO NOME", retorno.getNome());
         assertEquals("NOVA SENHA", retorno.getSenha());
         consultoraControle.excluirFisicamente(retorno.getId());
@@ -126,9 +176,21 @@ public class ConsultoraControleTest {
 
     }
 
+    @Test
+    public void testValidarCpfRepetido() {
+        Consultora inserida = criaConsultoraCorreta();
+        inserida.setId(null);
+        inserida = consultoraControle.salva(inserida);
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome de tamanho ok");
+        String retorno = consultoraControle.validarConsultora(consultora);
+        assertEquals("Consultora Nome de tamanho ok já possui CPF 581.547.790-72", retorno);
+        consultoraControle.excluirFisicamente(inserida.getId());
+
+    }
+
     private Consultora criaConsultoraCorreta() {
         return new ConsultoraBuilder("Nome de tamanho ok")
-                .setId(999999)
                 .setCpf("581.547.790-72")
                 .setDataNascimento(Calendar.getInstance().getTime())
                 .setSenha("123456")

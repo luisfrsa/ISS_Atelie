@@ -57,7 +57,6 @@ public class NotificacaoControle {
         notificacaoDAO.remover(notificacao);
     }
 
-
     public Notificacao salvar(Notificacao notificacao) {
         Notificacao novaNotificacao = null;
 

@@ -23,22 +23,7 @@ public class NotificacaoControleTest {
 
     private NotificacaoControle notificacaoControle = new NotificacaoControle();
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
+   
     /*Teste caixa preta*/
     @Test
     public void testInserir() {
@@ -63,6 +48,18 @@ public class NotificacaoControleTest {
         assertEquals("NOVO NOME", retorno.getNome());
         assertEquals((int) 2, (int) retorno.getPrioridade());
         notificacaoControle.excluirFisicamente(retorno.getId());
+    }
+    
+      @Test
+    public void testInserirErroNome() {
+        Notificacao notificacao = criaNotificacaoCorreta();
+        notificacao.setId(null);
+        Notificacao retorno = notificacaoControle.salvar(notificacao);
+        assertEquals("Nome de tamanho ok", retorno.getNome());
+        assertEquals((int) 1, (int) retorno.getPrioridade());
+        assertEquals(true, retorno.getStatus());
+        notificacaoControle.excluirFisicamente(retorno.getId());
+
     }
 
     /*Teste caixa preta*/
