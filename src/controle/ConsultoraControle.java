@@ -133,6 +133,23 @@ public class ConsultoraControle {
         });
     }
 
+    public Consultora salva(Consultora consultora) {
+        Consultora novaConsultora = null;
+        String erro = validarConsultora(consultora);
+        if (isNull(erro)) {
+            fecharTela();
+            if (isNull(consultora.getId())) {
+                novaConsultora = consultoraDAO.inserir(consultora);
+            } else {
+                novaConsultora = consultoraDAO.alterar(consultora);
+            }
+            atualizaTabela();
+            return novaConsultora;
+        } else {
+            throw new RuntimeException(erro);
+        }
+    }
+
     private void fecharTela() {
         atualizaTabela();
         formGerenciarConsultora.setVisible(false);

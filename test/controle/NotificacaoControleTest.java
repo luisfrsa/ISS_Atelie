@@ -49,6 +49,18 @@ public class NotificacaoControleTest {
         assertEquals((int) 2, (int) retorno.getPrioridade());
         notificacaoControle.excluirFisicamente(retorno.getId());
     }
+    
+      @Test
+    public void testInserirErroNome() {
+        Notificacao notificacao = criaNotificacaoCorreta();
+        notificacao.setId(null);
+        Notificacao retorno = notificacaoControle.salvar(notificacao);
+        assertEquals("Nome de tamanho ok", retorno.getNome());
+        assertEquals((int) 1, (int) retorno.getPrioridade());
+        assertEquals(true, retorno.getStatus());
+        notificacaoControle.excluirFisicamente(retorno.getId());
+
+    }
 
     /*Teste caixa preta*/
 
