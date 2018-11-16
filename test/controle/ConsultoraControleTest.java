@@ -6,6 +6,7 @@
 package controle;
 
 import java.util.Calendar;
+import java.util.List;
 import modelo.Consultora;
 import modelo.builder.ConsultoraBuilder;
 import org.junit.After;
@@ -18,20 +19,20 @@ import static org.junit.Assert.*;
  * @author luis
  */
 public class ConsultoraControleTest {
-
+    
     private ConsultoraControle consultoraControle = new ConsultoraControle();
-
+    
     public ConsultoraControleTest() {
     }
-
+    
     @Before
     public void setUp() {
-//        Mockito.when(consultoraDAO.inserir(Mockito.any(Consultora.class))).thenReturn(consultora);
+        List<Consultora> consultoras = consultoraControle.buscarTodas();
+        for (Consultora c : consultoras) {
+            consultoraControle.excluirFisicamente(c.getId());
+        }
     }
-
-    @After
-    public void tearDown() {
-    }
+  
 
     /*Teste caixa preta*/
     @Test
@@ -43,16 +44,16 @@ public class ConsultoraControleTest {
         assertEquals("581.547.790-72", retorno.getCpf());
         assertEquals("123456", retorno.getSenha());
         consultoraControle.excluirFisicamente(retorno.getId());
-
+        
     }
-
+    
     @Test
     public void testAlterar() {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setCpf("287.217.720-53");
         consultora.setId(null);
         Consultora retorno = consultoraControle.salvar(consultora);
-        retorno.setNome("NOVO NOME");      
+        retorno.setNome("NOVO NOME");
         retorno.setSenha("NOVA SENHA");
         retorno = consultoraControle.salvar(consultora);
         assertEquals("NOVO NOME", retorno.getNome());
@@ -69,16 +70,16 @@ public class ConsultoraControleTest {
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals(null, retorno);
     }
-
+    
     @Test
     public void testValidarNomeNulo() {
         Consultora consultora = criaConsultoraCorreta();
         consultora.setNome(null);
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("O Nome deve possuir no mínimo 3 caracteres", retorno);
-
+        
     }
-
+    
     @Test
     public void testValidarNomePequeno() {
         Consultora consultora = criaConsultoraCorreta();
@@ -86,7 +87,7 @@ public class ConsultoraControleTest {
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("O Nome deve possuir no mínimo 3 caracteres", retorno);
     }
-
+    
     @Test
     public void testValidarNomeGrande() {
         Consultora consultora = criaConsultoraCorreta();
@@ -94,7 +95,7 @@ public class ConsultoraControleTest {
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("O Nome deve possuir no máximo 50 caracteres", retorno);
     }
-
+    
     @Test
     public void testValidarCPFNulo() {
         Consultora consultora = criaConsultoraCorreta();
@@ -102,9 +103,9 @@ public class ConsultoraControleTest {
         consultora.setCpf(null);
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("CPF Inválido", retorno);
-
+        
     }
-
+    
     @Test
     public void testValidarCPFErrado() {
         Consultora consultora = criaConsultoraCorreta();
@@ -112,9 +113,9 @@ public class ConsultoraControleTest {
         consultora.setCpf("123.456.789-10");
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("CPF Inválido", retorno);
-
+        
     }
-
+    
     @Test
     public void testValidarDataNula() {
         Consultora consultora = criaConsultoraCorreta();
@@ -123,12 +124,24 @@ public class ConsultoraControleTest {
         consultora.setDataNascimento(null);
         String retorno = consultoraControle.validarConsultora(consultora);
         assertEquals("Não foi possível converter data de nascimento, favor informar dd/mm/yyyy", retorno);
-
+        
     }
-
+    
+    @Test
+    public void testValidarCpfRepetido() {
+        Consultora inserida = criaConsultoraCorreta();
+        inserida.setId(null);
+        inserida = consultoraControle.salvar(inserida);
+        Consultora consultora = criaConsultoraCorreta();
+        consultora.setNome("Nome de tamanho ok");
+        String retorno = consultoraControle.validarConsultora(consultora);
+        assertEquals("Consultora Nome de tamanho ok já possui CPF 581.547.790-72", retorno);
+        consultoraControle.excluirFisicamente(inserida.getId());
+        
+    }
+    
     private Consultora criaConsultoraCorreta() {
         return new ConsultoraBuilder("Nome de tamanho ok")
-                .setId(999999)
                 .setCpf("581.547.790-72")
                 .setDataNascimento(Calendar.getInstance().getTime())
                 .setSenha("123456")
@@ -136,5 +149,5 @@ public class ConsultoraControleTest {
                 .build();
     }
     /*Teste caixa branca*/
-
+    
 }

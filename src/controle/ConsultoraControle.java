@@ -92,6 +92,10 @@ public class ConsultoraControle {
         return null;
     }
 
+    public List<Consultora> buscarTodas() {
+        return consultoraDAO.buscarTodos();
+    }
+
     public String validarConsultora(Consultora consultora) {
         String erroMsg = null;
         if (isNull(consultora.getNome()) || consultora.getNome().length() < 3) {
