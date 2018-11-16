@@ -57,16 +57,20 @@ public class NotificacaoControle {
         notificacaoDAO.remover(notificacao);
     }
 
+
     public Notificacao salvar(Notificacao notificacao) {
+        Notificacao novaNotificacao = null;
+
         String erro = validarNotificacao(notificacao);
         if (isNull(erro)) {
-            validarNotificacao(notificacao);
             fecharTela();
             if (isNull(notificacao.getId())) {
-                return notificacaoDAO.inserir(notificacao);
+                novaNotificacao = notificacaoDAO.inserir(notificacao);
             } else {
-                return notificacaoDAO.alterar(notificacao);
+                novaNotificacao = notificacaoDAO.alterar(notificacao);
             }
+            atualizaTabela();
+            return novaNotificacao;
         } else {
             JError.alert(erro, "Erro validação");
         }
