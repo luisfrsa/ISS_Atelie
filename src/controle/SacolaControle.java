@@ -334,7 +334,7 @@ public class SacolaControle {
         }
     }
 
-    private boolean validaSacola(Sacola sacola) {
+    public boolean validaSacola(Sacola sacola) {
         visaoCriarSacola.getTxtDataAcerto().setBackground(new java.awt.Color(255, 255, 255));
 
         if (sacola.getConsultora() == null) {
