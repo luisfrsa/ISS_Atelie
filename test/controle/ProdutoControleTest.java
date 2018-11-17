@@ -92,7 +92,6 @@ public class ProdutoControleTest {
     }
 
     //--------------- PARTICIONAMENTO DE EQUIVALENCIA ---------------
-    
     @Test
     /*Cobertura: Validar cadastro de Produto válido
     Resultado esperado: Retorno verdadeiro*/
@@ -155,6 +154,58 @@ public class ProdutoControleTest {
         produto.setValor(27.5);
         retorno = controleProduto.validaCadastroProduto(produto);
         assertTrue(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'cor' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto6() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'tamanho' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto7() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'marca' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto8() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'modelo' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto9() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande ");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
     }
 
     @Test
@@ -251,12 +302,63 @@ public class ProdutoControleTest {
         assertTrue(retorno);
     }
 
+    @Test
+    /*Cobertura: Validar edição de Produto com campo 'cor' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto6() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande Cor grande");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar edição de Produto com campo 'tamanho' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto7() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande Tamanho grande");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar edição de Produto com campo 'marca' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto8() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande Marca grande");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+
+    @Test
+    /*Cobertura: Validar edição de Produto com campo 'modelo' de tamanho invalido > 20
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto9() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande Modelo grande ");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+
     //--------------- ANALISE DE VALOR LIMITE ---------------
-    
     @Test
     /*Cobertura: Validar cadastro de Produto com valor = 0
     Resultado esperado: Retorno falso*/
-    public void testValidaCadastroProduto6() {
+    public void testValidaCadastroProduto10() {
         Boolean retorno;
         Produto produto;
 
@@ -269,7 +371,7 @@ public class ProdutoControleTest {
     @Test
     /*Cobertura: Validar cadastro de Produto com valor = 1
     Resultado esperado: Retorno verdadeiro*/
-    public void testValidaCadastroProduto7() {
+    public void testValidaCadastroProduto11() {
         Boolean retorno;
         Produto produto;
 
@@ -277,6 +379,110 @@ public class ProdutoControleTest {
         produto.setValor(Double.valueOf(1));
         retorno = controleProduto.validaCadastroProduto(produto);
         assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'tamanho' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto12() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("String de tamanho 20");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'tamanho' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto13() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("String de tamanho 21 ");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'cor' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto14() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("String de tamanho 20");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'cor' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto15() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("String de tamanho 21 ");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'marca' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto16() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("String de tamanho 20");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'marca' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto17() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("String de tamanho 21 ");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'modelo' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaCadastroProduto18() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("String de tamanho 20");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'modelo' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaCadastroProduto19() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("String de tamanho 21 ");
+        retorno = controleProduto.validaCadastroProduto(produto);
+        assertFalse(retorno);
     }
 
     @Test
@@ -302,7 +508,7 @@ public class ProdutoControleTest {
     @Test
     /*Cobertura: Validar edição de Produto com valor = 0
     Resultado esperado: Retorno falso*/
-    public void testValidaEdicaoProduto6() {
+    public void testValidaEdicaoProduto10() {
         Boolean retorno;
         Produto produto;
 
@@ -315,7 +521,7 @@ public class ProdutoControleTest {
     @Test
     /*Cobertura: Validar edição de Produto com valor = 1
     Resultado esperado: Retorno falso*/
-    public void testValidaEdicaoProduto7() {
+    public void testValidaEdicaoProduto11() {
         Boolean retorno;
         Produto produto;
 
@@ -323,6 +529,110 @@ public class ProdutoControleTest {
         produto.setValor(Double.valueOf(1));
         retorno = controleProduto.validaEdicaoProduto(produto);
         assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'tamanho' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaEdicaoProduto12() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("String de tamanho 20");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'tamanho' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto13() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setTamanho("String de tamanho 21 ");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'cor' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaEdicaoProduto14() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("String de tamanho 20");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'cor' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto15() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setCor("String de tamanho 21 ");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'marca' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaEdicaoProduto16() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("String de tamanho 20");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'marca' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto17() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setMarca("String de tamanho 21 ");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'modelo' de tamanho valido = 20
+    Resultado esperado: Retorno verdadeiro*/
+    public void testValidaEdicaoProduto18() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("String de tamanho 20");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertTrue(retorno);
+    }
+    
+    @Test
+    /*Cobertura: Validar cadastro de Produto com campo 'modelo' de tamanho invalido = 21
+    Resultado esperado: Retorno falso*/
+    public void testValidaEdicaoProduto19() {
+        Boolean retorno;
+        Produto produto;
+
+        produto = criaProdutoValido();
+        produto.setModelo("String de tamanho 21 ");
+        retorno = controleProduto.validaEdicaoProduto(produto);
+        assertFalse(retorno);
     }
 
 }

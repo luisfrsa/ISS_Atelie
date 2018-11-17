@@ -344,6 +344,34 @@ public class ProdutoControle {
             visaoCadastrarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
+        
+        if (produto.getCor().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Cor' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtCor().requestFocus();
+            visaoCadastrarProduto.getTxtCor().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if (produto.getTamanho().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Tamanho' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtTamanho().requestFocus();
+            visaoCadastrarProduto.getTxtTamanho().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if (produto.getMarca().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Marca' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtMarca().requestFocus();
+            visaoCadastrarProduto.getTxtMarca().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if (produto.getModelo().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Modelo' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoCadastrarProduto.getTxtModelo().requestFocus();
+            visaoCadastrarProduto.getTxtModelo().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
 
         return true;
     }
@@ -434,6 +462,34 @@ public class ProdutoControle {
             JOptionPane.showMessageDialog(null, "O Valor de um Produto deve ser maior que zero!", "Erro na Validação", 0);
             visaoEditarProduto.getTxtValor().requestFocus();
             visaoEditarProduto.getTxtValor().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if(produto.getCor().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Cor' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtCor().requestFocus();
+            visaoEditarProduto.getTxtCor().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if(produto.getTamanho().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Tamanho' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtTamanho().requestFocus();
+            visaoEditarProduto.getTxtTamanho().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if(produto.getMarca().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Marca' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtMarca().requestFocus();
+            visaoEditarProduto.getTxtMarca().setBackground(new java.awt.Color(255, 204, 204));
+            return false;
+        }
+        
+        if(produto.getModelo().length() > 20){
+            JOptionPane.showMessageDialog(null, "O campo 'Modelo' tem o tamanho máximo de 20 carcacters!", "Erro na Validação", 0);
+            visaoEditarProduto.getTxtModelo().requestFocus();
+            visaoEditarProduto.getTxtModelo().setBackground(new java.awt.Color(255, 204, 204));
             return false;
         }
 
