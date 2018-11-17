@@ -3,6 +3,7 @@ package controle;
 import dao.ConsultoraDAO;
 import java.util.List;
 import static java.util.Objects.isNull;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -56,14 +57,17 @@ public class ConsultoraControle {
     }
 
     public Consultora salvar(Consultora consultora) {
+        Consultora novaConsultora = null;
         String erro = validarConsultora(consultora);
         if (isNull(erro)) {
             fecharTela();
             if (isNull(consultora.getId())) {
-                return consultoraDAO.inserir(consultora);
+                novaConsultora = consultoraDAO.inserir(consultora);
             } else {
-                return consultoraDAO.alterar(consultora);
+                novaConsultora = consultoraDAO.alterar(consultora);
             }
+            atualizaTabela();
+            return novaConsultora;
         } else {
             JError.alert(erro, "Erro validação");
         }
@@ -88,6 +92,10 @@ public class ConsultoraControle {
         return null;
     }
 
+    public List<Consultora> buscarTodas() {
+        return consultoraDAO.buscarTodos();
+    }
+
     public String validarConsultora(Consultora consultora) {
         String erroMsg = null;
         if (isNull(consultora.getNome()) || consultora.getNome().length() < 3) {
@@ -102,7 +110,9 @@ public class ConsultoraControle {
         if (isNull(consultora.getDataNascimento())) {
             return "Não foi possível converter data de nascimento, favor informar dd/mm/yyyy";
         }
-        return null;
+
+        return validarCPFUnico(consultora);
+
     }
 
     private void atualizaTabela() {
@@ -123,6 +133,23 @@ public class ConsultoraControle {
         });
     }
 
+    public Consultora salva(Consultora consultora) {
+        Consultora novaConsultora = null;
+        String erro = validarConsultora(consultora);
+        if (isNull(erro)) {
+            fecharTela();
+            if (isNull(consultora.getId())) {
+                novaConsultora = consultoraDAO.inserir(consultora);
+            } else {
+                novaConsultora = consultoraDAO.alterar(consultora);
+            }
+            atualizaTabela();
+            return novaConsultora;
+        } else {
+            throw new RuntimeException(erro);
+        }
+    }
+
     private void fecharTela() {
         atualizaTabela();
         formGerenciarConsultora.setVisible(false);
@@ -130,6 +157,21 @@ public class ConsultoraControle {
 
     public ConsultoraDAO getConsultoraDAO() {
         return consultoraDAO;
+    }
+
+    private String validarCPFUnico(Consultora consultoraValidacao) {
+        List<Consultora> consultorasList = consultoraDAO.buscarTodos();
+        List<Consultora> consultorasRepetidas = consultorasList
+                .stream()
+                .filter(consultora -> consultora.getCpf().equals(consultoraValidacao.getCpf()))
+                .collect(Collectors.toList());
+        for (Consultora repetida : consultorasRepetidas) {
+            if (!repetida.getId().equals(consultoraValidacao.getId())) {
+                return "Consultora " + repetida.getNome() + " já possui CPF " + repetida.getCpf();
+            }
+        }
+        return null;
+
     }
 
 }
