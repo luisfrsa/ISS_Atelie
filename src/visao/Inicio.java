@@ -38,6 +38,7 @@ public class Inicio extends javax.swing.JFrame {
         jTextFieldCódigo = new javax.swing.JTextField();
         jTextFieldUsuario = new javax.swing.JTextField();
         jTextFieldTipo = new javax.swing.JTextField();
+        lblAtelie = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuProdutos = new javax.swing.JMenuItem();
@@ -69,6 +70,10 @@ public class Inicio extends javax.swing.JFrame {
                 jTextFieldTipoActionPerformed(evt);
             }
         });
+
+        lblAtelie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblAtelie.setForeground(new java.awt.Color(102, 102, 102));
+        lblAtelie.setText("Sistema Ateliê Doce Beleza");
 
         jMenu1.setText("Menu");
 
@@ -152,13 +157,19 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 358, Short.MAX_VALUE)
-                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jTextFieldCódigo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 278, Short.MAX_VALUE)
+                        .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jTextFieldCódigo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAtelie)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +178,9 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCódigo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 266, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addComponent(lblAtelie)
+                .addContainerGap())
         );
 
         pack();
@@ -259,6 +272,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCódigo;
     private javax.swing.JTextField jTextFieldTipo;
     private javax.swing.JTextField jTextFieldUsuario;
+    private javax.swing.JLabel lblAtelie;
     private javax.swing.JMenuItem menuConsultoras;
     private javax.swing.JMenuItem menuFrequencia;
     private javax.swing.JMenuItem menuProdutos;
