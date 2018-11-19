@@ -6,7 +6,6 @@
 package visao.sacola;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 

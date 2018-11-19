@@ -2,14 +2,12 @@ package controle;
 
 import dao.ConsultoraDAO;
 import java.util.List;
-import java.util.Objects;
 import static java.util.Objects.isNull;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consultora;
-import modelo.Produto;
 import static util.Documentos.adicionaPontuacaoCPF;
 import static util.Documentos.validaCPF;
 import util.JError;
@@ -94,6 +92,10 @@ public class ConsultoraControle {
         return null;
     }
 
+    public List<Consultora> buscarTodas() {
+        return consultoraDAO.buscarTodos();
+    }
+
     public String validarConsultora(Consultora consultora) {
         String erroMsg = null;
         if (isNull(consultora.getNome()) || consultora.getNome().length() < 3) {
@@ -129,6 +131,23 @@ public class ConsultoraControle {
                 consultora.getStatusAtividade() ? "Ativo" : "Inativo"
             });
         });
+    }
+
+    public Consultora salva(Consultora consultora) {
+        Consultora novaConsultora = null;
+        String erro = validarConsultora(consultora);
+        if (isNull(erro)) {
+            fecharTela();
+            if (isNull(consultora.getId())) {
+                novaConsultora = consultoraDAO.inserir(consultora);
+            } else {
+                novaConsultora = consultoraDAO.alterar(consultora);
+            }
+            atualizaTabela();
+            return novaConsultora;
+        } else {
+            throw new RuntimeException(erro);
+        }
     }
 
     private void fecharTela() {

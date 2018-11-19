@@ -5,12 +5,6 @@
  */
 package visao.relatorios;
 
-
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-
 /**
  *
  * @author willr

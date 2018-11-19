@@ -299,7 +299,7 @@ public class ProdutoControle {
         visaoCadastrarProduto.getBtnCadastrar().addActionListener(actionListener);
     }
 
-    private boolean validaQuantidadeEstoque(Integer quantidade) {
+    public boolean validaQuantidadeEstoque(Integer quantidade) {
 
         if (quantidade == null) {
             JOptionPane.showMessageDialog(null, "O campo 'Quantidade' é obrigatório!"
@@ -319,7 +319,7 @@ public class ProdutoControle {
         return true;
     }
 
-    private boolean validaCadastroProduto(Produto produto) {
+    public boolean validaCadastroProduto(Produto produto) {
 
         restauraCorCamposCadastro();
 
@@ -411,7 +411,7 @@ public class ProdutoControle {
         visaoEditarProduto.getBtnSalvar().addActionListener(actionListener);
     }
 
-    private boolean validaEdicaoProduto(Produto produto) {
+    public boolean validaEdicaoProduto(Produto produto) {
 
         restauraCorCamposEdicao();
 
@@ -465,11 +465,10 @@ public class ProdutoControle {
     }
 
     //----- TELA ESTOQUE PRODUTOS -----
-    
-    public void atualizaTabelaEstoque(){
+    public void atualizaTabelaEstoque() {
         preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
-    }    
-    
+    }
+
     public void preencheTabelaEstoque(List<ItemEstoque> lista, JTable tabela) {
 
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
@@ -529,15 +528,23 @@ public class ProdutoControle {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Integer id = Integer.parseInt(visaoEditarEstoque.getTxtId().getText());
-                Integer quantidade = Integer.parseInt(visaoEditarEstoque.getTxtQuantidade().getText());
+                Integer quantidade;
+                
+                try {
+                    quantidade = Integer.parseInt(visaoEditarEstoque.getTxtQuantidade().getText());
+                } catch (NumberFormatException e) {
+                    quantidade = null;
+                }
 
-                ItemEstoque item = daoItemEstoque.buscarPorId(id);
-                item.setQuantidade(quantidade);
-                daoItemEstoque.alterar(item);
+                if (validaQuantidadeEstoque(quantidade)) {
+                    ItemEstoque item = daoItemEstoque.buscarPorId(id);
+                    item.setQuantidade(quantidade);
+                    daoItemEstoque.alterar(item);
 
-                JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
-                preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
-                visaoEditarEstoque.dispose();
+                    JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!", "Sucesso", 1);
+                    preencheTabelaEstoque(daoItemEstoque.buscarTodos(), visaoEstoqueProdutos.getTblEstoqueProdutos());
+                    visaoEditarEstoque.dispose();
+                }
 
             }
         };

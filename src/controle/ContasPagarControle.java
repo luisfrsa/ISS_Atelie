@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.ContasPagar;
-import modelo.builder.ContasPagarBuilder;
 import util.Datas;
 import static util.Datas.formatoData;
 import visao.contaspagar.FormBaixarContasPagar;

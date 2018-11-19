@@ -1,11 +1,6 @@
 package modelo.builder;
 
 import modelo.Notificacao;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 
 import static java.util.Objects.isNull;

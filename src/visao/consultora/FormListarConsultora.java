@@ -6,11 +6,9 @@
 package visao.consultora;
 
 import controle.ConsultoraControle;
-import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 
 /**
  *
