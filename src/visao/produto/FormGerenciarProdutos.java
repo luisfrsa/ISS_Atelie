@@ -5,6 +5,10 @@
  */
 package visao.produto;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -49,6 +53,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         lblEstoque = new javax.swing.JLabel();
         btnEstoque = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JSeparator();
+        btnAjuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Produtos");
@@ -104,6 +109,14 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         btnEstoque.setBackground(new java.awt.Color(153, 204, 255));
         btnEstoque.setText("Ir para Estoque de Produtos");
 
+        btnAjuda.setBackground(new java.awt.Color(255, 204, 0));
+        btnAjuda.setText("Ajuda?");
+        btnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,18 +143,23 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
                                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEstoque)
                             .addComponent(btnEstoque)
                             .addComponent(lblListagem))
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addGap(0, 34, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAjuda)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnAjuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -173,6 +191,16 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/luisfrsa/ISS_Atelie/tree/master/ajuda#gerenciar-produtos"));
+        } catch (URISyntaxException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAjudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +238,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JToggleButton btnDetalhes;
@@ -228,9 +257,7 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 
-    
     //Getters de componentes para uso do controle
-    
     public JButton getBtnBuscar() {
         return btnBuscar;
     }
@@ -259,5 +286,4 @@ public class FormGerenciarProdutos extends javax.swing.JFrame {
         return btnEstoque;
     }
 
-    
 }
