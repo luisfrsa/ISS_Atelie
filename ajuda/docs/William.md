@@ -34,3 +34,10 @@ Para `Editar um Produto no estoque`, clique no nome da Produto a ser alterado, e
 Em seguida a tela de edição será carregada com os dados do Produto selecionado.
 Altere a quantidade e para salvar as alterações, basta clicar no botão `Salvar`, conforme exibido abaixo.
 ![alt text](./images/tela-editar-estoque.png)
+
+### Relatório de Frequência
+#### Gerar Relatório de Frequência
+Para gerar o `Relatório de Frequência` referente a uma consultora, já na tela inicial de sistema clique sobre o menu `Relatórios` e em seguida no sub-menu `Frequência`, conforme exibido à seguir.
+![alt text](./images/menu-relatorio-frequencia.png)
+Será aberta uma tela solicitando o CPF da consultora a qual será gerado o relatório. Preencha o campo de CPF e clique sobre o botão `Gerar Relatório`, conforme exibido à seguir.
+![alt text](./images/botao-gerar-relatorio.png)
