@@ -5,6 +5,8 @@
  */
 package visao.produto;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -48,6 +50,7 @@ public class FormEditarProduto extends javax.swing.JFrame {
         txtValor = new javax.swing.JTextField();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        btnAjuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Produto");
@@ -77,6 +80,14 @@ public class FormEditarProduto extends javax.swing.JFrame {
 
         txtId.setEditable(false);
 
+        btnAjuda.setBackground(new java.awt.Color(255, 204, 0));
+        btnAjuda.setText("Ajuda?");
+        btnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,7 +95,7 @@ public class FormEditarProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
@@ -127,14 +138,17 @@ public class FormEditarProduto extends javax.swing.JFrame {
                                 .addComponent(btnCancelar))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblTitulo)
-                                .addGap(0, 177, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAjuda)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnAjuda))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
@@ -163,7 +177,7 @@ public class FormEditarProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblModelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
@@ -172,6 +186,16 @@ public class FormEditarProduto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/luisfrsa/ISS_Atelie/tree/master/ajuda#alterar-produto-j%C3%A1-cadastrado"));
+        } catch (URISyntaxException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAjudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +233,7 @@ public class FormEditarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjuda;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblCor;

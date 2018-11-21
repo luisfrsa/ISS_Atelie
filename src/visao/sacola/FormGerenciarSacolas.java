@@ -5,6 +5,8 @@
  */
 package visao.sacola;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -46,6 +48,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         btnDetalhes = new javax.swing.JButton();
         btnNova = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnAjuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Sacolas");
@@ -90,6 +93,14 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
         btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
         btnExcluir.setText("Excluir Sacola");
 
+        btnAjuda.setBackground(new java.awt.Color(255, 204, 0));
+        btnAjuda.setText("Ajuda?");
+        btnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,34 +109,39 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTitulo)
-                            .addComponent(lblBusca)
-                            .addComponent(lblListagem)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-                            .addComponent(jSeparator1))
-                        .addGap(0, 45, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDetalhes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNova)
                         .addGap(51, 51, 51)
                         .addComponent(btnExcluir))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblConsultora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtConsultora, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(58, 58, 58))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBusca)
+                            .addComponent(lblListagem))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAjuda)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnAjuda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBusca)
@@ -150,6 +166,16 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/luisfrsa/ISS_Atelie/tree/master/ajuda#gerenciar-sacolas"));
+        } catch (URISyntaxException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAjudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +213,7 @@ public class FormGerenciarSacolas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjuda;
     private javax.swing.JToggleButton btnBuscar;
     private javax.swing.JButton btnDetalhes;
     private javax.swing.JButton btnExcluir;

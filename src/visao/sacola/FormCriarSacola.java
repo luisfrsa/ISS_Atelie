@@ -5,6 +5,8 @@
  */
 package visao.sacola;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -52,6 +54,7 @@ public class FormCriarSacola extends javax.swing.JFrame {
         lblDataAcerto = new javax.swing.JLabel();
         txtDataAcerto = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
+        btnAjuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criar Sacola");
@@ -103,6 +106,14 @@ public class FormCriarSacola extends javax.swing.JFrame {
 
         lblDataAcerto.setText("Data de Acerto:");
 
+        btnAjuda.setBackground(new java.awt.Color(255, 204, 0));
+        btnAjuda.setText("Ajuda?");
+        btnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,6 +121,7 @@ public class FormCriarSacola extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
                     .addComponent(jSeparator4)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCriarSacola)
@@ -135,8 +147,6 @@ public class FormCriarSacola extends javax.swing.JFrame {
                                     .addComponent(lblNomeConsultora, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitulo)
                             .addComponent(lblSubTitulo2)
                             .addComponent(btnAdicionarProduto)
                             .addGroup(layout.createSequentialGroup()
@@ -144,14 +154,20 @@ public class FormCriarSacola extends javax.swing.JFrame {
                                 .addComponent(lblDataAcerto)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDataAcerto, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAjuda)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnAjuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,6 +207,16 @@ public class FormCriarSacola extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjudaActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/luisfrsa/ISS_Atelie/tree/master/ajuda#criar-nova-sacola"));
+        } catch (URISyntaxException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAjudaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +254,7 @@ public class FormCriarSacola extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarProduto;
+    private javax.swing.JButton btnAjuda;
     private javax.swing.JButton btnAssociarConsultora;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCriarSacola;
