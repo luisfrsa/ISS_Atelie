@@ -1,20 +1,18 @@
 # ISS Ateliê
 
-### Login
-Para realizar login no sistema ISS Ateliê, é preciso preencher as credenciais `usuário` e `senha` conforme exibido na imagem abaixo.  
-![alt text](./images/nomeDaImagem.png)
+##William Rodrigues
 
-
-### Consultora
-Para `listar todas as consultora`, clique no menu de Consultoras, conforme exibido abaixo.
-![alt text](./images/nomeDaImagem.png)
-Para `inserir uma consultora`, clique no botão cadastrar consultoras, conforme exibido abaixo.
-![alt text](./images/nomeDaImagem.png)
-Em seguida preencha os dados solicitados e clique no botão `salvar`, conforme exibido abaixo.
-![alt text](./images/nomeDaImagem.png)
-Para `alterar e inativar uma consultora`, clique no nome da consultora derejada, conforme exibido abaixo.
-![alt text](./images/nomeDaImagem.png)
-Em seguida altere os dados, sendo que caso queira inativa-la, basta marcar desmarcar a opção `status`. Para salvar as alterações, basta clicar no botão `salvar`, conforme exibido abaixo.
-![alt text](./images/nomeDaImagem.png)
+### Gerenciar Produtos
+Para `listar todos os Produtos`, já na tela inicial do sistema clique sobre o menu Produtos, conforme exibido abaixo.
+![alt text](./images/menu-produtos.png)
+Para `Cadastrar um novo Produto`, clique sobre o botão `Cadastrar Novo`, conforme exibido abaixo.
+![alt text](./images/botao-novo-produto.png)
+Em seguida preencha os dados solicitados e clique no botão `Cadastrar`, conforme exibido abaixo.
+![alt text](./images/tela-cadastrar-produto.png)
+Para `Alterar um Produto`, clique no nome da Produto a ser alterado, e clique sobre o botão `Mais Detalhes`, conforme exibido abaixo.
+![alt text](./images/botao-detalhes-produto.png)
+Em seguida a tela de edição será carregada com os dados do Produto selecionado.
+Altere os dados e para salvar as alterações, basta clicar no botão `Salvar`, conforme exibido abaixo.
+![alt text](./images/tela-editar-produtom.png)
 
 
